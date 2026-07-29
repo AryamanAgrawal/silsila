@@ -123,17 +123,21 @@ const ensemble = artists.filter((a) => a.billing === "ensemble");
     height: 13px;
     border-right: 2px solid var(--accent);
     border-bottom: 2px solid var(--accent);
-    transform: rotate(45deg) translateY(-3px);
-    transition: transform 0.25s ease;
+    transform-origin: center;
+    transform: translateY(-4px) rotate(45deg);
+    transition: transform 0.34s cubic-bezier(0.33, 1, 0.68, 1);
     flex: none;
   }
   .bio[open] .b-more {
-    transform: rotate(-135deg) translateY(-3px);
+    transform: translateY(1px) rotate(-135deg);
   }
 
   .b-body {
     padding-bottom: var(--s8);
     max-width: var(--measure);
+  }
+  .bio summary {
+    -webkit-tap-highlight-color: transparent;
   }
   .b-body p {
     margin: 0 0 var(--s4);

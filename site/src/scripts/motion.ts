@@ -220,6 +220,47 @@ function magnetic() {
   });
 }
 
+/* ── 08 Bio disclosures: animate the height instead of snapping ─── */
+function disclosures() {
+  document.querySelectorAll<HTMLDetailsElement>("details.bio").forEach((d) => {
+    const summary = d.querySelector("summary");
+    const body = d.querySelector<HTMLElement>(".b-body");
+    if (!summary || !body) return;
+    let animating = false;
+
+    summary.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (animating) return;
+      animating = true;
+      const done = () => {
+        gsap.set(body, { clearProps: "height,opacity,overflow" });
+        animating = false;
+      };
+
+      if (d.open) {
+        gsap.to(body, {
+          height: 0,
+          opacity: 0,
+          overflow: "hidden",
+          duration: 0.34,
+          ease: "power2.inOut",
+          onComplete: () => {
+            d.open = false;
+            done();
+          },
+        });
+      } else {
+        d.open = true;
+        gsap.fromTo(
+          body,
+          { height: 0, opacity: 0, overflow: "hidden" },
+          { height: "auto", opacity: 1, duration: 0.42, ease: "power2.out", onComplete: done },
+        );
+      }
+    });
+  });
+}
+
 /* ── boot ────────────────────────────────────────────────── */
 function boot() {
   if (reduced) {
@@ -234,6 +275,7 @@ function boot() {
   polaroids();
   marquees();
   magnetic();
+  disclosures();
 }
 
 if (document.fonts?.ready) {
