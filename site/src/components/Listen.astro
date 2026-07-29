@@ -87,10 +87,14 @@ import { album } from "@/data/event";
     margin: 0;
   }
 
+  /* The embed draws its own 12px rounded card on a transparent ground, so the
+     iframe box has to match it or the corners show a wedge of whatever sits
+     behind. */
   .player iframe {
-    border-radius: 0;
     display: block;
-    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    background: transparent;
+    color-scheme: normal;
   }
   .full {
     display: flex;
