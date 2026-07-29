@@ -10,7 +10,7 @@
 export const event = {
   title: "Resonance",
   series: "silsila",
-  tagline: "An evening of South Asian classical music",
+  tagline: "The Living Journey of South Asian Classical Music",
   presentedBy: "Tehreem Khan",
 
   date: "2026-08-30",

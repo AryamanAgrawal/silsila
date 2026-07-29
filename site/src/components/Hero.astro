@@ -1,6 +1,9 @@
 ---
 import { event, formatted } from "@/data/event";
 
+/** "South Asian" is a compound adjective and must not break across lines. */
+const taglineDisplay = event.tagline.replace("South Asian", "South\u00A0Asian");
+
 /** 11 tarab strings, as on the instrument. */
 const STRINGS = Array.from({ length: 11 }, (_, i) => i);
 ---
@@ -34,7 +37,7 @@ const STRINGS = Array.from({ length: 11 }, (_, i) => i);
       <span class="sr-only">{event.series}</span>
     </div>
 
-    <p class="tagline">{event.tagline}</p>
+    <p class="tagline">{taglineDisplay}</p>
 
     <dl class="facts">
       <div>
@@ -127,7 +130,10 @@ const STRINGS = Array.from({ length: 11 }, (_, i) => i);
     text-transform: uppercase;
     letter-spacing: 0.015em;
     font-size: clamp(0.82rem, 2.1vw, 1.32rem);
-    margin: clamp(var(--s12), 7vw, var(--s16)) 0 0;
+    margin: clamp(var(--s12), 7vw, var(--s16)) auto 0;
+    /* Balance only engages once the line actually wraps; without it the mobile
+       break orphans "MUSIC" on a line of its own. */
+    text-wrap: balance;
   }
 
   .facts {
