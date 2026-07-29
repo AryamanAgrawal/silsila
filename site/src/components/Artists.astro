@@ -2,9 +2,24 @@
 import { artists } from "@/data/event";
 import Polaroid from "./Polaroid.astro";
 
-const headline = artists.filter((a) => a.billing === "headline");
-const featured = artists.filter((a) => a.billing === "featured");
-const ensemble = artists.filter((a) => a.billing === "ensemble");
+/**
+ * The wall is laid out 2 / 2 / 3, stepping down in size so billing reads off
+ * the arrangement. Cards fill from `artists` in order, so reordering that array
+ * reorders the wall.
+ */
+const SHAPE = [
+  { count: 2, width: 320 },
+  { count: 2, width: 250 },
+  { count: 3, width: 206 },
+];
+
+let cursor = 0;
+const rows = SHAPE.map(({ count, width }) => {
+  const members = artists.slice(cursor, cursor + count);
+  const offset = cursor;
+  cursor += count;
+  return { members, width, offset };
+});
 ---
 
 <section class="field field--plaster section artists" id="artists" aria-labelledby="artists-h">
@@ -12,23 +27,15 @@ const ensemble = artists.filter((a) => a.billing === "ensemble");
     <p class="kicker">On stage</p>
     <h2 class="section-title" id="artists-h">The artists</h2>
 
-    <div class="wall wall--headline">
-      {headline.map((a, i) => <Polaroid artist={a} width={320} seed={i + 1} />)}
-    </div>
-
-    <div class="tier">
-      <p class="tier-label">Presented by</p>
-      <div class="wall wall--featured">
-        {featured.map((a, i) => <Polaroid artist={a} width={236} seed={i + 3} />)}
-      </div>
-    </div>
-
-    <div class="tier">
-      <p class="tier-label">With</p>
-      <div class="wall wall--ensemble">
-        {ensemble.map((a, i) => <Polaroid artist={a} width={190} seed={i + 4} />)}
-      </div>
-    </div>
+    {
+      rows.map((row) => (
+        <div class="wall">
+          {row.members.map((a, i) => (
+            <Polaroid artist={a} width={row.width} seed={row.offset + i + 1} />
+          ))}
+        </div>
+      ))
+    }
 
     <div class="bios">
       {
@@ -83,32 +90,11 @@ const ensemble = artists.filter((a) => a.billing === "ensemble");
     align-items: flex-start;
     gap: clamp(var(--s8), 5vw, var(--s24)) clamp(var(--s6), 4vw, var(--s16));
   }
-  .wall--headline {
+  .wall + .wall {
+    margin-top: clamp(var(--s8), 5vw, var(--s16));
+  }
+  .wall:first-of-type {
     margin-top: clamp(var(--s12), 6vw, var(--s16));
-    gap: clamp(var(--s8), 6vw, var(--s32));
-  }
-
-  /* Each tier is introduced by a hairline and a label, so the drop in size
-     reads as billing rather than as an inconsistency. */
-  .tier {
-    margin-top: clamp(var(--s16), 9vw, var(--s32));
-  }
-  .tier-label {
-    display: flex;
-    align-items: center;
-    gap: var(--s4);
-    font-size: var(--t-12);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin: 0 0 clamp(var(--s8), 4vw, var(--s12));
-  }
-  .tier-label::before,
-  .tier-label::after {
-    content: "";
-    height: 1px;
-    background: var(--hairline);
-    flex: 1;
   }
 
   .bios {

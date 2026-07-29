@@ -48,17 +48,13 @@ export type Artist = {
   honorific?: string;
   instrument: string;
   photo: string;
-  billing: "headline" | "featured" | "ensemble";
-  /**
-   * Billing tiers follow the poster: Jayanta and Samir headline page 1, Tehreem
-   * has page 4 to herself, the rest share pages 5 and 6.
-   */
   /** Paragraphs. `null` where no bio has been supplied yet. */
   bio: string[] | null;
   press?: { quote: string; source: string }[];
   links?: { label: string; url: string }[];
 };
 
+/** Wall order. The artists section lays these out 2 / 2 / 3, in this order. */
 export const artists: Artist[] = [
   {
     slug: "jayanta-banerjee",
@@ -66,7 +62,6 @@ export const artists: Artist[] = [
     honorific: "Shri",
     instrument: "Sitar",
     photo: "/assets/artists/jayanta.jpg",
-    billing: "headline",
     bio: [
       "Shri Jayanta Banerjee is an internationally acclaimed sitarist, composer, and multidisciplinary musician whose artistry bridges Indian classical traditions with contemporary and global expressions. Trained under eminent gurus including Shri Amit Prasanna Mukherjee, Pt. Devi Prasad Chatterjee, Pt. Santosh Banerjee of the Rampur Gharana, and Pt. Robi Chakraborty of the Maihar Gharana, his musical lineage reflects a deep-rooted connection to the great traditions of Hindustani classical music. Alongside the sitar, he is proficient in the sarod, harmonium and keyboards, and is also a trained vocalist.",
       "Over the course of his career he has performed extensively across India and internationally, appearing at the Hollywood Bowl, Royal Festival Hall, the National Centre for the Performing Arts, the Asian Art Museum, the Palace of Fine Arts and the Sydney Opera House. He has collaborated with legendary artists across Indian classical music and dance, including Padma Vibhushan Pt. Birju Maharaj, Pt. Chitresh Das, and Vidwan Vikku Vinayakram.",
@@ -86,7 +81,6 @@ export const artists: Artist[] = [
     honorific: "Pandit",
     instrument: "Tabla",
     photo: "/assets/artists/samir.jpg",
-    billing: "headline",
     bio: [
       "Samir Chatterjee is a virtuoso tabla player from India who travels widely throughout the year, performing as a soloist and alongside outstanding musicians from both Indian and non-Indian traditions. He performed at the Nobel Peace Prize ceremony in Oslo in 2007, and several times at the United Nations General Assembly. He is a firm believer in the transforming effect of music on society, and every aspect of his work reflects that conviction.",
       "He began his studies with Pandit Bankim Ghosh, Pt. Balaram Mukherjee, Pt. Rathin Dhar and Mohammad Salim, and his later formation came under Pt. Amalesh Chatterjee and Pt. Shyamal Bose. All of his teachers have been of the Farrukhabad Gharana, which he now represents. In concert he has accompanied many of India’s greatest musicians, among them Pt. Ravi Shankar, Ud. Vilayat Khan, Pt. Bhimsen Joshi, Pt. Jasraj, Pt. Nikhil Banerjee, Pt. Shivkumar Sharma and Pt. Hariprasad Chaurasia.",
@@ -110,7 +104,6 @@ export const artists: Artist[] = [
     name: "Tehreem Khan",
     instrument: "Sitar",
     photo: "/assets/artists/tehreem.jpg",
-    billing: "featured",
     bio: null,
   },
   {
@@ -118,7 +111,6 @@ export const artists: Artist[] = [
     name: "Sikandar Rahman",
     instrument: "Violin",
     photo: "/assets/artists/sikandar.jpg",
-    billing: "ensemble",
     bio: null,
   },
   {
@@ -126,7 +118,6 @@ export const artists: Artist[] = [
     name: "Pranav Shikarpur",
     instrument: "Bansuri",
     photo: "/assets/artists/pranav.jpg",
-    billing: "ensemble",
     bio: null,
   },
   {
@@ -134,7 +125,6 @@ export const artists: Artist[] = [
     name: "Shiva Kannan",
     instrument: "Keyboard",
     photo: "/assets/artists/shiva.jpg",
-    billing: "ensemble",
     bio: null,
   },
   {
@@ -142,7 +132,6 @@ export const artists: Artist[] = [
     name: "Aditya Pillai",
     instrument: "Dholak",
     photo: "/assets/artists/aditya.jpg",
-    billing: "ensemble",
     bio: null,
   },
 ];
