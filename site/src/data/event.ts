@@ -144,32 +144,25 @@ export const artists: Artist[] = [
 ];
 
 /**
- * The evening, as one list: the clock from the programme deck, carrying the
- * narrative from the event description where it applies.
+ * The evening, in order. Deliberately unnumbered and untimed: the audience gets
+ * the sequence, not a schedule that will drift on the night. Doors and curtain
+ * live on `event` and are stated once, in the section lede.
  *
- * OPEN QUESTION: the deck lists 8:20 as a Tehreem solo, while the written
- * description frames that slot as the Ustad-Shagird duet with Jayanta. Only one
- * can be true. It is set as a solo below, per the deck.
+ * The deck's internal timings are 7:10 / 8:10 / 8:20 / 8:35, curtain 8:50.
+ *
+ * OPEN QUESTION: the deck lists the 8:20 slot as a Tehreem solo, while the
+ * written description frames it as the Ustad-Shagird duet with Jayanta. Only
+ * one can be true. It is set as a solo below, per the deck.
  */
 export const runOfShow = [
   {
-    time: "7:00",
-    title: "Doors close, opening remarks",
-    performers: "",
-    body: null,
-    kicker: "Seating",
-    feature: false,
-  },
-  {
-    time: "7:10",
     title: "Sitar & Tabla",
     performers: "Jayanta Banerjee & Samir Chatterjee",
     body: "The evening opens with Tehreem Khan\u2019s teacher on sitar, accompanied on tabla. Through intricate improvisation, rhythmic dialogue, and moments of profound stillness, the two explore the depth, beauty, and spontaneity of this living art form.",
-    kicker: "45 min to 1 hr",
+    kicker: "Opening set",
     feature: true,
   },
   {
-    time: "8:10",
     title: "Echoes to Sky",
     performers: "Jayanta Banerjee",
     body: "A first live look at the new album: sitar instrumentals that move through shifting emotional and sonic landscapes, from intimacy and longing to openness and stillness.",
@@ -177,7 +170,6 @@ export const runOfShow = [
     feature: false,
   },
   {
-    time: "8:20",
     title: "Ustad & Shagird",
     performers: "Tehreem Khan",
     body: "A special presentation celebrating the Ustad-Shagird (Guru-Shishya) tradition, honouring the bond between teacher and disciple that has sustained this music for generations.",
@@ -185,20 +177,11 @@ export const runOfShow = [
     feature: false,
   },
   {
-    time: "8:35",
     title: "A Dialogue Between East and West",
     performers: "Composed by Jayanta Banerjee",
     body: "A collaborative finale joined by Sikandar Rahman on violin, Shiva Kannan on keyboard, and Aditya Pillai on dholak, where distinct musical voices meet with mutual respect, curiosity, and shared expression.",
     kicker: "Finale",
     feature: true,
-  },
-  {
-    time: "8:50",
-    title: "Curtain",
-    performers: "",
-    body: null,
-    kicker: "",
-    feature: false,
   },
 ];
 

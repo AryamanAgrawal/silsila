@@ -14,10 +14,7 @@ import { runOfShow, formatted } from "@/data/event";
     <ol class="run">
       {
         runOfShow.map((slot) => (
-          <li class:list={["slot", { "slot--feature": slot.feature, "slot--plain": !slot.body }]} data-anim="slot">
-            <div class="time">
-              <time>{slot.time}</time>
-            </div>
+          <li class:list={["slot", { "slot--feature": slot.feature }]} data-anim="slot">
             <div class="detail">
               <h3 class="t">{slot.title}</h3>
               {slot.performers && <p class="who">{slot.performers}</p>}
@@ -51,10 +48,7 @@ import { runOfShow, formatted } from "@/data/event";
   }
 
   .slot {
-    display: grid;
-    grid-template-columns: clamp(74px, 12vw, 128px) 1fr;
-    gap: clamp(var(--s4), 3vw, var(--s12));
-    padding: var(--s6) 0 var(--s6) var(--s6);
+    padding: var(--s8) 0 var(--s8) clamp(var(--s6), 3vw, var(--s12));
     border-bottom: 1px solid rgba(233, 189, 189, 0.22);
     position: relative;
   }
@@ -65,7 +59,7 @@ import { runOfShow, formatted } from "@/data/event";
     content: "";
     position: absolute;
     left: -3.5px;
-    top: calc(var(--s6) + 0.62em);
+    top: calc(var(--s8) + 0.52em);
     width: 8px;
     height: 8px;
     background: var(--rose);
@@ -78,13 +72,6 @@ import { runOfShow, formatted } from "@/data/event";
     left: -5.5px;
   }
 
-  .time time {
-    font-family: var(--f-display);
-    font-size: clamp(1.4rem, 3.4vw, 2.1rem);
-    line-height: 1;
-    color: var(--bone);
-    letter-spacing: 0.01em;
-  }
 
   .t {
     font-family: var(--f-serif);
@@ -115,9 +102,5 @@ import { runOfShow, formatted } from "@/data/event";
     text-transform: uppercase;
     color: var(--rose);
     margin: var(--s3) 0 0;
-  }
-  .slot--plain .t {
-    font-size: clamp(1rem, 2.2vw, 1.25rem);
-    opacity: 0.85;
   }
 </style>
