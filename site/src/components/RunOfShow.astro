@@ -7,7 +7,7 @@ import { runOfShow, formatted } from "@/data/event";
     <p class="kicker">Run of show</p>
     <h2 class="section-title" id="evening-h">The evening</h2>
     <p class="lede">
-      Doors {formatted.doors}. The music starts at {formatted.showtime} and runs to about {formatted.curtain},
+      Doors {formatted.doors}. The music starts at {formatted.showtime} and runs to {formatted.curtain},
       without an interval.
     </p>
 
@@ -43,13 +43,13 @@ import { runOfShow, formatted } from "@/data/event";
     top: 6px;
     bottom: 6px;
     width: 1px;
-    background: var(--rose);
-    opacity: 0.4;
+    background: var(--hairline);
+    opacity: 1;
   }
 
   .slot {
     padding: var(--s8) 0 var(--s8) clamp(var(--s6), 3vw, var(--s12));
-    border-bottom: 1px solid rgba(233, 189, 189, 0.22);
+    border-bottom: 1px solid var(--hairline);
     position: relative;
   }
   .slot:last-child {
@@ -62,11 +62,11 @@ import { runOfShow, formatted } from "@/data/event";
     top: calc(var(--s8) + 0.52em);
     width: 8px;
     height: 8px;
-    background: var(--rose);
+    background: var(--accent);
     border-radius: 999px;
   }
   .slot--feature::before {
-    background: var(--bone);
+    background: var(--strong);
     width: 12px;
     height: 12px;
     left: -5.5px;
@@ -80,27 +80,26 @@ import { runOfShow, formatted } from "@/data/event";
     letter-spacing: 0.075em;
     font-size: clamp(1.15rem, 2.8vw, 1.85rem);
     line-height: 1.15;
-    color: var(--bone);
+    color: var(--strong);
     margin: 0;
   }
   .who {
     font-family: var(--f-sign);
     font-size: clamp(1.2rem, 2.6vw, 1.6rem);
     line-height: 1.2;
-    color: var(--rose);
+    color: var(--accent);
     margin: 2px 0 0;
   }
   .desc {
     max-width: 58ch;
     margin: var(--s3) 0 0;
-    color: var(--bone);
     font-size: var(--t-16);
   }
   .tag {
     font-size: var(--t-12);
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--rose);
+    color: var(--muted);
     margin: var(--s3) 0 0;
   }
 </style>

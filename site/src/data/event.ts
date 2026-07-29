@@ -16,7 +16,7 @@ export const event = {
   date: "2026-08-30",
   doors: "18:30",
   showtime: "19:00",
-  curtain: "20:50",
+  curtain: "21:00",
 
   venue: {
     name: "Abrons Arts Center",
@@ -148,11 +148,7 @@ export const artists: Artist[] = [
  * the sequence, not a schedule that will drift on the night. Doors and curtain
  * live on `event` and are stated once, in the section lede.
  *
- * The deck's internal timings are 7:10 / 8:10 / 8:20 / 8:35, curtain 8:50.
- *
- * OPEN QUESTION: the deck lists the 8:20 slot as a Tehreem solo, while the
- * written description frames it as the Ustad-Shagird duet with Jayanta. Only
- * one can be true. It is set as a solo below, per the deck.
+
  */
 export const runOfShow = [
   {
@@ -164,22 +160,22 @@ export const runOfShow = [
   },
   {
     title: "Echoes to Sky",
-    performers: "Jayanta Banerjee",
+    performers: "Jayanta Banerjee & Samir Chatterjee",
     body: "A first live look at the new album: sitar instrumentals that move through shifting emotional and sonic landscapes, from intimacy and longing to openness and stillness.",
     kicker: "Sneak peek",
     feature: false,
   },
   {
     title: "Ustad & Shagird",
-    performers: "Tehreem Khan",
-    body: "A special presentation celebrating the Ustad-Shagird (Guru-Shishya) tradition, honouring the bond between teacher and disciple that has sustained this music for generations.",
-    kicker: "Sitar solo",
+    performers: "Jayanta Banerjee, Tehreem Khan & Samir Chatterjee",
+    body: "A special presentation celebrating the Ustad-Shagird (Guru-Shishya) tradition, teacher and disciple performing together on sitar, honouring the bond that has sustained this music for generations.",
+    kicker: "Sitar duet",
     feature: false,
   },
   {
     title: "A Dialogue Between East and West",
     performers: "Composed by Jayanta Banerjee",
-    body: "A collaborative finale joined by Sikandar Rahman on violin, Shiva Kannan on keyboard, and Aditya Pillai on dholak, where distinct musical voices meet with mutual respect, curiosity, and shared expression.",
+    body: "A collaborative finale joined by Sikandar Rahman on violin, Pranav Shikarpur on bansuri, Shiva Kannan on keyboard, and Aditya Pillai on dholak, where distinct musical voices meet with mutual respect, curiosity, and shared expression.",
     kicker: "Finale",
     feature: true,
   },
@@ -200,7 +196,7 @@ export const album = {
   hyperfollowUrl:
     "https://distrokid.com/hyperfollow/jayantabanerjee/echoes-to-sky",
   blurb:
-    "A sitar instrumental album that moves through shifting emotional and sonic landscapes, each composition a distinct exploration of mood, texture, and space. Heard live for the first time at 8:10.",
+    "A sitar instrumental album that moves through shifting emotional and sonic landscapes, each composition a distinct exploration of mood, texture, and space.",
   tracks: [
     "In the Air Tonight",
     "The Mand of Deep Longings",
