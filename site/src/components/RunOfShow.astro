@@ -1,0 +1,135 @@
+---
+import { runOfShow, formatted } from "@/data/event";
+---
+
+<section class="field field--plaster section evening" id="evening" aria-labelledby="evening-h">
+  <div class="wrap">
+    <p class="kicker">Run of show</p>
+    <h2 class="section-title" id="evening-h">The evening</h2>
+    <p class="lede">
+      Doors {formatted.doors}. The music starts at {formatted.showtime} and runs to about {formatted.curtain},
+      without an interval.
+    </p>
+
+    <ol class="run">
+      {
+        runOfShow.map((slot) => (
+          <li class:list={["slot", { "slot--feature": slot.feature, "slot--plain": !slot.body }]} data-anim="slot">
+            <div class="time">
+              <time>{slot.time}</time>
+              {slot.numeral && <span class="numeral">{slot.numeral}</span>}
+            </div>
+            <div class="detail">
+              <h3 class="t">{slot.title}</h3>
+              {slot.performers && <p class="who">{slot.performers}</p>}
+              {slot.body && <p class="desc">{slot.body}</p>}
+              {slot.kicker && <p class="tag">{slot.kicker}</p>}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .run {
+    list-style: none;
+    margin: clamp(var(--s12), 6vw, var(--s16)) 0 0;
+    padding: 0;
+    position: relative;
+  }
+  /* the spine */
+  .run::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background: var(--rose);
+    opacity: 0.4;
+  }
+
+  .slot {
+    display: grid;
+    grid-template-columns: clamp(74px, 12vw, 128px) 1fr;
+    gap: clamp(var(--s4), 3vw, var(--s12));
+    padding: var(--s6) 0 var(--s6) var(--s6);
+    border-bottom: 1px solid rgba(233, 189, 189, 0.22);
+    position: relative;
+  }
+  .slot:last-child {
+    border-bottom: 0;
+  }
+  .slot::before {
+    content: "";
+    position: absolute;
+    left: -3.5px;
+    top: calc(var(--s6) + 0.62em);
+    width: 8px;
+    height: 8px;
+    background: var(--rose);
+    border-radius: 999px;
+  }
+  .slot--feature::before {
+    background: var(--bone);
+    width: 12px;
+    height: 12px;
+    left: -5.5px;
+  }
+
+  .time {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .time time {
+    font-family: var(--f-display);
+    font-size: clamp(1.4rem, 3.4vw, 2.1rem);
+    line-height: 1;
+    color: var(--bone);
+    letter-spacing: 0.01em;
+  }
+  .numeral {
+    font-family: var(--f-display);
+    font-size: var(--t-12);
+    letter-spacing: 0.2em;
+    color: var(--rose);
+  }
+
+  .t {
+    font-family: var(--f-serif);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.075em;
+    font-size: clamp(1.15rem, 2.8vw, 1.85rem);
+    line-height: 1.15;
+    color: var(--bone);
+    margin: 0;
+  }
+  .who {
+    font-family: var(--f-sign);
+    font-size: clamp(1.2rem, 2.6vw, 1.6rem);
+    line-height: 1.2;
+    color: var(--rose);
+    margin: 2px 0 0;
+  }
+  .desc {
+    max-width: 58ch;
+    margin: var(--s3) 0 0;
+    color: var(--bone);
+    font-size: var(--t-16);
+  }
+  .tag {
+    font-size: var(--t-12);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin: var(--s3) 0 0;
+  }
+  .slot--plain .t {
+    font-size: clamp(1rem, 2.2vw, 1.25rem);
+    opacity: 0.85;
+  }
+</style>

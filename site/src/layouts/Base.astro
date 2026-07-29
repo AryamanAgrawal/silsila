@@ -1,0 +1,107 @@
+---
+import "@fontsource/anton/400.css";
+import "@fontsource/cormorant-garamond/300.css";
+import "@fontsource/cormorant-garamond/400.css";
+import "@fontsource/cormorant-garamond/500.css";
+import "@fontsource/cormorant-garamond/300-italic.css";
+import "@fontsource/pinyon-script/400.css";
+import "@fontsource/ephesis/400.css";
+import "@fontsource/open-sauce-one/400.css";
+import "@fontsource/open-sauce-one/500.css";
+import "@fontsource/open-sauce-one/700.css";
+import "@/styles/global.css";
+
+import {
+  event,
+  artists,
+  addressLine,
+  showStart,
+  showEnd,
+  doorsOpen,
+  formatted,
+} from "@/data/event";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+/** The series is set lowercase in the script face, but reads as a proper noun in metadata. */
+const seriesProper = event.series.charAt(0).toUpperCase() + event.series.slice(1);
+
+const {
+  title = `${seriesProper}: ${event.title} - ${event.tagline}`,
+  description = `${event.tagline}. ${formatted.weekday} ${formatted.dayNumber} ${formatted.month} ${formatted.year} at ${event.venue.name}, New York. Jayanta Banerjee, sitar. Samir Chatterjee, tabla.`,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(`${import.meta.env.BASE_URL}/og.jpg`.replace(/\/+/g, "/"), Astro.site).href;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "MusicEvent",
+  name: `${seriesProper}: ${event.title}`,
+  description,
+  startDate: showStart.toISOString(),
+  endDate: showEnd.toISOString(),
+  doorTime: doorsOpen.toISOString(),
+  eventStatus: "https://schema.org/EventScheduled",
+  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+  image: [ogImage],
+  location: {
+    "@type": "MusicVenue",
+    name: `${event.venue.name} — ${event.venue.room}`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: event.venue.street,
+      addressLocality: event.venue.locality,
+      addressRegion: event.venue.region,
+      postalCode: event.venue.postalCode,
+      addressCountry: "US",
+    },
+  },
+  performer: artists.map((a) => ({ "@type": "Person", name: a.name })),
+  organizer: { "@type": "Person", name: event.presentedBy },
+  ...(event.tickets.url
+    ? {
+        offers: {
+          "@type": "Offer",
+          url: event.tickets.url,
+          availability: "https://schema.org/InStock",
+        },
+      }
+    : {}),
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={`${import.meta.env.BASE_URL}/favicon.svg`.replace(/\/+/g, "/")} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={`${import.meta.env.BASE_URL}/apple-touch-icon.png`.replace(/\/+/g, "/")} />
+    <meta name="theme-color" content="#850D0D" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="geo.position" content="40.7156;-73.9808" />
+    <meta name="ICBM" content="40.7156, -73.9808" />
+    <meta name="address" content={addressLine} />
+
+    <link rel="sitemap" href={`${import.meta.env.BASE_URL}/sitemap-index.xml`.replace(/\/+/g, "/")} />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <slot />
+  </body>
+</html>

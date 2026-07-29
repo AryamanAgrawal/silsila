@@ -1,0 +1,55 @@
+/* Brand tokens. Every value here is sampled or read from SILSILA.pdf. */
+
+:root {
+  /* ---- colour ---- */
+  --plaster: #850d0d;
+  --sindoor: #bd0606;
+  --ink: #171717;
+  --bone: #e9e4e0;
+  --bone-warm: #f2e3dd;
+  --kraft: #d0bb92;
+  --ash: #5e5a57; /* muted on bone, 4.9:1 */
+  --rose: #e9bdbd; /* muted on plaster, 6.1:1 */
+
+  /* ---- type ---- */
+  --f-display: "Anton", "Arial Narrow", sans-serif;
+  --f-serif: "Cormorant Garamond", "Times New Roman", serif;
+  --f-formal: "Pinyon Script", cursive;
+  --f-sign: "Ephesis", cursive;
+  --f-body: "Open Sauce One", system-ui, sans-serif;
+
+  /* ---- scale (1.25 minor third) ---- */
+  --t-12: 0.75rem;
+  --t-14: 0.875rem;
+  --t-16: 1rem;
+  --t-20: 1.25rem;
+  --t-25: 1.563rem;
+  --t-31: 1.953rem;
+  --t-39: 2.441rem;
+  --t-49: 3.052rem;
+  --t-61: 3.815rem;
+  --t-76: 4.768rem;
+
+  /* fluid display sizes */
+  --t-hero: clamp(3.4rem, 15vw, 13rem);
+  --t-script: clamp(2rem, 6.4vw, 5.4rem);
+  --t-section: clamp(2.2rem, 6vw, 4.2rem);
+
+  /* ---- space ---- */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s6: 24px;
+  --s8: 32px;
+  --s12: 48px;
+  --s16: 64px;
+  --s24: 96px;
+  --s32: 128px;
+  --s48: 192px;
+
+  /* ---- layout ---- */
+  --gutter: clamp(20px, 4vw, 32px);
+  --max: 1240px;
+  --measure: 62ch;
+}

@@ -1,0 +1,2756 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Design Sheet - Silsila: Resonance</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Pinyon+Script&family=Ephesis&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/open-sauce-one@5/400.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/open-sauce-one@5/500.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/open-sauce-one@5/700.css"
+    />
+
+    <style>
+      /* ═══════════════════════════════════════════════════════════
+   BRAND TOKENS - derived from SILSILA.pdf
+   ═══════════════════════════════════════════════════════════ */
+      :root {
+        /* ---- colour ---- */
+        --plaster: #850d0d; /* deep field red - sampled from pp.2,4,6 */
+        --plaster-lo: #6e0808; /* plaster shadow */
+        --plaster-hi: #9a1414; /* plaster highlight */
+        --sindoor: #bd0606; /* bright accent red - sampled from RESONANCE */
+        --ink: #171717;
+        --bone: #e9e4e0; /* paper field */
+        --bone-warm: #f2e3dd; /* warm strip (poster footer) */
+        --kraft: #d0bb92; /* washi tape tan */
+        --ash: #5e5a57; /* muted on bone (AA) */
+        --rose: #e9bdbd; /* muted on plaster (AA) */
+
+        /* ---- type ---- */
+        --f-display: "Anton", "Arial Narrow", sans-serif;
+        --f-serif: "Cormorant Garamond", "Times New Roman", serif;
+        --f-formal: "Pinyon Script", cursive;
+        --f-sign: "Ephesis", cursive;
+        --f-body: "Open Sauce One", "Inter", system-ui, sans-serif;
+
+        /* ---- scale (1.25 minor third) ---- */
+        --t-12: 0.75rem;
+        --t-14: 0.875rem;
+        --t-16: 1rem;
+        --t-20: 1.25rem;
+        --t-25: 1.563rem;
+        --t-31: 1.953rem;
+        --t-39: 2.441rem;
+        --t-49: 3.052rem;
+        --t-61: 3.815rem;
+        --t-76: 4.768rem;
+        --t-95: 5.96rem;
+        --t-119: 7.451rem;
+
+        /* ---- space ---- */
+        --s1: 4px;
+        --s2: 8px;
+        --s3: 12px;
+        --s4: 16px;
+        --s6: 24px;
+        --s8: 32px;
+        --s12: 48px;
+        --s16: 64px;
+        --s24: 96px;
+        --s32: 128px;
+
+        /* ---- sheet chrome (not brand) ---- */
+        --sheet-bg: #0d0d0f;
+        --sheet-card: #161619;
+        --sheet-line: #2a2a30;
+        --sheet-text: #d7d5d2;
+        --sheet-dim: #85837f;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 72px;
+      }
+      body {
+        margin: 0;
+        background: var(--sheet-bg);
+        color: var(--sheet-text);
+        font-family: var(--f-body);
+        font-size: var(--t-16);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: inherit;
+      }
+
+      /* ── sheet chrome ───────────────────────────────────────── */
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        display: flex;
+        gap: var(--s6);
+        align-items: center;
+        padding: var(--s3) var(--s8);
+        background: rgba(13, 13, 15, 0.86);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--sheet-line);
+        font-size: var(--t-12);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .nav::-webkit-scrollbar {
+        display: none;
+      }
+      .nav b {
+        font-family: var(--f-display);
+        font-weight: 400;
+        letter-spacing: 0.04em;
+        color: #fff;
+        font-size: var(--t-14);
+      }
+      .nav a {
+        color: var(--sheet-dim);
+        text-decoration: none;
+        white-space: nowrap;
+        transition: color 0.2s;
+      }
+      .nav a:hover {
+        color: var(--sindoor);
+      }
+
+      .wrap {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 var(--s8) var(--s32);
+      }
+
+      .masthead {
+        padding: var(--s32) 0 var(--s24);
+        border-bottom: 1px solid var(--sheet-line);
+      }
+      .masthead h1 {
+        font-family: var(--f-display);
+        font-weight: 400;
+        font-size: clamp(3rem, 9vw, 7rem);
+        line-height: 0.88;
+        letter-spacing: -0.01em;
+        margin: 0;
+        color: #fff;
+        text-transform: uppercase;
+      }
+      .masthead .sub {
+        color: var(--sheet-dim);
+        max-width: 62ch;
+        margin-top: var(--s6);
+      }
+      .kv {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--s2) var(--s8);
+        margin-top: var(--s8);
+        font-size: var(--t-12);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--sheet-dim);
+      }
+      .kv span b {
+        color: var(--sheet-text);
+        font-weight: 500;
+      }
+
+      section {
+        padding-top: var(--s32);
+      }
+      .sec-num {
+        font-family: var(--f-display);
+        font-size: var(--t-14);
+        color: var(--sindoor);
+        letter-spacing: 0.18em;
+      }
+      .sec-title {
+        font-family: var(--f-display);
+        font-weight: 400;
+        text-transform: uppercase;
+        font-size: var(--t-49);
+        line-height: 1;
+        letter-spacing: -0.005em;
+        color: #fff;
+        margin: var(--s2) 0 var(--s4);
+      }
+      .sec-desc {
+        color: var(--sheet-dim);
+        max-width: 68ch;
+        margin: 0 0 var(--s12);
+      }
+      h3.blk {
+        font-size: var(--t-12);
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: var(--sheet-dim);
+        margin: var(--s16) 0 var(--s4);
+        font-weight: 500;
+        border-top: 1px solid var(--sheet-line);
+        padding-top: var(--s3);
+      }
+
+      .card {
+        background: var(--sheet-card);
+        border: 1px solid var(--sheet-line);
+        border-radius: 4px;
+        padding: var(--s8);
+      }
+      .grid2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--s6);
+      }
+      .grid3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--s6);
+      }
+      .grid4 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--s4);
+      }
+      @media (max-width: 900px) {
+        .grid2,
+        .grid3,
+        .grid4 {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .note {
+        font-size: var(--t-14);
+        color: var(--sheet-dim);
+        line-height: 1.55;
+      }
+      .note code,
+      code.i {
+        font-family: ui-monospace, Menlo, monospace;
+        font-size: 0.85em;
+        background: #202026;
+        padding: 1px 5px;
+        border-radius: 3px;
+        color: #c9c6c2;
+      }
+      .flag {
+        border-left: 3px solid var(--sindoor);
+        padding: var(--s3) var(--s6);
+        background: #1b1416;
+        border-radius: 0 4px 4px 0;
+        margin: var(--s3) 0;
+        font-size: var(--t-14);
+      }
+      .flag b {
+        color: #f0a0a0;
+      }
+      .ok {
+        border-left-color: #4c8b5a;
+        background: #141a16;
+      }
+      .ok b {
+        color: #8fd09e;
+      }
+
+      .tblwrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      table.spec { min-width: 620px; }
+      table.spec {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: var(--t-14);
+      }
+      table.spec th {
+        text-align: left;
+        font-weight: 500;
+        font-size: var(--t-12);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--sheet-dim);
+        border-bottom: 1px solid var(--sheet-line);
+        padding: var(--s2) var(--s4) var(--s2) 0;
+        vertical-align: bottom;
+      }
+      table.spec td {
+        border-bottom: 1px solid #1e1e23;
+        padding: var(--s3) var(--s4) var(--s3) 0;
+        vertical-align: top;
+      }
+      table.spec td:first-child {
+        color: #fff;
+        white-space: nowrap;
+      }
+
+      /* ── real-brand canvases ─────────────────────────────────── */
+      .canvas {
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+        border: 1px solid var(--sheet-line);
+      }
+      .on-bone {
+        background: var(--bone);
+        color: var(--ink);
+      }
+      .on-plaster {
+        background: var(--plaster);
+        color: var(--bone);
+      }
+      .tex-paper::before,
+      .tex-plaster::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+      /* Both textures are centred on mid-grey and blended with `overlay`, so they
+         modulate the field without shifting it. Measured: bone lands on #E9E4E0
+         exactly, plaster on #870D0D against a #850D0D target. */
+      .tex-paper::before {
+        background: url("./assets/texture/paper-grain.jpg") center/480px;
+        mix-blend-mode: overlay;
+        opacity: 0.9;
+      }
+      .tex-plaster::before {
+        background: url("./assets/texture/plaster-wash.jpg") center/cover;
+        mix-blend-mode: overlay;
+      }
+      .canvas > * {
+        position: relative;
+        z-index: 1;
+      }
+      .pad {
+        padding: var(--s12);
+      }
+
+      /* ── palette ─────────────────────────────────────────────── */
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: var(--s3);
+      }
+      .sw {
+        border-radius: 4px;
+        overflow: hidden;
+        border: 1px solid var(--sheet-line);
+      }
+      .sw .chip {
+        height: 96px;
+        position: relative;
+      }
+      .sw .chip span {
+        position: absolute;
+        left: 10px;
+        bottom: 8px;
+        font-size: var(--t-12);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+      .sw .meta {
+        padding: var(--s3);
+        font-size: var(--t-12);
+        line-height: 1.45;
+        color: var(--sheet-dim);
+        background: #131316;
+      }
+      .sw .meta b {
+        display: block;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: var(--t-12);
+      }
+      .sw .meta code {
+        font-family: ui-monospace, monospace;
+        color: #9c9994;
+      }
+
+      /* ── typography specimens ────────────────────────────────── */
+      .spec-row {
+        border-bottom: 1px solid var(--sheet-line);
+        padding: var(--s6) 0;
+        display: grid;
+        grid-template-columns: 190px 1fr;
+        gap: var(--s6);
+        align-items: baseline;
+      }
+      @media (max-width: 760px) {
+        .spec-row {
+          grid-template-columns: 1fr;
+        }
+      }
+      .spec-row .lbl {
+        font-size: var(--t-12);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--sheet-dim);
+      }
+      .spec-row .lbl em {
+        display: block;
+        text-transform: none;
+        letter-spacing: 0;
+        font-style: normal;
+        color: #64615e;
+        margin-top: 4px;
+        line-height: 1.4;
+      }
+
+      /* ── brand components ────────────────────────────────────── */
+      .checker {
+        height: 26px;
+        background: repeating-conic-gradient(
+            var(--ink) 0% 25%,
+            transparent 0% 50%
+          )
+          0 0 / 26px 26px;
+      }
+      .checker.on-red {
+        background: repeating-conic-gradient(
+            var(--bone) 0% 25%,
+            transparent 0% 50%
+          )
+          0 0 / 22px 22px;
+      }
+
+      .polaroid {
+        background: #fbfaf8;
+        padding: 14px 14px 52px;
+        display: inline-block;
+        box-shadow:
+          0 14px 34px rgba(0, 0, 0, 0.34),
+          0 2px 6px rgba(0, 0, 0, 0.2);
+        position: relative;
+      }
+      .polaroid img {
+        display: block;
+        width: 100%;
+        height: auto;
+        filter: grayscale(1) contrast(1.06);
+      }
+      .polaroid .cap {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 12px;
+        text-align: center;
+      }
+      .polaroid .cap .n {
+        font-family: var(--f-serif);
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: var(--t-14);
+        color: var(--plaster);
+        line-height: 1;
+      }
+      .polaroid .cap .i {
+        font-family: var(--f-sign);
+        font-size: var(--t-20);
+        color: var(--ink);
+        line-height: 1;
+        margin-top: 2px;
+      }
+      .tape {
+        position: absolute;
+        width: 132px;
+        height: auto;
+        z-index: 3;
+        filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.28));
+      }
+
+      .btn-ticket {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--s3);
+        background: var(--sindoor);
+        color: var(--bone-warm);
+        font-family: var(--f-display);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-size: var(--t-25);
+        padding: 14px 34px;
+        border: 0;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        text-decoration: none;
+      }
+      .btn-ticket .ring {
+        position: absolute;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        border-radius: 999px;
+        width: 10px;
+        height: 10px;
+        pointer-events: none;
+        opacity: 0;
+      }
+
+      .rule-red {
+        height: 4px;
+        background: var(--sindoor);
+      }
+      .marquee-strip {
+        background: var(--sindoor);
+        color: var(--bone-warm);
+        overflow: hidden;
+        padding: 9px 0;
+      }
+      .marquee-track {
+        display: flex;
+        gap: var(--s8);
+        white-space: nowrap;
+        will-change: transform;
+        font-size: var(--t-12);
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+      }
+      .marquee-track b {
+        font-weight: 500;
+      }
+      .marquee-track i {
+        font-style: normal;
+        opacity: 0.55;
+      }
+
+      /* ── motion lab ──────────────────────────────────────────── */
+      .demo {
+        border: 1px solid var(--sheet-line);
+        border-radius: 4px;
+        overflow: hidden;
+        background: var(--sheet-card);
+      }
+      .demo .stage {
+        position: relative;
+        overflow: hidden;
+      }
+      .demo .bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--s4);
+        padding: var(--s3) var(--s4);
+        border-top: 1px solid var(--sheet-line);
+        background: #131316;
+      }
+      .demo .bar .t {
+        font-size: var(--t-12);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #fff;
+      }
+      .demo .bar .t em {
+        display: block;
+        text-transform: none;
+        letter-spacing: 0;
+        font-style: normal;
+        color: var(--sheet-dim);
+        margin-top: 3px;
+        font-size: var(--t-12);
+        line-height: 1.45;
+      }
+      .replay {
+        background: transparent;
+        border: 1px solid var(--sheet-line);
+        color: var(--sheet-text);
+        font-family: var(--f-body);
+        font-size: var(--t-12);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 7px 13px;
+        border-radius: 3px;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.18s;
+      }
+      .replay:hover {
+        border-color: var(--sindoor);
+        color: #fff;
+        background: #1e1416;
+      }
+
+      /* ── layout wireframe ────────────────────────────────────── */
+      .wire {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .wf {
+        position: relative;
+        border: 1px solid var(--sheet-line);
+        border-radius: 3px;
+        padding: var(--s4) var(--s6) var(--s4) 78px;
+        background: #131316;
+        min-height: 74px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .wf .idx {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--f-display);
+        font-size: var(--t-20);
+        color: #3e3e46;
+        border-right: 1px solid var(--sheet-line);
+      }
+      .wf h4 {
+        margin: 0;
+        font-size: var(--t-16);
+        color: #fff;
+        font-weight: 500;
+      }
+      .wf p {
+        margin: 4px 0 0;
+        font-size: var(--t-14);
+        color: var(--sheet-dim);
+        line-height: 1.5;
+      }
+      .wf .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 7px;
+      }
+      .wf .tag {
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 2px 7px;
+        border-radius: 2px;
+        border: 1px solid #33333b;
+        color: #77747f;
+      }
+      .wf .tag.m {
+        border-color: #4a2226;
+        color: #c97a80;
+      }
+      .wf.red {
+        background: linear-gradient(90deg, #1d1113, #131316);
+        border-color: #34191c;
+      }
+      .wf.bone {
+        background: linear-gradient(90deg, #1b1b1a, #131316);
+      }
+
+      .refstrip {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: var(--s2);
+      }
+      .refstrip img {
+        width: 100%;
+        border: 1px solid var(--sheet-line);
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <b>SILSILA / RESONANCE</b>
+      <a href="#source">00 Source</a>
+      <a href="#colour">01 Colour</a>
+      <a href="#type">02 Type</a>
+      <a href="#material">03 Material</a>
+      <a href="#components">04 Components</a>
+      <a href="#motion">05 Motion</a>
+      <a href="#layout">06 Layout</a>
+      <a href="#stack">07 Stack</a>
+      <a href="#asks">08 Asks</a>
+    </nav>
+
+    <div class="wrap">
+      <header class="masthead">
+        <h1>Design<br />Sheet</h1>
+        <p class="sub">
+          Design system and layout proposal for the
+          <b>Silsila: Resonance</b> event site. Everything below is derived from
+          <code class="i">SILSILA.pdf</code> - colours sampled from the rendered
+          pages, type identified from the embedded font table, textures and
+          motifs extracted as real assets. Nothing here is invented where the
+          poster already made the decision.
+        </p>
+        <div class="kv">
+          <span>Status <b>For review</b></span>
+          <span>Build <b>Astro 6 + GSAP</b></span>
+          <span>Scope <b>Single-page event site</b></span>
+          <span>Assets <b>19 extracted</b></span>
+        </div>
+      </header>
+
+      <!-- ══════════════════════════ 00 SOURCE ══════════════════════════ -->
+      <section id="source">
+        <div class="sec-num">00</div>
+        <h2 class="sec-title">Source audit</h2>
+        <p class="sec-desc">
+          What came out of the PDF, and three things in it that need your call
+          before the copy gets set in code.
+        </p>
+
+        <div class="refstrip">
+          <img src="./assets/ref/poster-1.jpg" alt="poster page 1" />
+          <img src="./assets/ref/poster-2.jpg" alt="poster page 2" />
+          <img src="./assets/ref/poster-4.jpg" alt="poster page 4" />
+          <img src="./assets/ref/poster-5.jpg" alt="poster page 5" />
+          <img src="./assets/ref/poster-6.jpg" alt="poster page 6" />
+        </div>
+
+        <h3 class="blk">Extracted, print quality, ready to use</h3>
+        <div class="grid4">
+          <div class="card note">
+            <b style="color: #fff">11 portraits</b><br />All seven performers in
+            B&amp;W, plus two colour frames of Jayanta and Samir. Largest is
+            Tehreem at 2103&times;1402.
+          </div>
+          <div class="card note">
+            <b style="color: #fff">2 textures</b><br />Red plaster wash
+            (2000&times;2000) and paper grain (2500&times;1667), both greyscale
+            so they tint cleanly.
+          </div>
+          <div class="card note">
+            <b style="color: #fff">6 motifs</b><br />Kraft washi tape (3
+            variants), torn kraft strip, paperclip, polaroid frame - all with
+            alpha recovered from their soft masks.
+          </div>
+          <div class="card note">
+            <b style="color: #fff">Abrons lockup</b><br />The venue wordmark,
+            transparent PNG, 1152&times;119.
+          </div>
+        </div>
+
+        <h3 class="blk">Three things to resolve</h3>
+        <div class="flag">
+          <b>The date does not agree with itself.</b> The poster reads
+          <i>Saturday, August 30th, 2026</i>. In 2026, August 30 is a
+          <b>Sunday</b>; the Saturday is August 29. Which is right? Everything
+          downstream (schema.org markup, the calendar file, the marquee) keys
+          off this.
+        </div>
+        <div class="flag">
+          <b>&ldquo;Players Theatre&rdquo; is probably the Playhouse.</b> The
+          poster says <i>Players Theatre - 466 Grand St</i>. 466 Grand St
+          is Abrons Arts Center, whose rooms are the <b>Playhouse</b> (~314
+          seats), the Experimental Theater, and the Underground Theater. There
+          is a Players Theatre in NYC, but it is at 115 MacDougal. I will write
+          &ldquo;Abrons Arts Center &middot; Playhouse&rdquo; unless you say
+          otherwise.
+        </div>
+        <div class="flag">
+          <b>Pranav Shikarpur is on the poster but not in the blurb.</b> Page 5
+          credits him on bansuri. Your programme description lists violin,
+          keyboard and dholak for the finale. I am building the lineup as seven
+          artists with Pranav included. Confirm he is in.
+        </div>
+        <div class="flag ok">
+          <b>What I did not find, and will need.</b> Ticket URL or a
+          &ldquo;tickets on sale soon&rdquo; state, ticket price tiers, a run
+          time, and one wide photograph of the full ensemble if one exists (nice
+          for the hero, not required). Also: is the Echoes to Sky album embed
+          welcome on this page? I have the DistroKid link.
+        </div>
+      </section>
+
+      <!-- ══════════════════════════ 01 COLOUR ══════════════════════════ -->
+      <section id="colour">
+        <div class="sec-num">01</div>
+        <h2 class="sec-title">Colour</h2>
+        <p class="sec-desc">
+          Five colours, sampled straight off the rendered PDF pages. The poster
+          is doing something smart that the site should keep: two reds, not one.
+          A deep plaster red holds whole fields, and a hotter sindoor red is
+          reserved for type and rules. Mixing them is what makes the poster feel
+          expensive.
+        </p>
+
+        <div class="swatches">
+          <div class="sw">
+            <div class="chip" style="background: var(--plaster)">
+              <span style="color: var(--bone)">#850D0D</span>
+            </div>
+            <div class="meta">
+              <b>Plaster</b><code>--plaster</code>Full-bleed field red. Always
+              carries the plaster texture. Never used for type.
+            </div>
+          </div>
+          <div class="sw">
+            <div class="chip" style="background: var(--sindoor)">
+              <span style="color: var(--bone-warm)">#BD0606</span>
+            </div>
+            <div class="meta">
+              <b>Sindoor</b><code>--sindoor</code>Headlines on bone, rules,
+              marquee bars, the ticket button. Never on plaster.
+            </div>
+          </div>
+          <div class="sw">
+            <div class="chip" style="background: var(--bone)">
+              <span style="color: var(--ink)">#E9E4E0</span>
+            </div>
+            <div class="meta">
+              <b>Bone</b><code>--bone</code>Paper field. Carries the grain
+              texture at 55% multiply.
+            </div>
+          </div>
+          <div class="sw">
+            <div class="chip" style="background: var(--ink)">
+              <span style="color: var(--bone)">#171717</span>
+            </div>
+            <div class="meta">
+              <b>Ink</b><code>--ink</code>Body copy on bone, the checkerboard,
+              photograph blacks.
+            </div>
+          </div>
+          <div class="sw">
+            <div class="chip" style="background: var(--kraft)">
+              <span style="color: var(--ink)">#D0BB92</span>
+            </div>
+            <div class="meta">
+              <b>Kraft</b><code>--kraft</code>Tape and torn paper only. It is a
+              material, not a colour you type in.
+            </div>
+          </div>
+        </div>
+
+        <h3 class="blk">Contrast, measured</h3>
+        <div class="tblwrap"><table class="spec">
+          <tr>
+            <th>Pair</th>
+            <th>Ratio</th>
+            <th>Verdict</th>
+            <th>Rule</th>
+          </tr>
+          <tr>
+            <td>Ink on Bone</td>
+            <td>14.20:1</td>
+            <td style="color: #8fd09e">AAA</td>
+            <td>Default body pairing.</td>
+          </tr>
+          <tr>
+            <td>Bone on Plaster</td>
+            <td>8.07:1</td>
+            <td style="color: #8fd09e">AAA</td>
+            <td>Default pairing on red fields.</td>
+          </tr>
+          <tr>
+            <td>Sindoor on Bone</td>
+            <td>5.21:1</td>
+            <td style="color: #b9d08f">AA</td>
+            <td>Fine for headlines and 16px+ body. Not for 12px meta.</td>
+          </tr>
+          <tr>
+            <td>Kraft on Plaster</td>
+            <td>5.44:1</td>
+            <td style="color: #b9d08f">AA</td>
+            <td>Only for the tape material, not for text.</td>
+          </tr>
+          <tr>
+            <td>Rose <code class="i">#E9BDBD</code> on Plaster</td>
+            <td>6.06:1</td>
+            <td style="color: #8fd09e">AA</td>
+            <td>
+              The muted-text colour on red. Use instead of tinting bone down.
+            </td>
+          </tr>
+          <tr>
+            <td>Sindoor on Plaster</td>
+            <td>1.55:1</td>
+            <td style="color: #f0a0a0">FAIL</td>
+            <td>Hard ban. This is the one mistake the palette invites.</td>
+          </tr>
+          <tr>
+            <td>Ink on Plaster</td>
+            <td>1.76:1</td>
+            <td style="color: #f0a0a0">FAIL</td>
+            <td>Hard ban.</td>
+          </tr>
+        </table></div>
+
+        <h3 class="blk">The two fields, live</h3>
+        <div class="grid2">
+          <div class="canvas on-bone tex-paper pad">
+            <div
+              style="
+                font-family: var(--f-display);
+                font-size: var(--t-49);
+                line-height: 0.9;
+                color: var(--sindoor);
+                text-transform: uppercase;
+              "
+            >
+              Bone field
+            </div>
+            <p
+              style="
+                font-family: var(--f-body);
+                font-size: var(--t-14);
+                max-width: 38ch;
+                color: var(--ink);
+              "
+            >
+              Paper grain at 55% multiply. Carries long-form reading: the
+              Silsila statement, the programme, the venue block.
+            </p>
+            <p
+              style="
+                font-family: var(--f-body);
+                font-size: var(--t-12);
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--ash);
+              "
+            >
+              Muted meta sits at #5E5A57
+            </p>
+          </div>
+          <div class="canvas on-plaster tex-plaster pad">
+            <div
+              style="
+                font-family: var(--f-serif);
+                font-weight: 500;
+                font-size: var(--t-39);
+                line-height: 1;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: var(--bone);
+              "
+            >
+              Plaster field
+            </div>
+            <p
+              style="
+                font-family: var(--f-body);
+                font-size: var(--t-14);
+                max-width: 38ch;
+                color: var(--bone);
+              "
+            >
+              The plaster wash multiplied over #850D0D. Carries the artists, the
+              finale and the ticket call. Photographs sit on it as polaroids.
+            </p>
+            <p
+              style="
+                font-family: var(--f-body);
+                font-size: var(--t-12);
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--rose);
+              "
+            >
+              Muted meta sits at #E9BDBD
+            </p>
+          </div>
+        </div>
+        <p class="note" style="margin-top: var(--s4)">
+          Rhythm through the page alternates the two fields. That alternation is
+          also the reason the site does not need a second accent colour - the
+          field change <i>is</i> the punctuation.
+        </p>
+      </section>
+
+      <!-- ══════════════════════════ 02 TYPE ══════════════════════════ -->
+      <section id="type">
+        <div class="sec-num">02</div>
+        <h2 class="sec-title">Typography</h2>
+        <p class="sec-desc">
+          The poster uses five families. Three are freely licensable and match
+          exactly; two are commercial and need a stand-in unless you want to buy
+          web licences. Below is each role, the poster's font, and what I am
+          proposing - set in the actual faces so you can judge the substitution
+          rather than take my word for it.
+        </p>
+
+        <div
+          class="canvas on-bone tex-paper"
+          style="padding: var(--s12) var(--s12) var(--s16)"
+        >
+          <div class="spec-row" style="border-color: #cfc9c4">
+            <div class="lbl" style="color: var(--ash)">
+              Display<em>Poster: Anton<br />Web: Anton - exact match, OFL</em>
+            </div>
+            <div
+              style="
+                font-family: var(--f-display);
+                font-size: clamp(3rem, 8vw, 6rem);
+                line-height: 0.85;
+                color: var(--sindoor);
+                text-transform: uppercase;
+                letter-spacing: -0.005em;
+              "
+            >
+              Resonance
+            </div>
+          </div>
+          <div class="spec-row" style="border-color: #cfc9c4">
+            <div class="lbl" style="color: var(--ash)">
+              Formal script<em
+                >Poster: Pinyon Script<br />Web: Pinyon Script - exact match,
+                OFL</em
+              >
+            </div>
+            <div
+              style="
+                font-family: var(--f-formal);
+                font-size: clamp(2.5rem, 6vw, 4.5rem);
+                line-height: 1;
+                color: var(--ink);
+              "
+            >
+              silsila
+            </div>
+          </div>
+          <div class="spec-row" style="border-color: #cfc9c4">
+            <div class="lbl" style="color: var(--ash)">
+              Names / editorial serif<em
+                >Poster: TAN Moncheri, The Seasons (commercial)<br />Web:
+                Cormorant Garamond - stand-in</em
+              >
+            </div>
+            <div>
+              <div
+                style="
+                  font-family: var(--f-serif);
+                  font-weight: 500;
+                  font-size: clamp(1.8rem, 4vw, 2.8rem);
+                  letter-spacing: 0.11em;
+                  text-transform: uppercase;
+                  color: var(--plaster);
+                  line-height: 1.1;
+                "
+              >
+                Tehreem Khan
+              </div>
+              <div
+                style="
+                  font-family: var(--f-serif);
+                  font-weight: 400;
+                  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+                  letter-spacing: 0.11em;
+                  text-transform: uppercase;
+                  color: var(--ink);
+                  line-height: 1.2;
+                "
+              >
+                Sikandar Rahman
+              </div>
+            </div>
+          </div>
+          <div class="spec-row" style="border-color: #cfc9c4">
+            <div class="lbl" style="color: var(--ash)">
+              Signature script<em
+                >Poster: Brittany Signature (commercial)<br />Web: Ephesis - stand-in</em
+              >
+            </div>
+            <div
+              style="
+                font-family: var(--f-sign);
+                font-size: clamp(2rem, 5vw, 3.4rem);
+                line-height: 1.15;
+                color: var(--plaster);
+              "
+            >
+              Sitar &nbsp; Tabla &nbsp; Violin &nbsp; Bansuri
+            </div>
+          </div>
+          <div class="spec-row" style="border: 0">
+            <div class="lbl" style="color: var(--ash)">
+              Body / UI<em
+                >Poster: Open Sauce One<br />Web: Open Sauce One - exact match,
+                OFL via Fontsource</em
+              >
+            </div>
+            <div
+              style="
+                font-family: var(--f-body);
+                color: var(--ink);
+                max-width: 52ch;
+              "
+            >
+              <div
+                style="
+                  font-size: var(--t-12);
+                  letter-spacing: 0.16em;
+                  text-transform: uppercase;
+                  color: var(--plaster);
+                  font-weight: 500;
+                  margin-bottom: 6px;
+                "
+              >
+                An evening of South Asian classical music
+              </div>
+              Through intricate improvisation, rhythmic dialogue, and moments of
+              profound stillness, the two explore the depth, beauty, and
+              spontaneity of this living art form.
+              <div
+                style="
+                  font-size: var(--t-12);
+                  letter-spacing: 0.1em;
+                  text-transform: uppercase;
+                  color: var(--ash);
+                  margin-top: 10px;
+                "
+              >
+                Doors 6PM &middot; Showtime 7PM &middot; 466 Grand St
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flag" style="margin-top: var(--s6)">
+          <b>The one judgement call to make here.</b> TAN Moncheri and Brittany
+          Signature are the two faces doing the &ldquo;expensive&rdquo; work on
+          the poster, and they are commercial. Cormorant Garamond and Ephesis
+          get close in weight and rhythm but are not identical - Moncheri is
+          tighter and more geometric, Brittany has a wetter brush. If the poster
+          is going to be reprinted alongside the site, a web licence for those
+          two is worth it. If the site stands alone, the stand-ins hold the
+          look.
+        </div>
+
+        <h3 class="blk">Role table</h3>
+        <div class="tblwrap"><table class="spec">
+          <tr>
+            <th>Token</th>
+            <th>Face</th>
+            <th>Used for</th>
+            <th>Setting</th>
+          </tr>
+          <tr>
+            <td><code class="i">--f-display</code></td>
+            <td>Anton 400</td>
+            <td>RESONANCE, section numerals, ticket CTA, big numbers</td>
+            <td>uppercase, tracking -0.5%, line-height 0.85</td>
+          </tr>
+          <tr>
+            <td><code class="i">--f-serif</code></td>
+            <td>Cormorant Garamond 300–600</td>
+            <td>Artist names, programme movement titles, pull quotes</td>
+            <td>uppercase + 11% tracking for names; italic 300 for quotes</td>
+          </tr>
+          <tr>
+            <td><code class="i">--f-formal</code></td>
+            <td>Pinyon Script</td>
+            <td>The word <i>silsila</i>. Nothing else.</td>
+            <td>never below 32px</td>
+          </tr>
+          <tr>
+            <td><code class="i">--f-sign</code></td>
+            <td>Ephesis</td>
+            <td>Instrument labels under names</td>
+            <td>never below 20px, never in a sentence</td>
+          </tr>
+          <tr>
+            <td><code class="i">--f-body</code></td>
+            <td>Open Sauce One 400/500/700</td>
+            <td>All prose, all UI, all meta</td>
+            <td>16px/1.6 body; 12px/0.14em uppercase meta</td>
+          </tr>
+        </table></div>
+      </section>
+
+      <!-- ══════════════════════════ 03 MATERIAL ══════════════════════════ -->
+      <section id="material">
+        <div class="sec-num">03</div>
+        <h2 class="sec-title">Material</h2>
+        <p class="sec-desc">
+          The poster is a physical object: taped photographs on painted plaster,
+          torn kraft, a paperclip, a checkerboard border. That physicality is
+          the identity, and it is also the thing most likely to be lost in
+          translation to the web. These are the five materials, all real
+          extracted assets.
+        </p>
+
+        <div class="grid3">
+          <div class="card">
+            <div
+              style="
+                height: 120px;
+                background: var(--plaster);
+                position: relative;
+                border-radius: 3px;
+                overflow: hidden;
+              "
+            >
+              <div
+                style="
+                  position: absolute;
+                  inset: 0;
+                  background: url(&quot;./assets/texture/plaster-wash.jpg&quot;)
+                    center/cover;
+                  mix-blend-mode: overlay;
+                  opacity: 0.9;
+                "
+              ></div>
+            </div>
+            <h3
+              class="blk"
+              style="margin-top: var(--s4); border: 0; padding: 0"
+            >
+              Plaster wash
+            </h3>
+            <p class="note">
+              <code>texture/plaster-wash.jpg</code> - centred on mid-grey, overlay-blended onto
+              <code>--plaster</code>. Fixed-attachment on large fields so it
+              reads as a wall, not a tile.
+            </p>
+          </div>
+          <div class="card">
+            <div
+              style="
+                height: 120px;
+                background: var(--bone);
+                position: relative;
+                border-radius: 3px;
+                overflow: hidden;
+              "
+            >
+              <div
+                style="
+                  position: absolute;
+                  inset: 0;
+                  background: url(&quot;./assets/texture/paper-grain.jpg&quot;)
+                    center/500px;
+                  mix-blend-mode: overlay;
+                  opacity: 0.9;
+                "
+              ></div>
+            </div>
+            <h3
+              class="blk"
+              style="margin-top: var(--s4); border: 0; padding: 0"
+            >
+              Paper grain
+            </h3>
+            <p class="note">
+              <code>texture/paper-grain.jpg</code> - overlay onto
+              <code>--bone</code>. Subtle enough to survive a phone screen,
+              present enough to kill the flat-white feel.
+            </p>
+          </div>
+          <div class="card">
+            <div
+              style="
+                height: 120px;
+                background: #1a1a1e;
+                border-radius: 3px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                padding: 10px;
+              "
+            >
+              <img
+                src="./assets/motif/tape-kraft.png"
+                style="width: 44%"
+                alt="tape"
+              />
+              <img
+                src="./assets/motif/torn-kraft.png"
+                style="width: 44%"
+                alt="torn kraft"
+              />
+            </div>
+            <h3
+              class="blk"
+              style="margin-top: var(--s4); border: 0; padding: 0"
+            >
+              Kraft tape &amp; tear
+            </h3>
+            <p class="note">
+              Three tape variants and a torn strip, alpha recovered from the PDF
+              soft masks. Rotated per instance so no two are identical.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid2" style="margin-top: var(--s6)">
+          <div class="card">
+            <h3 class="blk" style="margin-top: 0; border: 0; padding: 0">
+              Checkerboard
+            </h3>
+            <p class="note">
+              Vector on the poster, so rebuilt in CSS rather than extracted. Two
+              scales: 26px on bone, 22px inverted on plaster. It is the site's
+              section divider and the loading motif.
+            </p>
+            <div class="checker" style="margin-top: var(--s4)"></div>
+            <div
+              class="checker on-red"
+              style="background-color: var(--plaster); margin-top: var(--s2)"
+            ></div>
+          </div>
+          <div class="card">
+            <h3 class="blk" style="margin-top: 0; border: 0; padding: 0">
+              Polaroid
+            </h3>
+            <p class="note">
+              Rebuilt as a CSS component rather than the extracted frame image,
+              so it scales and reflows. White stock, 14px rails, 52px chin,
+              two-layer drop shadow, greyscale + 6% contrast on the photograph.
+            </p>
+            <div
+              style="
+                margin-top: var(--s4);
+                text-align: center;
+                background: var(--plaster);
+                padding: var(--s6);
+                border-radius: 3px;
+                position: relative;
+                overflow: hidden;
+              "
+            >
+              <div
+                style="
+                  position: absolute;
+                  inset: 0;
+                  background: url(&quot;./assets/texture/plaster-wash.jpg&quot;)
+                    center/cover;
+                  mix-blend-mode: overlay;
+                  opacity: 0.9;
+                "
+              ></div>
+              <div
+                class="polaroid"
+                style="
+                  width: 190px;
+                  transform: rotate(-2.4deg);
+                  position: relative;
+                  z-index: 1;
+                "
+              >
+                <img src="./assets/artists/aditya.jpg" alt="Aditya Pillai" />
+                <div class="cap">
+                  <div class="n">Aditya Pillai</div>
+                  <div class="i">Dholak</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════ 04 COMPONENTS ══════════════════════════ -->
+      <section id="components">
+        <div class="sec-num">04</div>
+        <h2 class="sec-title">Components</h2>
+        <p class="sec-desc">
+          The pieces the page is assembled from. Each one is live here, not a
+          picture of itself.
+        </p>
+
+        <h3 class="blk">Hero lockup</h3>
+        <div class="canvas on-bone tex-paper" style="padding: 0">
+          <div class="checker"></div>
+          <div
+            style="
+              padding: var(--s16) var(--s12) var(--s12);
+              text-align: center;
+            "
+          >
+            <div style="position: relative; display: inline-block">
+              <div
+                style="
+                  font-family: var(--f-display);
+                  font-size: clamp(2.6rem, 11vw, 8.5rem);
+                  line-height: 0.84;
+                  color: var(--sindoor);
+                  text-transform: uppercase;
+                  letter-spacing: -0.01em;
+                "
+              >
+                Resonance
+              </div>
+              <div
+                style="
+                  font-family: var(--f-formal);
+                  font-size: clamp(1.6rem, 5vw, 3.6rem);
+                  color: var(--ink);
+                  position: absolute;
+                  left: 50%;
+                  transform: translate(-50%, -58%);
+                  white-space: nowrap;
+                "
+              >
+                silsila
+              </div>
+            </div>
+            <div
+              style="
+                font-family: var(--f-body);
+                font-weight: 700;
+                font-size: clamp(0.8rem, 1.7vw, 1.25rem);
+                letter-spacing: 0.02em;
+                text-transform: uppercase;
+                color: var(--ink);
+                margin-top: var(--s6);
+              "
+            >
+              An evening of South Asian classical music
+            </div>
+            <div
+              style="
+                font-family: var(--f-body);
+                font-size: var(--t-14);
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: var(--ash);
+                margin-top: var(--s4);
+              "
+            >
+              30 August 2026 &nbsp;&middot;&nbsp; Doors 6PM &nbsp;&middot;&nbsp;
+              Abrons Arts Center, New York
+            </div>
+            <div style="margin-top: var(--s8)">
+              <a class="btn-ticket" href="#" id="btnDemo">Reserve seats</a>
+            </div>
+          </div>
+          <div class="marquee-strip">
+            <div class="marquee-track" id="mq1">
+              <span><b>Jayanta Banerjee</b> <i>Sitar</i></span
+              ><span><b>Samir Chatterjee</b> <i>Tabla</i></span>
+              <span><b>Tehreem Khan</b> <i>Sitar</i></span
+              ><span><b>Sikandar Rahman</b> <i>Violin</i></span>
+              <span><b>Pranav Shikarpur</b> <i>Bansuri</i></span
+              ><span><b>Shiva Kannan</b> <i>Keyboard</i></span>
+              <span><b>Aditya Pillai</b> <i>Dholak</i></span>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="blk">Artist card - two densities</h3>
+        <div class="canvas on-plaster tex-plaster pad">
+          <div
+            style="
+              display: flex;
+              gap: var(--s16);
+              flex-wrap: wrap;
+              align-items: flex-start;
+              justify-content: center;
+            "
+          >
+            <div style="position: relative">
+              <img
+                class="tape"
+                src="./assets/motif/tape-kraft.png"
+                style="
+                  top: -16px;
+                  left: 22px;
+                  transform: rotate(-7deg);
+                  width: 120px;
+                "
+                alt=""
+              />
+              <div
+                class="polaroid"
+                style="width: 240px; transform: rotate(-1.6deg)"
+              >
+                <img
+                  src="./assets/artists/jayanta.jpg"
+                  alt="Jayanta Banerjee"
+                />
+                <div class="cap">
+                  <div class="n">Jayanta Banerjee</div>
+                  <div class="i">Sitar</div>
+                </div>
+              </div>
+            </div>
+            <div style="position: relative">
+              <img
+                class="tape"
+                src="./assets/motif/tape-kraft-2.png"
+                style="
+                  top: -14px;
+                  right: 16px;
+                  transform: rotate(9deg);
+                  width: 112px;
+                "
+                alt=""
+              />
+              <div
+                class="polaroid"
+                style="width: 190px; transform: rotate(2.2deg)"
+              >
+                <img src="./assets/artists/tehreem.jpg" alt="Tehreem Khan" />
+                <div class="cap">
+                  <div class="n">Tehreem Khan</div>
+                  <div class="i">Sitar</div>
+                </div>
+              </div>
+            </div>
+            <div style="position: relative">
+              <img
+                class="tape"
+                src="./assets/motif/tape-kraft-wide.png"
+                style="
+                  top: -15px;
+                  left: 14px;
+                  transform: rotate(-4deg);
+                  width: 118px;
+                "
+                alt=""
+              />
+              <div
+                class="polaroid"
+                style="width: 190px; transform: rotate(-2.8deg)"
+              >
+                <img
+                  src="./assets/artists/sikandar.jpg"
+                  alt="Sikandar Rahman"
+                />
+                <div class="cap">
+                  <div class="n">Sikandar Rahman</div>
+                  <div class="i">Violin</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p
+            style="
+              text-align: center;
+              font-family: var(--f-body);
+              font-size: var(--t-12);
+              letter-spacing: 0.1em;
+              text-transform: uppercase;
+              color: var(--rose);
+              margin: var(--s8) 0 0;
+            "
+          >
+            Masters at 240px &middot; ensemble at 190px &middot; tilt randomised
+            within &plusmn;3&deg;, tape rotation within &plusmn;10&deg;
+          </p>
+        </div>
+
+        <h3 class="blk">Programme entry</h3>
+        <div class="canvas on-bone tex-paper pad">
+          <div
+            style="
+              display: grid;
+              grid-template-columns: auto 1fr;
+              gap: var(--s8);
+              align-items: start;
+              max-width: 760px;
+            "
+          >
+            <div
+              style="
+                font-family: var(--f-display);
+                font-size: var(--t-76);
+                line-height: 0.8;
+                color: var(--sindoor);
+              "
+            >
+              II
+            </div>
+            <div>
+              <div
+                style="
+                  font-family: var(--f-serif);
+                  font-weight: 500;
+                  font-size: var(--t-31);
+                  letter-spacing: 0.06em;
+                  text-transform: uppercase;
+                  color: var(--ink);
+                  line-height: 1.1;
+                "
+              >
+                Ustad &amp; Shagird
+              </div>
+              <div
+                style="
+                  font-family: var(--f-sign);
+                  font-size: var(--t-25);
+                  color: var(--plaster);
+                  line-height: 1.2;
+                  margin-top: 2px;
+                "
+              >
+                Jayanta Banerjee &amp; Tehreem Khan
+              </div>
+              <p
+                style="
+                  font-family: var(--f-body);
+                  font-size: var(--t-16);
+                  color: var(--ink);
+                  max-width: 56ch;
+                  margin: var(--s3) 0 0;
+                "
+              >
+                A special presentation celebrating the Guru-Shishya tradition,
+                teacher and disciple performing together on sitar - honouring
+                the bond that has sustained this music for generations.
+              </p>
+              <div
+                style="
+                  font-family: var(--f-body);
+                  font-size: var(--t-12);
+                  letter-spacing: 0.14em;
+                  text-transform: uppercase;
+                  color: var(--ash);
+                  margin-top: var(--s4);
+                "
+              >
+                Sitar duet
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="blk">Rules, strips and the section break</h3>
+        <div class="grid2">
+          <div class="card">
+            <div class="canvas on-bone" style="padding: var(--s6) var(--s6) 0">
+              <div
+                style="
+                  font-family: var(--f-body);
+                  font-size: var(--t-12);
+                  letter-spacing: 0.14em;
+                  text-transform: uppercase;
+                  color: var(--ash);
+                "
+              >
+                Section rule
+              </div>
+              <div class="rule-red" style="margin: var(--s3) 0 var(--s6)"></div>
+              <div class="checker" style="margin: 0 calc(-1 * var(--s6))"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="marquee-strip">
+              <div class="marquee-track" id="mq2">
+                <span><b>Sun 30 Aug 2026</b></span
+                ><span><i>Doors 6PM</i></span
+                ><span><b>Showtime 7PM</b></span>
+                <span><i>Abrons Arts Center</i></span
+                ><span><b>466 Grand St</b></span
+                ><span><i>Lower East Side</i></span>
+              </div>
+            </div>
+            <p class="note" style="margin-top: var(--s4)">
+              The detail strip. Runs under the hero and again above the footer.
+              Pauses on hover so it stays readable.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════ 05 MOTION ══════════════════════════ -->
+      <section id="motion">
+        <div class="sec-num">05</div>
+        <h2 class="sec-title">Motion</h2>
+        <p class="sec-desc">
+          GSAP, with one governing idea rather than a bag of effects:
+          <b>the site behaves like a struck string</b>. Nothing on this page
+          eases linearly to a stop. Things are plucked, they overshoot, and they
+          settle with a decay you can feel. That is what the word
+          <i>resonance</i> is asking for, and it is a motion language nobody
+          else's concert site is using. Every demo below is live - press replay.
+        </p>
+
+        <div class="grid2">
+          <div class="demo">
+            <div
+              class="stage on-bone tex-paper"
+              style="
+                height: 280px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <div style="text-align: center; position: relative; z-index: 1">
+                <div
+                  id="d1-word"
+                  style="
+                    font-family: var(--f-display);
+                    font-size: clamp(2rem, 7vw, 4.4rem);
+                    line-height: 0.85;
+                    color: var(--sindoor);
+                    text-transform: uppercase;
+                    overflow: hidden;
+                  "
+                ></div>
+                <div
+                  id="d1-script"
+                  style="
+                    font-family: var(--f-formal);
+                    font-size: clamp(1.4rem, 4vw, 2.6rem);
+                    color: var(--ink);
+                    margin-top: -0.35em;
+                    clip-path: inset(0 100% 0 0);
+                  "
+                >
+                  silsila
+                </div>
+              </div>
+            </div>
+            <div class="bar">
+              <div class="t">
+                01 &nbsp;Sam<em
+                  >The first beat of the cycle. Letters rise out of a baseline
+                  mask on a stagger, then <i>silsila</i> writes itself left to
+                  right.</em
+                >
+              </div>
+              <button class="replay" data-demo="1">Replay</button>
+            </div>
+          </div>
+
+          <div class="demo">
+            <div
+              class="stage on-plaster tex-plaster"
+              style="
+                height: 280px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <svg
+                id="d2"
+                viewBox="0 0 400 240"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  position: relative;
+                  z-index: 1;
+                "
+              >
+                <g stroke="#E9BDBD" stroke-width="1" opacity=".5">
+                  <path class="symp" d="M40 40 Q200 40 360 40"></path>
+                  <path class="symp" d="M40 70 Q200 70 360 70"></path>
+                  <path class="symp" d="M40 100 Q200 100 360 100"></path>
+                  <path class="symp" d="M40 160 Q200 160 360 160"></path>
+                  <path class="symp" d="M40 190 Q200 190 360 190"></path>
+                  <path class="symp" d="M40 220 Q200 220 360 220"></path>
+                </g>
+                <path
+                  id="d2-main"
+                  d="M40 130 Q200 130 360 130"
+                  stroke="#E9E4E0"
+                  stroke-width="2.5"
+                  fill="none"
+                ></path>
+                <circle
+                  id="d2-dot"
+                  cx="200"
+                  cy="130"
+                  r="5"
+                  fill="#E9E4E0"
+                ></circle>
+              </svg>
+            </div>
+            <div class="bar">
+              <div class="t">
+                02 &nbsp;Sympathetic strings<em
+                  >A sitar has 11 tarab strings that ring untouched when the
+                  main string sounds. Pluck the white one - the others answer,
+                  quieter and late.</em
+                >
+              </div>
+              <button class="replay" data-demo="2">Pluck</button>
+            </div>
+          </div>
+
+          <div class="demo">
+            <div
+              class="stage on-bone tex-paper"
+              style="
+                height: 280px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: 18px;
+              "
+            >
+              <div
+                id="d3"
+                style="display: flex; gap: 4px; position: relative; z-index: 1"
+              ></div>
+              <div
+                id="d3-label"
+                style="
+                  font-family: var(--f-body);
+                  font-size: var(--t-12);
+                  letter-spacing: 0.18em;
+                  text-transform: uppercase;
+                  color: var(--ash);
+                  position: relative;
+                  z-index: 1;
+                "
+              >
+                Teental &middot; 16 beats
+              </div>
+            </div>
+            <div class="bar">
+              <div class="t">
+                03 &nbsp;The cycle<em
+                  >The checkerboard is not decoration, it is a 16-beat teental
+                  cycle. It scrubs with scroll; beat 1 (<i>sam</i>) lands red.
+                  Used as every section divider.</em
+                >
+              </div>
+              <button class="replay" data-demo="3">Run cycle</button>
+            </div>
+          </div>
+
+          <div class="demo">
+            <div
+              class="stage on-plaster tex-plaster"
+              style="
+                height: 280px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 26px;
+              "
+            >
+              <div style="position: relative; z-index: 1">
+                <img
+                  class="tape d4-tape"
+                  src="./assets/motif/tape-kraft.png"
+                  style="
+                    position: absolute;
+                    top: -14px;
+                    left: 16px;
+                    transform: rotate(-7deg);
+                    width: 96px;
+                  "
+                  alt=""
+                />
+                <div class="polaroid d4-card" style="width: 150px">
+                  <img src="./assets/artists/shiva.jpg" alt="" />
+                  <div class="cap">
+                    <div class="n" style="font-size: 11px">Shiva Kannan</div>
+                    <div class="i" style="font-size: 16px">Keyboard</div>
+                  </div>
+                </div>
+              </div>
+              <div style="position: relative; z-index: 1">
+                <img
+                  class="tape d4-tape"
+                  src="./assets/motif/tape-kraft-2.png"
+                  style="
+                    position: absolute;
+                    top: -12px;
+                    right: 12px;
+                    transform: rotate(8deg);
+                    width: 92px;
+                  "
+                  alt=""
+                />
+                <div class="polaroid d4-card" style="width: 150px">
+                  <img src="./assets/artists/pranav.jpg" alt="" />
+                  <div class="cap">
+                    <div class="n" style="font-size: 11px">
+                      Pranav Shikarpur
+                    </div>
+                    <div class="i" style="font-size: 16px">Bansuri</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bar">
+              <div class="t">
+                04 &nbsp;Pinned to the wall<em
+                  >Photographs land first with a slight overshoot in rotation,
+                  then the tape presses down on top. The order matters - tape
+                  first reads as a sticker, tape last reads as a hand.</em
+                >
+              </div>
+              <button class="replay" data-demo="4">Replay</button>
+            </div>
+          </div>
+
+          <div class="demo">
+            <div
+              class="stage on-bone tex-paper"
+              style="
+                height: 280px;
+                display: flex;
+                align-items: center;
+                padding: 0 var(--s12);
+              "
+            >
+              <div
+                id="d5"
+                style="
+                  max-width: 46ch;
+                  position: relative;
+                  z-index: 1;
+                  font-family: var(--f-serif);
+                  font-weight: 300;
+                  font-style: italic;
+                  font-size: clamp(1.1rem, 2.3vw, 1.7rem);
+                  line-height: 1.45;
+                  color: var(--ink);
+                "
+              >
+                Silsila means continuation, the unbroken line through which
+                South Asian classical music has passed from one generation to
+                the next.
+              </div>
+            </div>
+            <div class="bar">
+              <div class="t">
+                05 &nbsp;Line reveal<em
+                  >SplitText by line, each line rising out of its own clip mask
+                  on a 0.08s stagger. The only text effect on the site - used
+                  once, for the Silsila statement.</em
+                >
+              </div>
+              <button class="replay" data-demo="5">Replay</button>
+            </div>
+          </div>
+
+          <div class="demo">
+            <div
+              class="stage on-plaster tex-plaster"
+              style="
+                height: 280px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <svg
+                id="d6"
+                viewBox="0 0 420 240"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  position: relative;
+                  z-index: 1;
+                  font-family: var(--f-body);
+                "
+              >
+                <path
+                  id="d6-path"
+                  d="M60 190 C 60 110, 140 120, 150 70 C 158 30, 210 28, 232 62 C 254 96, 300 92, 320 130 C 336 162, 352 172, 372 178"
+                  stroke="#E9BDBD"
+                  stroke-width="1.6"
+                  fill="none"
+                  stroke-linecap="round"
+                ></path>
+                <g class="d6-node" opacity="0">
+                  <circle cx="60" cy="190" r="4" fill="#E9E4E0"></circle>
+                  <text
+                    x="60"
+                    y="212"
+                    fill="#E9BDBD"
+                    font-size="9"
+                    text-anchor="middle"
+                    letter-spacing="1.6"
+                  >
+                    RAMPUR
+                  </text>
+                </g>
+                <g class="d6-node" opacity="0">
+                  <circle cx="150" cy="70" r="4" fill="#E9E4E0"></circle>
+                  <text
+                    x="150"
+                    y="56"
+                    fill="#E9BDBD"
+                    font-size="9"
+                    text-anchor="middle"
+                    letter-spacing="1.6"
+                  >
+                    MAIHAR
+                  </text>
+                </g>
+                <g class="d6-node" opacity="0">
+                  <circle cx="232" cy="62" r="6" fill="#E9E4E0"></circle>
+                  <text
+                    x="232"
+                    y="46"
+                    fill="#E9E4E0"
+                    font-size="10"
+                    text-anchor="middle"
+                    letter-spacing="1.6"
+                  >
+                    JAYANTA
+                  </text>
+                </g>
+                <g class="d6-node" opacity="0">
+                  <circle cx="320" cy="130" r="6" fill="#E9E4E0"></circle>
+                  <text
+                    x="320"
+                    y="152"
+                    fill="#E9E4E0"
+                    font-size="10"
+                    text-anchor="middle"
+                    letter-spacing="1.6"
+                  >
+                    TEHREEM
+                  </text>
+                </g>
+                <g class="d6-node" opacity="0">
+                  <circle cx="372" cy="178" r="3" fill="#E9BDBD"></circle>
+                  <text
+                    x="372"
+                    y="200"
+                    fill="#E9BDBD"
+                    font-size="9"
+                    text-anchor="middle"
+                    letter-spacing="1.6"
+                  >
+                    NEXT
+                  </text>
+                </g>
+              </svg>
+            </div>
+            <div class="bar">
+              <div class="t">
+                06 &nbsp;The line itself<em
+                  >A pinned section where the silsila is drawn as one continuous
+                  path: gharana to guru to shishya to whoever is next. DrawSVG,
+                  scrubbed to scroll.</em
+                >
+              </div>
+              <button class="replay" data-demo="6">Draw</button>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="blk">Also proposed, not demoed above</h3>
+        <div class="tblwrap"><table class="spec">
+          <tr>
+            <th>Move</th>
+            <th>Where</th>
+            <th>Why</th>
+          </tr>
+          <tr>
+            <td>Magnetic + resonance ring</td>
+            <td>Ticket button (try the one in section 04)</td>
+            <td>
+              Cursor attraction inside 60px, and a ring that expands and decays
+              on click. Same decay curve as the strings.
+            </td>
+          </tr>
+          <tr>
+            <td>Plaster wipe</td>
+            <td>Bone-to-plaster section joins</td>
+            <td>
+              The red field wipes up over the bone one rather than cutting.
+              Masked, 0.7s, no layout shift.
+            </td>
+          </tr>
+          <tr>
+            <td>Photograph settle</td>
+            <td>All polaroids on scroll</td>
+            <td>
+              ScrollTrigger with <code class="i">once: true</code>. They never
+              re-animate on scroll back, which is what makes a page feel calm
+              rather than busy.
+            </td>
+          </tr>
+          <tr>
+            <td>Marquee scrub</td>
+            <td>Detail strips</td>
+            <td>
+              Base drift plus a scroll-velocity term, so fast scrolling pushes
+              the strip. Cheap, and it makes the page feel physical.
+            </td>
+          </tr>
+          <tr>
+            <td>Counter to date</td>
+            <td>Hero, on load</td>
+            <td>
+              The date numerals roll from 00 to 30 with the same decay. One
+              second, once, never again.
+            </td>
+          </tr>
+        </table></div>
+
+        <div class="flag ok" style="margin-top: var(--s6)">
+          <b>Restraint, stated as a rule.</b>
+          No smooth-scroll hijacking (Lenis included). No WebGL. No
+          page-transition library. Everything above respects
+          <code class="i">prefers-reduced-motion</code> by collapsing to a 200ms
+          fade, and the page is fully readable with JavaScript off. The event is
+          90 minutes of two people listening to each other very carefully - the
+          site should not be louder than that.
+        </div>
+      </section>
+
+      <!-- ══════════════════════════ 06 LAYOUT ══════════════════════════ -->
+      <section id="layout">
+        <div class="sec-num">06</div>
+        <h2 class="sec-title">Layout</h2>
+        <p class="sec-desc">
+          Single page, anchored nav, ten movements. The field colour alternates
+          bone and plaster the whole way down, which gives the scroll a pulse
+          without needing dividers everywhere. Red rows are plaster, grey rows
+          are bone.
+        </p>
+
+        <div class="wire">
+          <div class="wf bone">
+            <div class="idx">00</div>
+            <h4>
+              Overture
+              <span style="color: var(--sheet-dim); font-weight: 400"
+                > - optional</span
+              >
+            </h4>
+            <p>
+              Checkerboard wipe over bone, the word <i>silsila</i> writes
+              itself, then it lifts into the hero. Under 1.2s, session-stored so
+              it plays once per visit.
+            </p>
+            <div class="tags">
+              <span class="tag">bone</span><span class="tag m">write-on</span
+              ><span class="tag m">checker wipe</span>
+            </div>
+          </div>
+
+          <div class="wf bone">
+            <div class="idx">01</div>
+            <h4>Hero</h4>
+            <p>
+              Checkerboard top edge. Anton RESONANCE at full viewport width with
+              <i>silsila</i> in Pinyon overlapping it, exactly as the poster
+              locks up. Subline, then date / doors / venue. Two calls: reserve
+              seats, add to calendar. Sympathetic strings live behind the type,
+              plucked on load and on hover.
+            </p>
+            <div class="tags">
+              <span class="tag">bone</span><span class="tag">full height</span
+              ><span class="tag m">sam</span><span class="tag m">strings</span
+              ><span class="tag m">counter</span>
+            </div>
+          </div>
+
+          <div class="wf">
+            <div class="idx">02</div>
+            <h4>Detail strip</h4>
+            <p>
+              Sindoor bar. Date, doors, showtime, venue, address, running as a
+              marquee. This is the row that answers &ldquo;when and where&rdquo;
+              before anyone scrolls.
+            </p>
+            <div class="tags">
+              <span class="tag">sindoor</span
+              ><span class="tag m">velocity scrub</span>
+            </div>
+          </div>
+
+          <div class="wf bone">
+            <div class="idx">03</div>
+            <h4>Silsila - the statement</h4>
+            <p>
+              Your opening paragraph, set as an editorial pull quote in
+              Cormorant italic, one idea per line. The definition of the word
+              carries the whole concept, so it gets a full quiet screen and the
+              only line-reveal on the site.
+            </p>
+            <div class="tags">
+              <span class="tag">bone</span
+              ><span class="tag m">line reveal</span>
+            </div>
+          </div>
+
+          <div class="wf">
+            <div class="idx">04</div>
+            <h4>The programme - three movements</h4>
+            <p>
+              I. Sitar &amp; Tabla. II. Ustad &amp; Shagird. III. A Dialogue
+              Between East and West. Roman numerals in Anton at 76px, movement
+              title in Cormorant caps, performers in Ephesis, description in
+              Open Sauce. Vertical spine down the left that draws as you scroll.
+            </p>
+            <div class="tags">
+              <span class="tag">plaster</span
+              ><span class="tag m">spine draw</span
+              ><span class="tag m">stagger</span>
+            </div>
+          </div>
+
+          <div class="wf bone">
+            <div class="idx">05</div>
+            <h4>The line</h4>
+            <p>
+              Pinned. The lineage path draws once: Rampur and Maihar into
+              Jayanta, Jayanta into Tehreem, and forward. Farrukhabad into Samir
+              on its own branch. This is the section that earns the event's
+              name, and it is the one thing on the site that no template could
+              have produced.
+            </p>
+            <div class="tags">
+              <span class="tag">bone</span><span class="tag">pinned</span
+              ><span class="tag m">DrawSVG scrub</span>
+            </div>
+          </div>
+
+          <div class="wf">
+            <div class="idx">06</div>
+            <h4>Artists</h4>
+            <p>
+              Polaroid wall on plaster. Jayanta and Samir at 240px leading, then
+              Tehreem, then the ensemble four at 190px. Click any card to open a
+              bio drawer - full text is already written in the source documents.
+              Tape rotation and card tilt randomised per instance.
+            </p>
+            <div class="tags">
+              <span class="tag">plaster</span
+              ><span class="tag m">settle + tape</span
+              ><span class="tag">drawer</span>
+            </div>
+          </div>
+
+          <div class="wf bone">
+            <div class="idx">07</div>
+            <h4>
+              Listen
+              <span style="color: var(--sheet-dim); font-weight: 400"
+                > - pending your call</span
+              >
+            </h4>
+            <p>
+              A single embedded track from <i>Echoes to Sky</i>, framed as a
+              record sleeve rather than a player widget. Strongest argument for
+              it: someone who has never heard a sitar can decide to buy a ticket
+              in thirty seconds.
+            </p>
+            <div class="tags">
+              <span class="tag">bone</span
+              ><span class="tag">needs approval</span>
+            </div>
+          </div>
+
+          <div class="wf">
+            <div class="idx">08</div>
+            <h4>Venue &amp; practicalities</h4>
+            <p>
+              Address, map, doors and showtime, the Playhouse room, nearest
+              trains, accessibility, contact. Set as a plain two-column table
+              because this is the part people screenshot. Abrons lockup sits
+              here.
+            </p>
+            <div class="tags">
+              <span class="tag">plaster</span><span class="tag">static</span>
+            </div>
+          </div>
+
+          <div class="wf">
+            <div class="idx">09</div>
+            <h4>Tickets</h4>
+            <p>
+              Full-bleed sindoor. One Anton word, one button, price tiers
+              underneath. Nothing else in the viewport.
+            </p>
+            <div class="tags">
+              <span class="tag">sindoor</span
+              ><span class="tag m">magnetic + ring</span>
+            </div>
+          </div>
+
+          <div class="wf bone">
+            <div class="idx">10</div>
+            <h4>Footer</h4>
+            <p>
+              Presented by Tehreem Khan. Contact, socials, poster download,
+              credits. Checkerboard bottom edge closing the frame the hero
+              opened.
+            </p>
+            <div class="tags">
+              <span class="tag">bone</span><span class="tag m">checker</span>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="blk">Grid and responsive behaviour</h3>
+        <div class="tblwrap"><table class="spec">
+          <tr>
+            <th>Breakpoint</th>
+            <th>Grid</th>
+            <th>Notable change</th>
+          </tr>
+          <tr>
+            <td>&lt; 640px</td>
+            <td>4 col, 20px gutter</td>
+            <td>
+              Polaroid wall becomes a single tilted column. Lineage path rotates
+              to vertical. Hero type at 15vw.
+            </td>
+          </tr>
+          <tr>
+            <td>640 – 1024px</td>
+            <td>8 col, 28px gutter</td>
+            <td>
+              Artists in 2 up. Programme numerals move above their titles.
+            </td>
+          </tr>
+          <tr>
+            <td>&gt; 1024px</td>
+            <td>12 col, 32px gutter, 1240px max</td>
+            <td>
+              Full layout. Hero type is viewport-width bound, not container
+              bound.
+            </td>
+          </tr>
+        </table></div>
+      </section>
+
+      <!-- ══════════════════════════ 07 STACK ══════════════════════════ -->
+      <section id="stack">
+        <div class="sec-num">07</div>
+        <h2 class="sec-title">Stack</h2>
+        <div class="grid2">
+          <div>
+            <div class="tblwrap"><table class="spec">
+              <tr>
+                <th>Layer</th>
+                <th>Choice</th>
+              </tr>
+              <tr>
+                <td>Framework</td>
+                <td>
+                  Astro 6, zero client framework. Same setup as
+                  aryamanagrawal.github.io.
+                </td>
+              </tr>
+              <tr>
+                <td>Styling</td>
+                <td>
+                  Plain CSS with the tokens above in
+                  <code class="i">src/styles/tokens.css</code>. No Tailwind - this is one page with a strong opinion, utilities would fight
+                  it.
+                </td>
+              </tr>
+              <tr>
+                <td>Motion</td>
+                <td>
+                  GSAP 3.13 + ScrollTrigger + SplitText + DrawSVG, all free as
+                  of 3.13. One island, deferred.
+                </td>
+              </tr>
+              <tr>
+                <td>Fonts</td>
+                <td>
+                  Self-hosted woff2 via Fontsource. Anton, Cormorant Garamond,
+                  Pinyon Script, Ephesis, Open Sauce One. Subset to latin,
+                  preload the two used above the fold.
+                </td>
+              </tr>
+              <tr>
+                <td>Images</td>
+                <td>
+                  <code class="i">astro:assets</code>, AVIF + WebP, responsive
+                  srcset. Photographs are already greyscale so they compress
+                  hard.
+                </td>
+              </tr>
+              <tr>
+                <td>SEO</td>
+                <td>
+                  schema.org <code class="i">MusicEvent</code> with performers,
+                  offers and location, so the date shows up in Google and Apple
+                  Maps. OG image generated from the poster.
+                </td>
+              </tr>
+              <tr>
+                <td>Hosting</td>
+                <td>
+                  Static. Netlify or GitHub Pages on a custom domain, whichever
+                  you prefer.
+                </td>
+              </tr>
+            </table></div>
+          </div>
+          <div class="card">
+            <h3 class="blk" style="margin-top: 0; border: 0; padding: 0">
+              Performance targets
+            </h3>
+            <p class="note">
+              Lighthouse 100 / 100 / 100 / 100 on mobile. Under 200KB on first
+              paint excluding the hero photograph. LCP under 1.2s on 4G. The
+              whole GSAP bundle is 48KB gzipped and loads after first paint, so
+              the page is readable before any of the motion arrives.
+            </p>
+            <h3 class="blk">Accessibility</h3>
+            <p class="note">
+              All motion collapses under
+              <code class="i">prefers-reduced-motion</code>. Every polaroid has
+              a real alt. The bio drawers are
+              <code class="i">&lt;details&gt;</code> underneath, so they work
+              without JavaScript. Contrast pairs are the measured ones in
+              section 01, and the two failing pairs are impossible to hit
+              because plaster and sindoor never touch as foreground and
+              background.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════ 08 ASKS ══════════════════════════ -->
+      <section id="asks">
+        <div class="sec-num">08</div>
+        <h2 class="sec-title">What I need from you</h2>
+        <p class="sec-desc">
+          Ranked. The first three block the build; the rest can land later
+          without rework.
+        </p>
+        <div class="tblwrap"><table class="spec">
+          <tr>
+            <th>#</th>
+            <th>Need</th>
+            <th>Why it blocks</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Saturday 29 or Sunday 30 August</td>
+            <td>
+              Date is in the hero, the marquee, the schema markup and the .ics
+              file.
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>
+              Ticket URL, or confirmation of a &ldquo;coming soon&rdquo; state
+            </td>
+            <td>
+              Determines whether the tickets section is a button or a
+              mailing-list capture.
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Sign-off on this design system</td>
+            <td>Everything downstream is built on the tokens above.</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Price tiers, run time, interval or no interval</td>
+            <td>Fills the venue table. Placeholder text until then.</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Bios for Tehreem, Sikandar, Pranav, Shiva, Aditya</td>
+            <td>
+              I have full bios for Jayanta and Samir from the docs. The other
+              five have a photograph and an instrument and nothing else.
+            </td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Higher-res source photographs, if they exist</td>
+            <td>
+              Samir's best frame is 534&times;800 and Aditya's is 589&times;719,
+              which are thin for a 240px retina polaroid. Everything else is
+              fine.
+            </td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Yes or no on the album embed</td>
+            <td>Section 07 in the layout. Easy to add, easy to drop.</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Domain</td>
+            <td>For canonical URLs and the OG tags.</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Web licences for TAN Moncheri and Brittany Signature</td>
+            <td>
+              Only if you want an exact type match to the poster. The stand-ins
+              ship otherwise.
+            </td>
+          </tr>
+        </table></div>
+      </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+    <script>
+      gsap.registerPlugin(SplitText, DrawSVGPlugin);
+
+      /* The house curve: a plucked string. Overshoot, then decay.
+   Used everywhere something arrives. */
+      const PLUCK = "elastic.out(1, 0.45)";
+      const SETTLE = "power3.out";
+
+      /* ── 01 Sam ─────────────────────────────────────────────── */
+      const d1word = document.getElementById("d1-word");
+      d1word.innerHTML = "RESONANCE"
+        .split("")
+        .map(
+          (c) =>
+            `<span style="display:inline-block;overflow:hidden;vertical-align:top"><i style="display:inline-block;font-style:normal">${c}</i></span>`,
+        )
+        .join("");
+      function demo1() {
+        const letters = d1word.querySelectorAll("i");
+        const tl = gsap.timeline();
+        tl.fromTo(
+          letters,
+          { yPercent: 110 },
+          { yPercent: 0, duration: 0.9, ease: SETTLE, stagger: 0.045 },
+        ).fromTo(
+          "#d1-script",
+          { clipPath: "inset(0 100% 0 0)" },
+          { clipPath: "inset(0 0% 0 0)", duration: 1.1, ease: "power2.inOut" },
+          "-=.35",
+        );
+        return tl;
+      }
+
+      /* ── 02 Sympathetic strings ─────────────────────────────── */
+      function bend(target, amp, dur, delay) {
+        const el =
+          typeof target === "string" ? document.querySelector(target) : target;
+        const o = { v: 0 };
+        return gsap.to(o, {
+          v: 1,
+          duration: dur,
+          delay: delay,
+          ease: PLUCK,
+          onUpdate() {
+            // decaying sine: the string keeps ringing as the envelope closes
+            const t = this.progress();
+            const y = amp * Math.sin(t * Math.PI * 7) * Math.exp(-4.2 * t);
+            const d = el
+              .getAttribute("d")
+              .replace(
+                /Q(\S+) (\S+)/,
+                `Q$1 ${parseFloat(el.dataset.base) + y}`,
+              );
+            el.setAttribute("d", d);
+          },
+        });
+      }
+      document.querySelectorAll("#d2 path").forEach((p) => {
+        p.dataset.base = /Q\S+ (\S+)/.exec(p.getAttribute("d"))[1];
+      });
+      function demo2() {
+        const tl = gsap.timeline();
+        const main = document.getElementById("d2-main");
+        const dot = document.getElementById("d2-dot");
+        tl.add(bend(main, 34, 2.4, 0), 0);
+        tl.to(
+          {},
+          {
+            duration: 2.4,
+            onUpdate() {
+              const t = this.progress();
+              dot.setAttribute(
+                "cy",
+                130 + 34 * Math.sin(t * Math.PI * 7) * Math.exp(-4.2 * t),
+              );
+            },
+          },
+          0,
+        );
+        document.querySelectorAll("#d2 .symp").forEach((p, i) => {
+          const dist = Math.abs(i - 2.5);
+          tl.add(bend(p, 13 / (1 + dist * 0.55), 2.0, 0.12 + dist * 0.06), 0);
+        });
+        return tl;
+      }
+
+      /* ── 03 Teental ─────────────────────────────────────────── */
+      const d3 = document.getElementById("d3");
+      for (let i = 0; i < 16; i++) {
+        const c = document.createElement("div");
+        c.style.cssText = `width:22px;height:22px;background:${i === 0 ? "#BD0606" : i % 2 ? "transparent" : "#171717"};
+    border:1px solid ${i === 0 ? "#BD0606" : "#171717"};opacity:.18`;
+        d3.appendChild(c);
+      }
+      function demo3() {
+        const cells = d3.children;
+        const tl = gsap.timeline();
+        tl.to(cells, {
+          opacity: 1,
+          duration: 0.12,
+          stagger: 0.075,
+          ease: "none",
+        })
+          .to(cells[0], { scale: 1.45, duration: 0.5, ease: PLUCK }, "-=.2")
+          .to(cells[0], { scale: 1, duration: 0.4, ease: SETTLE })
+          .to(cells, { opacity: 0.18, duration: 0.5, ease: SETTLE }, "-=.1");
+        return tl;
+      }
+
+      /* ── 04 Pinned to the wall ──────────────────────────────── */
+      function demo4() {
+        const cards = gsap.utils.toArray(".d4-card");
+        const tapes = gsap.utils.toArray(".d4-tape");
+        const tl = gsap.timeline();
+        tl.fromTo(
+          cards,
+          { y: 40, rotation: (i) => (i ? 9 : -8), opacity: 0 },
+          {
+            y: 0,
+            rotation: (i) => (i ? 2.2 : -1.8),
+            opacity: 1,
+            duration: 1.1,
+            ease: PLUCK,
+            stagger: 0.12,
+          },
+        ).fromTo(
+          tapes,
+          { scaleY: 0, transformOrigin: "top center", opacity: 0 },
+          {
+            scaleY: 1,
+            opacity: 1,
+            duration: 0.42,
+            ease: "power2.out",
+            stagger: 0.1,
+          },
+          "-=.5",
+        );
+        return tl;
+      }
+
+      /* ── 05 Line reveal ─────────────────────────────────────── */
+      let split5 = null;
+      function demo5() {
+        if (split5) split5.revert();
+        split5 = new SplitText("#d5", { type: "lines", mask: "lines" });
+        return gsap.fromTo(
+          split5.lines,
+          { yPercent: 105 },
+          { yPercent: 0, duration: 0.85, ease: SETTLE, stagger: 0.08 },
+        );
+      }
+
+      /* ── 06 The line ────────────────────────────────────────── */
+      function demo6() {
+        const tl = gsap.timeline();
+        tl.fromTo(
+          "#d6-path",
+          { drawSVG: "0%" },
+          { drawSVG: "100%", duration: 2.2, ease: "power1.inOut" },
+        ).fromTo(
+          ".d6-node",
+          { opacity: 0, scale: 0.4, transformOrigin: "center" },
+          { opacity: 1, scale: 1, duration: 0.5, ease: PLUCK, stagger: 0.36 },
+          0.25,
+        );
+        return tl;
+      }
+
+      /* ── marquees ───────────────────────────────────────────── */
+      function marquee(id, speed) {
+        const track = document.getElementById(id);
+        track.innerHTML += track.innerHTML;
+        const w = track.scrollWidth / 2;
+        const tw = gsap.to(track, {
+          x: -w,
+          duration: w / speed,
+          ease: "none",
+          repeat: -1,
+        });
+        track.parentElement.addEventListener("mouseenter", () =>
+          tw.timeScale(0.15),
+        );
+        track.parentElement.addEventListener("mouseleave", () =>
+          tw.timeScale(1),
+        );
+      }
+      marquee("mq1", 44);
+      marquee("mq2", 34);
+
+      /* ── ticket button: magnetic + resonance ring ───────────── */
+      const btn = document.getElementById("btnDemo");
+      btn.addEventListener("mousemove", (e) => {
+        const r = btn.getBoundingClientRect();
+        gsap.to(btn, {
+          x: (e.clientX - r.left - r.width / 2) * 0.22,
+          y: (e.clientY - r.top - r.height / 2) * 0.3,
+          duration: 0.5,
+          ease: "power3.out",
+        });
+      });
+      btn.addEventListener("mouseleave", () =>
+        gsap.to(btn, { x: 0, y: 0, duration: 1.1, ease: PLUCK }),
+      );
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const r = btn.getBoundingClientRect();
+        const ring = document.createElement("span");
+        ring.className = "ring";
+        ring.style.left = e.clientX - r.left - 5 + "px";
+        ring.style.top = e.clientY - r.top - 5 + "px";
+        btn.appendChild(ring);
+        gsap.fromTo(
+          ring,
+          { scale: 0, opacity: 0.9 },
+          {
+            scale: 26,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power2.out",
+            onComplete: () => ring.remove(),
+          },
+        );
+      });
+
+      /* ── wiring ─────────────────────────────────────────────── */
+      const demos = {
+        1: demo1,
+        2: demo2,
+        3: demo3,
+        4: demo4,
+        5: demo5,
+        6: demo6,
+      };
+      document
+        .querySelectorAll(".replay")
+        .forEach((b) =>
+          b.addEventListener("click", () => demos[b.dataset.demo]()),
+        );
+
+      /* play each once when it scrolls into view */
+      const seen = new WeakSet();
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((en) => {
+            if (en.isIntersecting && !seen.has(en.target)) {
+              seen.add(en.target);
+              const n = en.target.querySelector(".replay")?.dataset.demo;
+              if (n) demos[n]();
+            }
+          });
+        },
+        { threshold: 0.4 },
+      );
+      document.querySelectorAll(".demo").forEach((d) => io.observe(d));
+    </script>
+  </body>
+</html>

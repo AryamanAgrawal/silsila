@@ -1,0 +1,56 @@
+---
+import { event, formatted } from "@/data/event";
+---
+
+<section class="field--sindoor section tickets" id="tickets" aria-labelledby="tickets-h">
+  <div class="wrap">
+    <h2 class="big" id="tickets-h">Book</h2>
+    <p class="line">
+      {formatted.weekday} {formatted.dayNumber} {formatted.month} {formatted.year} · {formatted.showtime} · {event.venue.name}
+    </p>
+    {
+      event.tickets.url ? (
+        <a class="btn btn--ghost big-btn" href={event.tickets.url} target="_blank" rel="noopener noreferrer" data-magnetic>
+          Get tickets
+        </a>
+      ) : (
+        <a class="btn btn--ghost big-btn" href={`mailto:${event.contact.email}`} data-magnetic>
+          Enquire
+        </a>
+      )
+    }
+    <p class="note">{event.tickets.note}</p>
+  </div>
+</section>
+
+<style>
+  .tickets {
+    text-align: center;
+  }
+  .big {
+    font-family: var(--f-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(4rem, 20vw, 15rem);
+    line-height: 0.8;
+    letter-spacing: -0.015em;
+    margin: 0;
+  }
+  .line {
+    font-size: var(--t-12);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: var(--s6) 0 var(--s8);
+    opacity: 0.9;
+  }
+  .big-btn {
+    padding-inline: clamp(var(--s8), 8vw, var(--s24));
+  }
+  .note {
+    font-size: var(--t-12);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.72;
+    margin: var(--s6) 0 0;
+  }
+</style>

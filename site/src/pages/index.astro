@@ -1,0 +1,51 @@
+---
+import Base from "@/layouts/Base.astro";
+import Hero from "@/components/Hero.astro";
+import Marquee from "@/components/Marquee.astro";
+import Statement from "@/components/Statement.astro";
+import RunOfShow from "@/components/RunOfShow.astro";
+import Artists from "@/components/Artists.astro";
+import Listen from "@/components/Listen.astro";
+import Venue from "@/components/Venue.astro";
+import Tickets from "@/components/Tickets.astro";
+import SiteFooter from "@/components/SiteFooter.astro";
+import { artists, event, formatted, addressLine } from "@/data/event";
+
+const details = [
+  { strong: `${formatted.weekday} ${formatted.dayNumber} ${formatted.month} ${formatted.year}` },
+  { strong: "Doors", dim: formatted.doors },
+  { strong: "Curtain", dim: formatted.showtime },
+  { strong: event.venue.name, dim: event.venue.room },
+  { strong: addressLine },
+  { strong: event.venue.neighbourhood },
+];
+
+const lineup = artists.map((a) => ({ strong: a.name, dim: a.instrument }));
+---
+
+<Base>
+{/*
+  Field sequence. Two rules keep the scroll from flickering between colours:
+  a sindoor marquee only ever sits between two bone sections, and plaster runs
+  as one uninterrupted act rather than alternating in and out.
+
+    bone → sindoor → bone → PLASTER PLASTER → bone → sindoor → bone → sindoor → bone
+*/}
+<Base>
+  <Hero />
+  <Marquee items={details} speed={38} />
+  <main id="main">
+    <Statement />
+    <RunOfShow />
+    <Artists />
+    <Listen />
+    <Marquee items={lineup} speed={46} />
+    <Venue />
+    <Tickets />
+  </main>
+  <SiteFooter />
+
+  <script>
+    import "@/scripts/motion";
+  </script>
+</Base>

@@ -1,0 +1,48 @@
+---
+interface Props {
+  items: { strong: string; dim?: string }[];
+  speed?: number;
+}
+const { items, speed = 42 } = Astro.props;
+---
+
+<div class="field--sindoor marquee" data-marquee={speed}>
+  <div class="track" data-marquee-track>
+    {
+      items.map((it) => (
+        <span class="item">
+          <b>{it.strong}</b>
+          {it.dim && <i>{it.dim}</i>}
+        </span>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .marquee {
+    overflow: hidden;
+    padding-block: 10px;
+    border-block: 0;
+  }
+  .track {
+    display: flex;
+    gap: var(--s8);
+    white-space: nowrap;
+    will-change: transform;
+  }
+  .item {
+    display: inline-flex;
+    gap: 8px;
+    font-size: var(--t-12);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .item b {
+    font-weight: 500;
+  }
+  .item i {
+    font-style: normal;
+    opacity: 0.6;
+  }
+</style>

@@ -1,0 +1,111 @@
+---
+import { event, formatted, addressLine } from "@/data/event";
+import { asset } from "@/lib/url";
+---
+
+<section class="field field--bone section venue" id="venue" aria-labelledby="venue-h">
+  <div class="wrap">
+    <p class="kicker">Getting there</p>
+    <h2 class="section-title" id="venue-h">Venue</h2>
+
+    <div class="grid">
+      <dl class="facts">
+        <div><dt>Date</dt><dd>{formatted.weekday} {formatted.dayNumber} {formatted.month} {formatted.year}</dd></div>
+        <div><dt>Doors</dt><dd>{formatted.doors}</dd></div>
+        <div><dt>Curtain</dt><dd>{formatted.showtime}</dd></div>
+        <div><dt>Ends</dt><dd>Approximately {formatted.curtain}</dd></div>
+        <div><dt>Venue</dt><dd>{event.venue.name}, {event.venue.room}</dd></div>
+        <div>
+          <dt>Address</dt>
+          <dd>
+            <a href={event.venue.mapsUrl} target="_blank" rel="noopener noreferrer">{addressLine}</a>
+            <span class="hood">{event.venue.neighbourhood}</span>
+          </dd>
+        </div>
+        <div>
+          <dt>Subway</dt>
+          <dd>{event.venue.trains.join(" · ")}</dd>
+        </div>
+        <div>
+          <dt>Enquiries</dt>
+          <dd>
+            <a href={`mailto:${event.contact.email}`}>{event.contact.email}</a>
+            <span class="hood">{event.contact.phone}</span>
+          </dd>
+        </div>
+      </dl>
+
+      <div class="aside">
+        <img class="lockup" src={asset("assets/motif/abrons-logo.png")} alt="Abrons Arts Center" width="576" height="60" loading="lazy" />
+        <p class="note">
+          The Playhouse is a 1915 proscenium theatre on the corner of Grand and Pitt. Seating is
+          unreserved, so arriving near doors is worth it.
+        </p>
+        <a class="btn btn--ghost" href={event.venue.mapsUrl} target="_blank" rel="noopener noreferrer">Open in Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: clamp(var(--s8), 6vw, var(--s24));
+    margin-top: var(--s8);
+    align-items: start;
+  }
+  @media (max-width: 860px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .facts {
+    margin: 0;
+    border-top: 1px solid var(--hairline);
+  }
+  .facts > div {
+    display: grid;
+    grid-template-columns: clamp(96px, 22%, 150px) 1fr;
+    gap: var(--s4);
+    padding: var(--s4) 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .facts dt {
+    font-size: var(--t-12);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 3px;
+  }
+  .facts dd {
+    margin: 0;
+  }
+  .facts a {
+    color: var(--link);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+  .hood {
+    display: block;
+    font-size: var(--t-14);
+    color: var(--muted);
+  }
+
+  .aside {
+    display: grid;
+    gap: var(--s6);
+    justify-items: start;
+  }
+  .lockup {
+    width: min(280px, 100%);
+    height: auto;
+  }
+  .note {
+    margin: 0;
+    max-width: 38ch;
+    color: var(--muted);
+    font-size: var(--t-14);
+  }
+</style>

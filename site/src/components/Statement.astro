@@ -1,0 +1,39 @@
+---
+import { statement, event } from "@/data/event";
+---
+
+<section class="field field--bone section statement" id="silsila" aria-labelledby="silsila-h">
+  <div class="wrap">
+    <p class="kicker">The word</p>
+    <h2 class="section-title" id="silsila-h">{event.series}</h2>
+    <div class="body">
+      {statement.map((p) => <p class="line" data-anim="lines">{p}</p>)}
+    </div>
+    <p class="signature">Presented by {event.presentedBy}</p>
+  </div>
+</section>
+
+<style>
+  .statement .body {
+    max-width: 54ch;
+    margin-top: var(--s6);
+  }
+  .line {
+    font-family: var(--f-serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(1.25rem, 3vw, 2.05rem);
+    line-height: 1.42;
+    margin: 0 0 var(--s6);
+  }
+  .line:last-child {
+    margin-bottom: 0;
+  }
+  .signature {
+    font-family: var(--f-sign);
+    font-size: var(--t-31);
+    color: var(--plaster);
+    margin: var(--s12) 0 0;
+    line-height: 1;
+  }
+</style>

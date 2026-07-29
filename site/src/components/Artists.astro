@@ -1,0 +1,177 @@
+---
+import { artists } from "@/data/event";
+import Polaroid from "./Polaroid.astro";
+
+const masters = artists.filter((a) => a.billing === "master");
+const ensemble = artists.filter((a) => a.billing === "ensemble");
+---
+
+<section class="field field--plaster section artists" id="artists" aria-labelledby="artists-h">
+  <div class="wrap">
+    <p class="kicker">On stage</p>
+    <h2 class="section-title" id="artists-h">The artists</h2>
+
+    <div class="wall wall--masters">
+      {masters.map((a, i) => <Polaroid artist={a} width={272} seed={i + 1} />)}
+    </div>
+
+    <div class="wall wall--ensemble">
+      {ensemble.map((a, i) => <Polaroid artist={a} width={204} seed={i + 4} />)}
+    </div>
+
+    <div class="bios">
+      {
+        artists
+          .filter((a) => a.bio)
+          .map((a) => (
+            <details class="bio">
+              <summary>
+                <span class="b-name">
+                  {a.honorific && <em>{a.honorific}</em>}
+                  {a.name}
+                </span>
+                <span class="b-inst">{a.instrument}</span>
+                <span class="b-more" aria-hidden="true" />
+              </summary>
+              <div class="b-body">
+                {a.bio!.map((p) => (
+                  <p>{p}</p>
+                ))}
+                {a.press && (
+                  <ul class="press">
+                    {a.press.map((q) => (
+                      <li>
+                        <blockquote>{q.quote}</blockquote>
+                        <cite>{q.source}</cite>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {a.links && (
+                  <p class="b-links">
+                    {a.links.map((l) => (
+                      <a href={l.url} target="_blank" rel="noopener noreferrer">
+                        {l.label}
+                      </a>
+                    ))}
+                  </p>
+                )}
+              </div>
+            </details>
+          ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .wall {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: clamp(var(--s8), 5vw, var(--s24)) clamp(var(--s6), 4vw, var(--s16));
+  }
+  .wall--masters {
+    margin-top: clamp(var(--s12), 6vw, var(--s16));
+  }
+  .wall--ensemble {
+    margin-top: clamp(var(--s16), 8vw, var(--s24));
+  }
+
+  .bios {
+    max-width: 74ch;
+    margin: clamp(var(--s24), 9vw, var(--s32)) auto 0;
+    border-top: 1px solid var(--hairline);
+  }
+  .bio {
+    border-bottom: 1px solid var(--hairline);
+  }
+  .bio summary {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s4);
+    padding: var(--s6) 0;
+    cursor: pointer;
+    list-style: none;
+  }
+  .bio summary::-webkit-details-marker {
+    display: none;
+  }
+  .b-name {
+    font-family: var(--f-serif);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+    color: var(--strong);
+  }
+  .b-name em {
+    font-style: normal;
+    color: var(--muted);
+    margin-right: 0.45em;
+    font-size: 0.72em;
+  }
+  .b-inst {
+    font-family: var(--f-sign);
+    font-size: var(--t-20);
+    color: var(--muted);
+  }
+  .b-more {
+    margin-left: auto;
+    width: 13px;
+    height: 13px;
+    border-right: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+    transform: rotate(45deg) translateY(-3px);
+    transition: transform 0.25s ease;
+    flex: none;
+  }
+  .bio[open] .b-more {
+    transform: rotate(-135deg) translateY(-3px);
+  }
+
+  .b-body {
+    padding-bottom: var(--s8);
+    max-width: var(--measure);
+  }
+  .b-body p {
+    margin: 0 0 var(--s4);
+  }
+  .press {
+    list-style: none;
+    margin: var(--s6) 0 0;
+    padding: 0;
+    display: grid;
+    gap: var(--s4);
+  }
+  .press blockquote {
+    font-family: var(--f-serif);
+    font-style: italic;
+    font-size: var(--t-20);
+    line-height: 1.4;
+    margin: 0;
+    color: var(--strong);
+  }
+  .press cite {
+    font-style: normal;
+    font-size: var(--t-12);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .b-links {
+    display: flex;
+    gap: var(--s4);
+    margin: var(--s6) 0 0;
+  }
+  .b-links a {
+    font-size: var(--t-12);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--link);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+  }
+</style>

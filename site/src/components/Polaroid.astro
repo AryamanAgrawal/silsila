@@ -1,0 +1,63 @@
+---
+import { asset } from "@/lib/url";
+import type { Artist } from "@/data/event";
+
+interface Props {
+  artist: Artist;
+  width: number;
+  /** Deterministic per-card jitter so the wall never reshuffles between builds. */
+  seed: number;
+}
+
+const { artist, width, seed } = Astro.props;
+
+const TAPES = ["tape-kraft.png", "tape-kraft-2.png", "tape-kraft-wide.png"];
+const tilt = (((seed * 37) % 60) / 10 - 3).toFixed(2);
+const tapeRot = (((seed * 53) % 200) / 10 - 10).toFixed(2);
+const tapeSide = seed % 2 === 0 ? "left" : "right";
+const tape = TAPES[seed % TAPES.length];
+const tapeOffset = 10 + ((seed * 7) % 26);
+---
+
+<figure
+  class="card"
+  data-anim="polaroid"
+  style={`--w:${width}px; --tilt:${tilt}deg;`}
+>
+  <img
+    class="tape"
+    data-anim="tape"
+    src={asset(`assets/motif/${tape}`)}
+    alt=""
+    aria-hidden="true"
+    style={`${tapeSide}:${tapeOffset}px; transform:rotate(${tapeRot}deg);`}
+  />
+  <div class="polaroid">
+    <img
+      src={asset(artist.photo)}
+      alt={`${artist.name}, ${artist.instrument.toLowerCase()}`}
+      width="720"
+      height="900"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>
+      <span class="p-name">{artist.name}</span>
+      <span class="p-inst">{artist.instrument}</span>
+    </figcaption>
+  </div>
+</figure>
+
+<style>
+  .card {
+    position: relative;
+    width: var(--w);
+    max-width: 100%;
+    margin: 0;
+    transform: rotate(var(--tilt));
+  }
+  .tape {
+    top: -14px;
+    width: clamp(80px, 52%, 124px);
+  }
+</style>
