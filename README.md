@@ -26,7 +26,11 @@ pnpm install
 pnpm dev        # http://localhost:4321/silsila
 pnpm build
 pnpm preview
+pnpm typecheck  # astro check
 ```
+
+TypeScript is pinned to 6.x: `astro check` relies on a programmatic API that
+TypeScript 7's native compiler does not expose yet.
 
 ## Deploy
 
