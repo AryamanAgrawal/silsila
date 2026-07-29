@@ -26,7 +26,7 @@ export const event = {
     region: "NY",
     postalCode: "10002",
     neighbourhood: "Lower East Side",
-    mapsUrl: "https://maps.google.com/?q=466+Grand+Street+New+York+NY+10002",
+    mapsUrl: "https://maps.app.goo.gl/Sdat87G5xHCCpsZAA",
     trains: ["F to Delancey St", "J M Z to Essex St", "B D to Grand St"],
   },
 
@@ -154,7 +154,6 @@ export const artists: Artist[] = [
 export const runOfShow = [
   {
     time: "7:00",
-    numeral: null,
     title: "Doors close, opening remarks",
     performers: "",
     body: null,
@@ -163,7 +162,6 @@ export const runOfShow = [
   },
   {
     time: "7:10",
-    numeral: "I",
     title: "Sitar & Tabla",
     performers: "Jayanta Banerjee & Samir Chatterjee",
     body: "The evening opens with Tehreem Khan\u2019s teacher on sitar, accompanied on tabla. Through intricate improvisation, rhythmic dialogue, and moments of profound stillness, the two explore the depth, beauty, and spontaneity of this living art form.",
@@ -172,7 +170,6 @@ export const runOfShow = [
   },
   {
     time: "8:10",
-    numeral: "II",
     title: "Echoes to Sky",
     performers: "Jayanta Banerjee",
     body: "A first live look at the new album: sitar instrumentals that move through shifting emotional and sonic landscapes, from intimacy and longing to openness and stillness.",
@@ -181,7 +178,6 @@ export const runOfShow = [
   },
   {
     time: "8:20",
-    numeral: "III",
     title: "Ustad & Shagird",
     performers: "Tehreem Khan",
     body: "A special presentation celebrating the Ustad-Shagird (Guru-Shishya) tradition, honouring the bond between teacher and disciple that has sustained this music for generations.",
@@ -190,7 +186,6 @@ export const runOfShow = [
   },
   {
     time: "8:35",
-    numeral: "IV",
     title: "A Dialogue Between East and West",
     performers: "Composed by Jayanta Banerjee",
     body: "A collaborative finale joined by Sikandar Rahman on violin, Shiva Kannan on keyboard, and Aditya Pillai on dholak, where distinct musical voices meet with mutual respect, curiosity, and shared expression.",
@@ -199,7 +194,6 @@ export const runOfShow = [
   },
   {
     time: "8:50",
-    numeral: null,
     title: "Curtain",
     performers: "",
     body: null,
