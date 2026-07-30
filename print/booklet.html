@@ -1,0 +1,1149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Silsila: Resonance — Programme</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Pinyon+Script&family=Ephesis&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/open-sauce-one@5/400.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/open-sauce-one@5/500.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/open-sauce-one@5/700.css"
+    />
+
+    <style>
+      /* ═══════════════════════════════════════════════════════════
+   SILSILA: RESONANCE — 8pp A5 saddle-stitched programme
+
+   Trim   148 × 210 mm (A5)
+   Bleed  3 mm all round  →  page box 154 × 216 mm
+   Safety 10 mm from trim; 14 mm on the bound edge for creep
+
+   Pages are single, in reading order, as saddle-stitch printers
+   ask for. Do not impose: the printer does that.
+
+   Palette is plaster red and bone only. The bright sindoor red
+   used on the website is deliberately absent.
+   ═══════════════════════════════════════════════════════════ */
+
+      :root {
+        --plaster: #850d0d;
+        --plaster-d: #6e0808;
+        --bone: #e9e4e0;
+        --bone-warm: #f2e3dd;
+        --ink: #171717;
+        --kraft: #d0bb92;
+        --rose: #e9bdbd;
+        --ash: #5e5a57;
+
+        --f-display: "Anton", sans-serif;
+        --f-serif: "Cormorant Garamond", serif;
+        --f-formal: "Pinyon Script", cursive;
+        --f-sign: "Ephesis", cursive;
+        --f-body: "Open Sauce One", sans-serif;
+
+        --trim-w: 148mm;
+        --trim-h: 210mm;
+        --bleed: 3mm;
+        --safe: 10mm;
+        --gutter: 14mm;
+      }
+
+      @page {
+        size: 154mm 216mm; /* trim + bleed */
+        margin: 0;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        background: #ffffff;
+        font-family: var(--f-body);
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Backgrounds and images must survive the print pipeline. */
+      * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .page {
+        position: relative;
+        width: 154mm;
+        height: 216mm;
+        overflow: hidden;
+        page-break-after: always;
+        break-after: page;
+        display: block;
+      }
+      .page:last-child {
+        page-break-after: auto;
+        break-after: auto;
+      }
+
+      /* The live area, inset from the bleed by the safety margin. */
+      .safe {
+        position: absolute;
+        top: calc(var(--bleed) + var(--safe));
+        bottom: calc(var(--bleed) + var(--safe));
+        left: calc(var(--bleed) + var(--safe));
+        right: calc(var(--bleed) + var(--safe));
+        display: flex;
+        flex-direction: column;
+      }
+      /* Recto pages bind on the left, verso on the right. */
+      .page--recto .safe {
+        left: calc(var(--bleed) + var(--gutter));
+      }
+      .page--verso .safe {
+        right: calc(var(--bleed) + var(--gutter));
+      }
+
+      /* ── fields ─────────────────────────────────────────────── */
+      .field-bone {
+        background: var(--bone);
+        color: var(--ink);
+      }
+      .field-plaster {
+        background: var(--plaster);
+        color: var(--bone);
+      }
+
+      .field-bone::before,
+      .field-plaster::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+      .field-bone::before {
+        background: url("assets/paper-grain.jpg") center / 60mm;
+        mix-blend-mode: overlay;
+        opacity: 0.9;
+      }
+      .field-plaster::before {
+        background: url("assets/plaster-wash.jpg") center / 120mm;
+        mix-blend-mode: overlay;
+        opacity: 0.55;
+      }
+      .page > *:not(::before) {
+        position: relative;
+        z-index: 1;
+      }
+      .safe {
+        z-index: 1;
+      }
+
+      /* ── checkerboard ───────────────────────────────────────── */
+      .checker {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 5mm;
+        z-index: 2;
+        background: repeating-conic-gradient(
+            var(--ink) 0% 25%,
+            transparent 0% 50%
+          )
+          0 0 / 5mm 5mm;
+      }
+      .checker--top {
+        top: 0;
+      }
+      .checker--bottom {
+        bottom: 0;
+      }
+      .checker--light {
+        background: repeating-conic-gradient(
+            var(--bone) 0% 25%,
+            transparent 0% 50%
+          )
+          0 0 / 5mm 5mm;
+      }
+
+      /* ── shared type ────────────────────────────────────────── */
+      .kicker {
+        font-size: 6.5pt;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+      .field-bone .kicker {
+        color: var(--plaster);
+      }
+      .field-plaster .kicker {
+        color: var(--rose);
+      }
+
+      .h-display {
+        font-family: var(--f-display);
+        text-transform: uppercase;
+        font-weight: 400;
+        font-size: 30pt;
+        line-height: 0.86;
+        letter-spacing: -0.005em;
+        margin-top: 2mm;
+      }
+      .field-bone .h-display {
+        color: var(--plaster);
+      }
+      .field-plaster .h-display {
+        color: var(--bone);
+      }
+
+      .name {
+        font-family: var(--f-serif);
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        line-height: 1.12;
+      }
+      .inst {
+        font-family: var(--f-sign);
+        line-height: 1.1;
+      }
+      p.body {
+        font-size: 8.6pt;
+        line-height: 1.62;
+        text-align: justify;
+        hyphens: auto;
+      }
+      p.body + p.body {
+        margin-top: 2.4mm;
+      }
+
+      .rule {
+        height: 0.4pt;
+        background: currentColor;
+        opacity: 0.3;
+        margin: 4mm 0;
+      }
+
+      /* ── p1 cover ───────────────────────────────────────────── */
+      .cover .safe {
+        justify-content: space-between;
+        text-align: center;
+      }
+      .cover .head {
+        margin-top: 6mm;
+      }
+      .cover .title {
+        font-family: var(--f-display);
+        text-transform: uppercase;
+        font-size: 40pt;
+        line-height: 0.84;
+        letter-spacing: -0.01em;
+        color: var(--bone);
+      }
+      /* Sits below the wordmark, not across it: bone script over bone
+         letterforms is unreadable however it is scaled. */
+      .cover .series {
+        font-family: var(--f-formal);
+        font-size: 27pt;
+        color: var(--rose);
+        line-height: 1;
+        margin-top: 1.5mm;
+      }
+      .cover .sub {
+        font-size: 7.6pt;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--bone);
+        margin-top: 6mm;
+        text-wrap: balance;
+        line-height: 1.55;
+      }
+      .cover .portraits {
+        display: flex;
+        justify-content: center;
+        gap: 6mm;
+      }
+      .cover .pcell {
+        position: relative;
+        width: 46mm;
+        flex: none;
+      }
+      .cover .polaroid {
+        background: #fbfaf8;
+        padding: 2mm 2mm 7mm;
+        box-shadow: 0 1.6mm 4.5mm rgba(0, 0, 0, 0.32);
+      }
+      .cover .polaroid img {
+        display: block;
+        width: 100%;
+        height: auto;
+        filter: grayscale(1) contrast(1.05);
+      }
+      .cover .cap {
+        text-align: center;
+        margin-top: 1.8mm;
+      }
+      .cover .cap .name {
+        font-family: var(--f-serif);
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-size: 6.6pt;
+        color: var(--plaster);
+        white-space: nowrap;
+      }
+      .cover .cap .inst {
+        font-family: var(--f-sign);
+        font-size: 9.5pt;
+        color: var(--ink);
+        line-height: 1.1;
+      }
+      .cover .tape {
+        position: absolute;
+        width: 22mm;
+        z-index: 3;
+        filter: drop-shadow(0 0.6mm 1mm rgba(0, 0, 0, 0.3));
+      }
+      .cover .meta {
+        font-size: 7.4pt;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--rose);
+        line-height: 1.9;
+      }
+      .cover .meta b {
+        color: var(--bone);
+        font-weight: 500;
+      }
+      .cover .presented {
+        font-family: var(--f-sign);
+        font-size: 15pt;
+        color: var(--bone);
+        line-height: 1.1;
+        margin-top: 5mm;
+      }
+
+      /* ── p2 statement ───────────────────────────────────────── */
+      /* The quiet page. The quotes optically centre in the space between the
+         heading and the footer rather than the blocks pushing apart. */
+      .statement .quotes {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-bottom: 6mm;
+      }
+      .statement .word {
+        font-family: var(--f-formal);
+        font-size: 46pt;
+        color: var(--ink);
+        line-height: 1;
+        margin: 1mm 0 0;
+      }
+      .statement .q {
+        font-family: var(--f-serif);
+        font-style: italic;
+        font-weight: 300;
+        font-size: 19pt;
+        line-height: 1.5;
+      }
+      .statement .q + .q {
+        margin-top: 7mm;
+      }
+
+      /* ── p3 run of show ─────────────────────────────────────── */
+      .run {
+        margin-top: 7mm;
+        position: relative;
+        padding-left: 6mm;
+      }
+      .run::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 1.5mm;
+        bottom: 1.5mm;
+        width: 0.4pt;
+        background: var(--plaster);
+        opacity: 0.35;
+      }
+      .slot {
+        padding: 3.4mm 0;
+      }
+      .slot + .slot {
+        border-top: 0.4pt solid rgba(23, 23, 23, 0.16);
+      }
+      .slot::before {
+        content: "";
+        position: absolute;
+        left: -1.1mm;
+        width: 2.2mm;
+        height: 2.2mm;
+        border-radius: 50%;
+        background: var(--plaster);
+        margin-top: 1.6mm;
+      }
+      .slot .t {
+        font-size: 12pt;
+        color: var(--plaster);
+      }
+      .slot .who {
+        font-family: var(--f-sign);
+        font-size: 11.5pt;
+        color: var(--ink);
+        margin-top: 0.4mm;
+      }
+      .slot .d {
+        font-size: 8.2pt;
+        line-height: 1.55;
+        margin-top: 1.6mm;
+      }
+      .slot .k {
+        font-size: 6.2pt;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--ash);
+        margin-top: 1.6mm;
+      }
+      .times {
+        font-family: var(--f-serif);
+        font-style: italic;
+        font-size: 11pt;
+        line-height: 1.45;
+        margin-top: 3mm;
+      }
+
+      /* ── p4 / p5 artist features ────────────────────────────── */
+      .artist .photo-wrap {
+        position: relative;
+        align-self: center;
+        margin: 6mm 0 5mm;
+      }
+      .artist .polaroid {
+        background: #fbfaf8;
+        padding: 2.6mm 2.6mm 9mm;
+        box-shadow: 0 2mm 6mm rgba(0, 0, 0, 0.3);
+      }
+      .artist .polaroid img {
+        display: block;
+        width: 100%;
+        height: auto;
+        filter: grayscale(1) contrast(1.05);
+      }
+      .artist .polaroid .cap {
+        text-align: center;
+        margin-top: 2.2mm;
+      }
+      .artist .polaroid .cap .name {
+        font-size: 9pt;
+        color: var(--plaster);
+      }
+      .artist .polaroid .cap .inst {
+        font-size: 12pt;
+        color: var(--ink);
+      }
+      .artist .tape {
+        position: absolute;
+        width: 26mm;
+        z-index: 3;
+        filter: drop-shadow(0 0.6mm 1mm rgba(0, 0, 0, 0.28));
+      }
+      .artist .bio {
+        font-size: 8.2pt;
+      }
+      .artist .press {
+        font-family: var(--f-serif);
+        font-style: italic;
+        font-size: 10pt;
+        line-height: 1.4;
+        color: var(--rose);
+        margin-top: 4mm;
+      }
+      .artist .press cite {
+        display: block;
+        font-family: var(--f-body);
+        font-style: normal;
+        font-size: 6.2pt;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-top: 1.6mm;
+      }
+
+      /* ── p6 the company ─────────────────────────────────────── */
+      /* Two rows of equal cards, the short row centred. A 3-column grid with
+         five items leaves the last two mis-sized and off-axis. */
+      .company .row {
+        display: flex;
+        justify-content: center;
+        gap: 5mm;
+      }
+      .company .row--top {
+        margin-top: 8mm;
+      }
+      .company .row--bottom {
+        margin-top: 7mm;
+      }
+      .company .cell {
+        position: relative;
+        width: 36mm;
+        flex: none;
+      }
+      .company .cell {
+        position: relative;
+      }
+      .company .polaroid {
+        background: #fbfaf8;
+        padding: 1.8mm 1.8mm 6.5mm;
+        box-shadow: 0 1.2mm 3.5mm rgba(0, 0, 0, 0.22);
+      }
+      .company .polaroid img {
+        display: block;
+        width: 100%;
+        height: auto;
+        filter: grayscale(1) contrast(1.05);
+      }
+      .company .cap {
+        text-align: center;
+        margin-top: 1.6mm;
+      }
+      .company .cap .name {
+        font-size: 6.3pt;
+        color: var(--plaster);
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+      }
+      .company .cap .inst {
+        font-size: 9pt;
+        color: var(--ink);
+      }
+      .company .tape {
+        position: absolute;
+        width: 16mm;
+        z-index: 3;
+        filter: drop-shadow(0 0.5mm 0.8mm rgba(0, 0, 0, 0.25));
+      }
+      .company .note {
+        margin-top: auto;
+        padding-top: 6mm;
+        font-size: 8.2pt;
+        line-height: 1.6;
+      }
+
+      /* ── p7 album ───────────────────────────────────────────── */
+      .album .tracks {
+        margin-top: 6mm;
+      }
+      .album .track {
+        display: flex;
+        gap: 4mm;
+        align-items: baseline;
+        padding: 2.2mm 0;
+        border-bottom: 0.4pt solid rgba(23, 23, 23, 0.16);
+        font-family: var(--f-serif);
+        font-size: 11.5pt;
+      }
+      .album .track .n {
+        font-family: var(--f-body);
+        font-size: 6.4pt;
+        letter-spacing: 0.18em;
+        color: var(--plaster);
+      }
+      .album .foot {
+        margin-top: auto;
+        display: flex;
+        gap: 6mm;
+        align-items: flex-end;
+      }
+      .album .qr {
+        width: 24mm;
+        height: 24mm;
+        flex: none;
+      }
+      .album .credits {
+        font-size: 7pt;
+        line-height: 1.65;
+        color: var(--ash);
+      }
+      .album .credits b {
+        color: var(--ink);
+        font-weight: 500;
+      }
+
+      /* ── p8 credits and thanks ──────────────────────────────── */
+      .credits-page .cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6mm 8mm;
+        margin-top: 6mm;
+      }
+      .credits-page .block {
+        break-inside: avoid;
+      }
+      .credits-page h3 {
+        font-size: 6.4pt;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--rose);
+        font-weight: 500;
+        margin-bottom: 1.8mm;
+      }
+      .credits-page .line {
+        font-size: 7.8pt;
+        line-height: 1.62;
+      }
+      .credits-page .line b {
+        font-weight: 500;
+      }
+      .credits-page .line em {
+        font-style: normal;
+        color: var(--rose);
+      }
+      .credits-page .thanks {
+        margin-top: 5mm;
+        font-size: 7.8pt;
+        line-height: 1.75;
+        column-count: 2;
+        column-gap: 8mm;
+      }
+      .credits-page .foot {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 6mm;
+      }
+      .credits-page .qr {
+        width: 22mm;
+        height: 22mm;
+        flex: none;
+      }
+      .credits-page .venue {
+        font-size: 7pt;
+        line-height: 1.7;
+        color: var(--rose);
+      }
+      .credits-page .venue b {
+        color: var(--bone);
+        font-weight: 500;
+        display: block;
+        font-size: 8pt;
+      }
+      .credits-page .abrons {
+        width: 34mm;
+        filter: invert(1) brightness(1.9);
+      }
+
+      .folio {
+        position: absolute;
+        bottom: calc(var(--bleed) + 5mm);
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 6.2pt;
+        letter-spacing: 0.2em;
+        z-index: 2;
+      }
+      .field-bone .folio {
+        color: var(--ash);
+      }
+      .field-plaster .folio {
+        color: var(--rose);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ═══════════ p1 · COVER (plaster) ═══════════ -->
+    <section class="page field-plaster cover">
+      <div class="checker checker--top checker--light"></div>
+      <div class="safe">
+        <div class="head">
+          <div class="title">Resonance</div>
+          <div class="series">silsila</div>
+          <div class="sub">
+            The Living Journey of South&nbsp;Asian Classical Music
+          </div>
+        </div>
+
+        <div class="portraits">
+          <div class="pcell">
+            <img
+              class="tape"
+              src="assets/tape-kraft.png"
+              alt=""
+              style="top: -3.4mm; left: 5mm; transform: rotate(-6deg)"
+            />
+            <div class="polaroid" style="transform: rotate(-1.6deg)">
+              <img src="assets/jayanta.jpg" alt="Jayanta Banerjee" />
+              <div class="cap">
+                <div class="name">Jayanta Banerjee</div>
+                <div class="inst">Sitar</div>
+              </div>
+            </div>
+          </div>
+          <div class="pcell">
+            <img
+              class="tape"
+              src="assets/tape-kraft-2.png"
+              alt=""
+              style="top: -3.4mm; right: 4mm; transform: rotate(7deg)"
+            />
+            <div class="polaroid" style="transform: rotate(1.9deg)">
+              <img src="assets/samir.jpg" alt="Samir Chatterjee" />
+              <div class="cap">
+                <div class="name">Samir Chatterjee</div>
+                <div class="inst">Tabla</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="foot">
+          <div class="meta">
+            <b>Sunday 30 August 2026</b><br />
+            Doors 6:30 PM &nbsp;·&nbsp; Curtain 7 PM<br />
+            Abrons Arts Center &nbsp;·&nbsp; Playhouse<br />
+            466 Grand Street, New York
+          </div>
+          <div class="presented">Presented by Tehreem Khan</div>
+        </div>
+      </div>
+      <div class="checker checker--bottom checker--light"></div>
+    </section>
+
+    <!-- ═══════════ p2 · THE WORD (bone, verso) ═══════════ -->
+    <section class="page field-bone statement page--verso">
+      <div class="safe">
+        <div>
+          <div class="kicker">The word</div>
+          <div class="word">silsila</div>
+        </div>
+
+        <div class="quotes">
+          <p class="q">
+            Silsila means continuation, the unbroken line through which South
+            Asian classical music has passed from one generation to the next,
+            each note carrying the wisdom of the past while opening space for
+            new expression.
+          </p>
+          <p class="q">
+            Resonance is the lingering voice of the sitar: the way a note keeps
+            sounding long after it is struck, connecting artists, traditions,
+            and audiences across time.
+          </p>
+        </div>
+
+        <div>
+          <div class="rule"></div>
+          <p class="body" style="text-align: left">
+            This evening traces the enduring connection between melody, rhythm,
+            and expression, and the bond between teacher and disciple that has
+            sustained this music for generations.
+          </p>
+        </div>
+      </div>
+      <div class="folio">2</div>
+    </section>
+
+    <!-- ═══════════ p3 · THE EVENING (bone, recto) ═══════════ -->
+    <section class="page field-bone page--recto">
+      <div class="safe">
+        <div class="kicker">Run of show</div>
+        <div class="h-display">The evening</div>
+        <div class="times">
+          Doors 6:30 PM. The music starts at 7 PM<br />and runs to 9 PM, without
+          an interval.
+        </div>
+
+        <div class="run">
+          <div class="slot">
+            <div class="name t">Sitar &amp; Tabla</div>
+            <div class="who">Jayanta Banerjee &amp; Samir Chatterjee</div>
+            <div class="d">
+              The evening opens with Tehreem Khan's teacher on sitar,
+              accompanied on tabla. Through intricate improvisation, rhythmic
+              dialogue, and moments of profound stillness, the two explore the
+              depth, beauty, and spontaneity of this living art form.
+            </div>
+            <div class="k">Opening set</div>
+          </div>
+
+          <div class="slot">
+            <div class="name t">Echoes to Sky</div>
+            <div class="who">Jayanta Banerjee &amp; Samir Chatterjee</div>
+            <div class="d">
+              A first live look at the new album: sitar instrumentals that move
+              through shifting emotional and sonic landscapes, from intimacy and
+              longing to openness and stillness.
+            </div>
+            <div class="k">Sneak peek</div>
+          </div>
+
+          <div class="slot">
+            <div class="name t">Ustad &amp; Shagird</div>
+            <div class="who">
+              Jayanta Banerjee, Tehreem Khan &amp; Samir Chatterjee
+            </div>
+            <div class="d">
+              A special presentation celebrating the Ustad-Shagird
+              (Guru-Shishya) tradition, teacher and disciple performing together
+              on sitar, honouring the bond that has sustained this music for
+              generations.
+            </div>
+            <div class="k">Sitar duet</div>
+          </div>
+
+          <div class="slot">
+            <div class="name t">A Dialogue Between East and West</div>
+            <div class="who">Composed by Jayanta Banerjee</div>
+            <div class="d">
+              A collaborative finale joined by Sikandar Rahman on violin, Pranav
+              Shikarpur on bansuri, Shiva Kannan on keyboard, and Aditya Pillai
+              on dholak, where distinct musical voices meet with mutual respect,
+              curiosity, and shared expression.
+            </div>
+            <div class="k">Finale</div>
+          </div>
+        </div>
+      </div>
+      <div class="folio">3</div>
+    </section>
+
+    <!-- ═══════════ p4 · JAYANTA (plaster, verso) ═══════════ -->
+    <section class="page field-plaster artist page--verso">
+      <div class="safe">
+        <div class="kicker">Sitar</div>
+        <div class="h-display" style="font-size: 22pt">
+          Jayanta<br />Banerjee
+        </div>
+
+        <div class="photo-wrap" style="width: 58mm">
+          <img
+            class="tape"
+            src="assets/tape-kraft.png"
+            alt=""
+            style="top: -4mm; left: 6mm; transform: rotate(-6deg)"
+          />
+          <div class="polaroid" style="transform: rotate(-1.4deg)">
+            <img src="assets/jayanta.jpg" alt="Jayanta Banerjee" />
+            <div class="cap">
+              <div class="name">Jayanta Banerjee</div>
+              <div class="inst">Sitar</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bio">
+          <p class="body">
+            Shri Jayanta Banerjee is an internationally acclaimed sitarist,
+            composer and multidisciplinary musician whose artistry bridges
+            Indian classical traditions with contemporary and global
+            expressions. He trained under eminent gurus including Shri Amit
+            Prasanna Mukherjee, Pt. Devi Prasad Chatterjee, Pt. Santosh Banerjee
+            of the Rampur Gharana and Pt. Robi Chakraborty of the Maihar
+            Gharana. Alongside the sitar he is proficient in the sarod,
+            harmonium and keyboards, and is also a trained vocalist.
+          </p>
+          <p class="body">
+            He has performed across India and internationally at the Hollywood
+            Bowl, Royal Festival Hall, the National Centre for the Performing
+            Arts, the Asian Art Museum, the Palace of Fine Arts and the Sydney
+            Opera House, and has collaborated with Padma Vibhushan Pt. Birju
+            Maharaj, Pt. Chitresh Das and Vidwan Vikku Vinayakram.
+          </p>
+          <p class="body">
+            He is also a composer, educator and cultural curator, and the
+            founder of &ldquo;Sambandh,&rdquo; a festival reviving the intimate
+            Baithaki tradition through interdisciplinary collaborations across
+            music, dance and theatre.
+          </p>
+        </div>
+      </div>
+      <div class="folio">4</div>
+    </section>
+
+    <!-- ═══════════ p5 · SAMIR (plaster, recto) ═══════════ -->
+    <section class="page field-plaster artist page--recto">
+      <div class="safe">
+        <div class="kicker">Tabla</div>
+        <div class="h-display" style="font-size: 22pt">
+          Samir<br />Chatterjee
+        </div>
+
+        <div class="photo-wrap" style="width: 52mm">
+          <img
+            class="tape"
+            src="assets/tape-kraft-2.png"
+            alt=""
+            style="top: -4mm; right: 5mm; transform: rotate(7deg)"
+          />
+          <div class="polaroid" style="transform: rotate(1.8deg)">
+            <img src="assets/samir.jpg" alt="Samir Chatterjee" />
+            <div class="cap">
+              <div class="name">Samir Chatterjee</div>
+              <div class="inst">Tabla</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bio">
+          <p class="body">
+            Pandit Samir Chatterjee is a virtuoso tabla player who travels
+            widely throughout the year, performing as a soloist and alongside
+            outstanding musicians from both Indian and non-Indian traditions. He
+            performed at the Nobel Peace Prize ceremony in Oslo in 2007, and
+            several times at the United Nations General Assembly.
+          </p>
+          <p class="body">
+            All of his teachers have been of the Farrukhabad Gharana, which he
+            now represents. In concert he has accompanied many of India's
+            greatest musicians, among them Pt. Ravi Shankar, Ud. Vilayat Khan,
+            Pt. Bhimsen Joshi, Pt. Jasraj, Pt. Nikhil Banerjee, Pt. Shivkumar
+            Sharma and Pt. Hariprasad Chaurasia. Based in New York, he has
+            performed with Branford Marsalis, Ravi Coltrane, Joshua Bell and the
+            Boston Philharmonic. He is the Founder-Director of Chhandayan and
+            the author of A Study of Tabla.
+          </p>
+        </div>
+
+        <div class="press" style="margin-top: auto">
+          &ldquo;A walking history book when it comes to Indian music.&rdquo;
+          <cite>WNYC</cite>
+        </div>
+      </div>
+      <div class="folio">5</div>
+    </section>
+
+    <!-- ═══════════ p6 · THE COMPANY (bone, verso) ═══════════ -->
+    <section class="page field-bone company page--verso">
+      <div class="safe">
+        <div class="kicker">On stage</div>
+        <div class="h-display">The company</div>
+
+        <div class="row row--top">
+          <div class="cell">
+            <img
+              class="tape"
+              src="assets/tape-kraft-wide.png"
+              alt=""
+              style="top: -2.6mm; left: 3mm; transform: rotate(-5deg)"
+            />
+            <div class="polaroid" style="transform: rotate(-1.6deg)">
+              <img src="assets/tehreem.jpg" alt="Tehreem Khan" />
+              <div class="cap">
+                <div class="name">Tehreem Khan</div>
+                <div class="inst">Sitar</div>
+              </div>
+            </div>
+          </div>
+          <div class="cell">
+            <img
+              class="tape"
+              src="assets/tape-kraft.png"
+              alt=""
+              style="top: -2.6mm; right: 2mm; transform: rotate(6deg)"
+            />
+            <div class="polaroid" style="transform: rotate(1.9deg)">
+              <img src="assets/sikandar.jpg" alt="Sikandar Rahman" />
+              <div class="cap">
+                <div class="name">Sikandar Rahman</div>
+                <div class="inst">Violin</div>
+              </div>
+            </div>
+          </div>
+          <div class="cell">
+            <img
+              class="tape"
+              src="assets/tape-kraft-2.png"
+              alt=""
+              style="top: -2.6mm; left: 4mm; transform: rotate(-3deg)"
+            />
+            <div class="polaroid" style="transform: rotate(-2.2deg)">
+              <img src="assets/pranav.jpg" alt="Pranav Shikarpur" />
+              <div class="cap">
+                <div class="name">Pranav Shikarpur</div>
+                <div class="inst">Bansuri</div>
+              </div>
+            </div>
+          </div>
+          </div>
+
+        <div class="row row--bottom">
+        <div class="cell">
+            <img
+              class="tape"
+              src="assets/tape-kraft-wide.png"
+              alt=""
+              style="top: -2.6mm; right: 3mm; transform: rotate(5deg)"
+            />
+            <div class="polaroid" style="transform: rotate(1.4deg)">
+              <img src="assets/shiva.jpg" alt="Shiva Kannan" />
+              <div class="cap">
+                <div class="name">Shiva Kannan</div>
+                <div class="inst">Keyboard</div>
+              </div>
+            </div>
+          </div>
+          <div class="cell" style="margin-left: 16mm">
+            <img
+              class="tape"
+              src="assets/tape-kraft.png"
+              alt=""
+              style="top: -2.6mm; left: 2mm; transform: rotate(-6deg)"
+            />
+            <div class="polaroid" style="transform: rotate(-1.1deg)">
+              <img src="assets/aditya.jpg" alt="Aditya Pillai" />
+              <div class="cap">
+                <div class="name">Aditya Pillai</div>
+                <div class="inst">Dholak</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="body note">
+          The finale, <em>A Dialogue Between East and West</em>, brings these
+          voices together with the sitar and tabla: a conversation across
+          traditions conducted with mutual respect, curiosity and shared
+          expression.
+        </p>
+      </div>
+      <div class="folio">6</div>
+    </section>
+
+    <!-- ═══════════ p7 · ECHOES TO SKY (bone, recto) ═══════════ -->
+    <section class="page field-bone album page--recto">
+      <div class="safe">
+        <div class="kicker">Heard live tonight</div>
+        <div class="h-display">Echoes<br />to Sky</div>
+        <div
+          class="inst"
+          style="font-size: 15pt; color: var(--plaster); margin-top: 2mm"
+        >
+          Jayanta Banerjee
+        </div>
+
+        <p class="body" style="margin-top: 4mm">
+          A sitar instrumental album that moves through shifting emotional and
+          sonic landscapes, each composition a distinct exploration of mood,
+          texture and space. The album is shaped by an interest in sound as
+          experience, where melody and resonance create changing environments
+          rather than fixed narratives.
+        </p>
+
+        <div class="tracks">
+          <div class="track"><span class="n">01</span> In the Air Tonight</div>
+          <div class="track">
+            <span class="n">02</span> The Mand of Deep Longings
+          </div>
+          <div class="track"><span class="n">03</span> Eternal Love</div>
+          <div class="track"><span class="n">04</span> Colors on the Wind</div>
+          <div class="track">
+            <span class="n">05</span> The Quiet Calm of Early Morning
+          </div>
+        </div>
+
+        <div class="foot">
+          <img
+            class="qr"
+            src="assets/qr-album.svg"
+            alt="Listen to Echoes to Sky"
+          />
+          <div class="credits">
+            <b>Listen now</b> on all major streaming platforms.<br /><br />
+            <b>Music producer, sound producer &amp; artistic direction</b
+            ><br />Jayanta Banerjee<br />
+            <b>Executive production</b><br />Tehreem Khan<br />
+            <b>Editorial</b><br />Tehreem Khan &amp; Rajannya Banerjee<br />
+            <b>Album cover design</b><br />Bloom Enterprise
+          </div>
+        </div>
+      </div>
+      <div class="folio">7</div>
+    </section>
+
+    <!-- ═══════════ p8 · CREDITS AND THANKS (plaster, back cover) ═══════════ -->
+    <section class="page field-plaster credits-page">
+      <div class="checker checker--top checker--light"></div>
+      <div class="safe">
+        <div class="kicker">With gratitude</div>
+        <div class="h-display" style="font-size: 26pt">
+          Credits<br />&amp; thanks
+        </div>
+
+        <div class="cols">
+          <div class="block">
+            <h3>Performers</h3>
+            <div class="line">
+              <b>Jayanta Banerjee</b> <em>Sitar</em><br />
+              <b>Samir Chatterjee</b> <em>Tabla</em><br />
+              <b>Tehreem Khan</b> <em>Sitar</em><br />
+              <b>Sikandar Rahman</b> <em>Violin</em><br />
+              <b>Pranav Shikarpur</b> <em>Bansuri</em><br />
+              <b>Shiva Kannan</b> <em>Keyboard</em><br />
+              <b>Aditya Pillai</b> <em>Dholak</em>
+            </div>
+          </div>
+
+          <div class="block">
+            <h3>Production</h3>
+            <div class="line">
+              <em>Presented by</em><br /><b>Tehreem Khan</b><br />
+              <em>Finale composed by</em><br /><b>Jayanta Banerjee</b><br />
+              <em>Venue</em><br /><b>Abrons Arts Center</b><br />
+              <em>Programme design</em><br /><b>[ name ]</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="block" style="margin-top: 6mm">
+          <h3>Thank you</h3>
+          <div class="thanks">
+            [ Name ]<br />
+            [ Name ]<br />
+            [ Name ]<br />
+            [ Name ]<br />
+            [ Name ]<br />
+            [ Name ]<br />
+            [ Name ]<br />
+            [ Name ]<br />
+            [ Name ]<br />
+            [ Name ]<br />
+            [ Name ]<br />
+            [ Name ]
+          </div>
+        </div>
+
+        <div class="foot">
+          <div class="venue">
+            <b>Abrons Arts Center</b>
+            466 Grand Street, New York, NY 10002<br />
+            tehreem.tauqir@gmail.com &nbsp;·&nbsp; 516-507-2335<br />
+            <span style="opacity: 0.8"
+              >Full programme, bios and the album:</span
+            >
+          </div>
+          <img
+            class="qr"
+            src="assets/qr-site-bone.svg"
+            alt="Silsila: Resonance website"
+          />
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
