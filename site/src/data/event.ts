@@ -20,7 +20,7 @@ export const event = {
 
   venue: {
     name: "Abrons Arts Center",
-    room: "Playhouse",
+    room: "Playhouse Theater",
     street: "466 Grand Street",
     locality: "New York",
     region: "NY",

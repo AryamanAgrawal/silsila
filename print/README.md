@@ -64,13 +64,16 @@ sibling of the site.
       different list.
 - [ ] Proof one physical copy before running the full quantity.
 
-## Known limitation
+## Image quality
 
-Samir's photograph is the weakest asset at **534 × 668 px**, which is about
-226 dpi at the size it prints on page 5. It will look acceptable on a digital
-press but it is below the 300 dpi ideal. Every other image is 320–395 dpi. A
-higher-resolution original of that frame is the single biggest quality win
-available.
+Every photograph now embeds at its native resolution: **290–733 ppi** at
+placement size. Samir is the lowest at 290 ppi on page 5, which is effectively
+the 300 dpi standard, so nothing needs replacing.
+
+Note for anyone editing `booklet.html`: **do not put a CSS `filter` on a
+photograph.** A filter forces Chrome to rasterise the image and re-encode it as
+a very low quality JPEG — it was turning 190 KB photographs into 9 KB ones. The
+black and white treatment is baked into the files in `assets/bw/` instead.
 
 ## If the printer insists on CMYK
 
