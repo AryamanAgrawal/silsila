@@ -70,10 +70,31 @@ Every photograph now embeds at its native resolution: **290–733 ppi** at
 placement size. Samir is the lowest at 290 ppi on page 5, which is effectively
 the 300 dpi standard, so nothing needs replacing.
 
-Note for anyone editing `booklet.html`: **do not put a CSS `filter` on a
-photograph.** A filter forces Chrome to rasterise the image and re-encode it as
-a very low quality JPEG — it was turning 190 KB photographs into 9 KB ones. The
-black and white treatment is baked into the files in `assets/bw/` instead.
+### Three Chrome print traps, and how this file avoids them
+
+Chrome's PDF exporter is the weak link. Three separate things make it wreck a
+photograph, and all three bit this booklet:
+
+1. **A CSS `filter` on an image** makes Chrome rasterise it and re-encode at
+   very low quality — 190 KB photographs became 9 KB ones. The black and white
+   treatment is therefore baked into the files in `assets/bw/`.
+2. **A `transform: rotate()` around an image** makes Chrome clip the raster
+   without antialiasing, leaving a visible staircase down every photo edge.
+3. **A `box-shadow` on the rotated card** is stored as a lossy mask and rings
+   at the hard edge, showing up as a grey band around the photograph.
+
+So the rotation, the tape, the shadow and the caption are composited by
+`bake-cards.py` instead, using the Chrome *compositor* (which antialiases
+properly) rather than the PDF exporter. The booklet then places one flat,
+untransformed, unfiltered PNG per card, and none of the three can occur.
+
+If you edit a card, re-run `python3 bake-cards.py` and it regenerates both the
+PNGs and `assets/cards/cards.css`.
+
+One more trap worth recording: `--force-device-scale-factor` does **not**
+supersample a headless screenshot, it shrinks the layout viewport. Using it
+collapsed every card to a sliver. `bake-cards.py` draws the page at five times
+life size at scale 1 instead.
 
 ## If the printer insists on CMYK
 
