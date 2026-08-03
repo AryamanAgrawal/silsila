@@ -1,15 +1,17 @@
 ========================================================================
-TO       SPICMACAY - Columbia chapter
+TO       spicmacay.columbia@gmail.com   -  SPICMACAY Columbia Chapter  [VERIFIED]
 METHOD   Email
-ATTACH   poster-web.jpg (and optionally the banner PNGs in assets/email/)
-SUBJECT  Hindustani classical concert for students - Aug 30, Lower East Side
+ATTACH   poster-web.jpg
+SUBJECT  Hindustani classical concert in NYC - Sun Aug 30, for your members
 ========================================================================
 
 Hi SPICMACAY Columbia,
 
-Ruh Arts Foundation is presenting Silsila: Resonance on Sunday 30 August at the Abrons Arts Center: Jayanta Banerjee on sitar, Pandit Samir Chatterjee on tabla, and a finale bringing together seven musicians across sitar, tabla, violin, bansuri, keyboard and dholak.
+Ruh Arts Foundation is presenting Silsila: Resonance on Sunday 30 August at the Playhouse Theater, Abrons Arts Center. Jayanta Banerjee plays sitar with Pandit Samir Chatterjee on tabla, there's a sitar duet between Jayanta and his disciple Tehreem Khan honouring the guru-shishya tradition, and the evening closes with a finale Jayanta composed for seven musicians across sitar, tabla, violin, bansuri, keyboard and dholak.
 
-Would you circulate it to your members? Code EARLYBIRD takes 20% off, and we're glad to arrange a group rate for students.
+Given that SPICMACAY exists to bring this music to young audiences, I thought it might be worth putting in front of your members.
+
+Would you share it with your members? Code EARLYBIRD takes 20% off.
 
 Sunday, August 30, 2026
 Doors 6:30 PM / Music 7:00 PM
@@ -17,17 +19,8 @@ Playhouse Theater, Abrons Arts Center
 466 Grand Street, New York, NY 10002
 
 Tickets: https://abronsartscenter.app.getcuebox.com/o/C5XTY485/shows/F5YXT2PK
-Use code EARLYBIRD for 20% off
 
-Jayanta Banerjee - sitar
-Pandit Samir Chatterjee - tabla
-Tehreem Khan - sitar
-Sikandar Rahman - violin
-Pranav Shikarpur - bansuri
-Shiva Kannan - keyboard
-Aditya Pillai - dholak
-
-Poster attached if you'd like to share it.
+Poster attached if it's useful.
 
 With gratitude,
 Aryaman Agrawal
@@ -37,5 +30,14 @@ Outreach & Community Lead, Ruh Arts Foundation
 ------------------------------------------------------------------------
 NOTES
 ------------------------------------------------------------------------
-Confirm the student/group rate with Tehreem before sending.
-If it does not exist, cut that clause and leave EARLYBIRD.
+VERIFIED from Columbia South Asia Institute's student groups directory.
+
+Best campus target by a distance: a society whose entire purpose is promoting
+Indian classical music among young people. Their membership tends to include
+graduate students and local community members, who are more likely to be in
+the city in August than undergraduates.
+
+TIMING CAVEAT, applies to every campus email: 30 August falls around move-in
+and orientation at both Columbia and NYU. Most undergraduates are not back
+yet, and student-org inboxes often go unread over the summer. Send these, but
+expect the weakest response rate of any tier and do not chase them.
