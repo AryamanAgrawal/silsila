@@ -1,25 +1,32 @@
 ========================================================================
 TO       admin@IAAC.us
 METHOD   Email
-ATTACH   poster-web.jpg (and optionally the banner PNGs in assets/email/)
-SUBJECT  Silsila: Resonance - Hindustani classical concert, Aug 30, Abrons Arts Center
+ATTACH   poster-web.jpg + the 6 banner PNGs in assets/email/
+SUBJECT  From a fellow Indian arts nonprofit - Silsila: Resonance, Aug 30 in NYC
 ========================================================================
 
 Dear Indo-American Arts Council,
 
-I'm writing on behalf of Ruh Arts Foundation, a 501(c)(3) dedicated to
-safeguarding the Subcontinent's classical arts. On Sunday 30 August we're
-presenting Silsila: Resonance at the Playhouse Theater, Abrons Arts Center,
-with Jayanta Banerjee on sitar and Pandit Samir Chatterjee on tabla.
+I'm writing from Ruh Arts Foundation, a 501(c)(3) dedicated to safeguarding
+the Subcontinent's classical arts. We're a young organisation working toward
+much the same thing IAAC has been doing for years, and I'm hoping we can
+help each other.
 
-Given IAAC's work showcasing artists of Indian heritage, I thought this
-would sit naturally alongside your programming. The evening honours the
-guru-shishya tradition through a sitar duet between Jayanta and his
-disciple Tehreem Khan, and closes with a collaborative finale across sitar,
-tabla, violin, bansuri, keyboard and dholak.
+On Sunday 30 August we're presenting Silsila: Resonance at the Playhouse
+Theater, Abrons Arts Center. Jayanta Banerjee plays sitar with Pandit Samir
+Chatterjee on tabla, there's a sitar duet between Jayanta and his disciple
+Tehreem Khan honouring the guru-shishya tradition, and the evening closes
+with A Dialogue Between East and West, a finale Jayanta composed for seven
+musicians across sitar, tabla, violin, bansuri, keyboard and dholak.
 
-Would you include it in your events listing and share it with your network?
-Poster and banner graphics are attached, free for you to use.
+Would you include it in your events listing and share it with your audience?
+I've attached the poster and a set of ready-made banner graphics you're
+welcome to use in any newsletter or social post.
+
+And the other half of that: we'd be glad to promote Erasing Borders to our
+list in return. Your festival is on 19 and 20 September, three weeks after
+our date, so there's no competition between them - and our audience is
+exactly the audience for it.
 
 Sunday, August 30, 2026
 Doors 6:30 PM / Music 7:00 PM
@@ -37,6 +44,31 @@ Pranav Shikarpur - bansuri
 Shiva Kannan - keyboard
 Aditya Pillai - dholak
 
+Happy to send anything else you need - higher-resolution images, artist
+bios, or a shorter blurb to fit your format.
+
 With gratitude,
 Aryaman Agrawal
 Outreach & Community Lead, Ruh Arts Foundation
+
+
+------------------------------------------------------------------------
+NOTES
+------------------------------------------------------------------------
+IAAC is active: the 18th Erasing Borders Dance Festival runs 19-20 September
+2026 at the Kaye Playhouse, Hunter College. Their team page lists only a
+board, no staff, so admin@IAAC.us is the only route.
+
+The reciprocity offer is the point of this email. Two 501(c)(3)s with the
+same mission and non-competing dates is a genuinely mutual proposition
+rather than a favour request, and it is much harder to ignore.
+
+ONLY OFFER THIS IF YOU WILL DO IT. If Ruh has no list or no intention of
+promoting their festival, cut that paragraph. A promise you do not keep to
+a peer organisation in a small scene is worse than never asking.
+
+Their programming leans dance and film (Erasing Borders, the New York Indian
+Film Festival), so a classical music evening fills a genuine gap for them
+rather than competing. Sarod maestro Amjad Ali Khan sits on their board, so
+Hindustani classical is well within their interests. I would not name-drop
+him in the email - it reads as trying too hard.
