@@ -60,5 +60,6 @@ can build a headline from.
 PRINT RESOLUTION: SILSILA.jpg is 1080x1350, which is about 3.6 inches wide at
 300dpi. Fine for web and for a small print listing, not enough for a large
 reproduction. If an outlet asks for print-quality artwork, get a 300dpi export
-of the corrected poster from Canva - do NOT send the old high-resolution file
-in outreach/assets/outdated/, it still says SATURDAY and PLAYERS THEATRE.
+of the corrected poster from Canva. The only high-resolution artwork that ever
+existed was the original poster, which said SATURDAY and PLAYERS THEATRE, so it
+has been deleted rather than risk it reaching print.
