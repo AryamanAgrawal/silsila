@@ -1,5 +1,5 @@
 ========================================================================
-TO       News India Times / Desi Talk (Parikh Worldwide Media)  -  ADDRESS NOT VERIFIED
+TO       editor@newsindia-times.com   -  News India Times / Desi Talk  [VERIFIED]
 METHOD   Email
 ATTACH   poster-web.jpg (and optionally the banner PNGs in assets/email/), plus poster-print.jpg for print use
 SUBJECT  Press: Nobel Peace Prize tabla soloist and acclaimed sitarist perform in NYC, Aug 30
@@ -42,15 +42,15 @@ tehreem.tauqir@gmail.com / 516-507-2335
 ------------------------------------------------------------------------
 NOTES
 ------------------------------------------------------------------------
-CONTACT: I could not verify an editorial email - their contact page blocks
-automated access. What is confirmed:
-  Parikh Worldwide Media, 1655 Oak Tree Road, Suite 155, Edison, NJ 08820
-  Tel (212) 675-7515
-Get the editor address from https://www.newsindiatimes.com/contact-us-2/ before
-sending, or just call. Do not guess an address - a bounce wastes the pitch.
+CONTACT: verified on their contact page. Note the hyphen in the domain -
+newsindia-times.com, not newsindiatimes.com.
+  editor@newsindia-times.com        stated as "for letters to the editor and press releases"
+  advertising@newsindia-times.com   paid placement
+  Tel 212-675-7515
+  Parikh Worldwide Media, 35 Journal Square Suite 204, Jersey City, NJ 07306
 
-Desi Talk is their NY/NJ/CT weekly, so it is the more relevant of the two
-mastheads for this event. Ask for Desi Talk specifically.
+Desi Talk is their NY/NJ/CT weekly and the more relevant masthead for this
+event, so ask for Desi Talk specifically in the email.
 
 Send by 16 August. Weeklies need one to two weeks of lead time.
 Send individually, never as a group or BCC.

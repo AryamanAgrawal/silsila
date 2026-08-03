@@ -1,5 +1,5 @@
 ========================================================================
-TO       The Indian EYE  -  ADDRESS NOT VERIFIED
+TO       info@theindianeye.com   -  The Indian EYE  [VERIFIED]
 METHOD   Email
 ATTACH   poster-web.jpg (and optionally the banner PNGs in assets/email/), plus poster-print.jpg for print use
 SUBJECT  Press: Nobel Peace Prize tabla soloist and acclaimed sitarist perform in NYC, Aug 30
@@ -42,14 +42,13 @@ tehreem.tauqir@gmail.com / 516-507-2335
 ------------------------------------------------------------------------
 NOTES
 ------------------------------------------------------------------------
-CONTACT: their site timed out on automated requests. Search results suggest a
-desk address in the form DBNADesk@TheIndianEYE.com for media invites and press
-releases, but I could not confirm it - check https://theindianeye.com before
-sending.
+CONTACT: the address was obfuscated on the page and had to be decoded.
+  info@theindianeye.com
+  New York office: 28 West 36th Street, #601, NY 10018
+  Tel 646-907-8022
 
-Relevant precedent: they covered the Indo-American Arts Council's Erasing
-Borders festival in July 2026, so they actively run South Asian arts events in
-New York.
+They covered the Indo-American Arts Council's Erasing Borders festival in July
+2026, so they actively run South Asian arts events in New York.
 
 Send by 16 August. Weeklies need one to two weeks of lead time.
 Send individually, never as a group or BCC.

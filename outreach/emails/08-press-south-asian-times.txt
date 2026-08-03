@@ -1,5 +1,5 @@
 ========================================================================
-TO       The South Asian Times  -  ADDRESS NOT VERIFIED
+TO       info@thesouthasiantimes.info   -  The South Asian Times  [VERIFIED]
 METHOD   Email
 ATTACH   poster-web.jpg (and optionally the banner PNGs in assets/email/), plus poster-print.jpg for print use
 SUBJECT  Press: Nobel Peace Prize tabla soloist and acclaimed sitarist perform in NYC, Aug 30
@@ -42,10 +42,15 @@ tehreem.tauqir@gmail.com / 516-507-2335
 ------------------------------------------------------------------------
 NOTES
 ------------------------------------------------------------------------
-CONTACT: their site returned 403 to automated requests, so grab the editorial
-address manually from https://thesouthasiantimes.info (About / Contact).
-Readership is claimed at 120,000+ weekly across the US East Coast, so worth the
-two minutes it takes to find it.
+CONTACT: their site is JavaScript-rendered, so it had to be read in a browser.
+  info@thesouthasiantimes.info        general / editorial
+  thesouthasiantimes@gmail.com        secondary
+  advertise@thesouthasiantimes.info   paid placement
+  Tel 516-390-7847
+
+Claims 120,000+ weekly readers across the NY/NJ area and the East Coast, the
+largest reach of the four. Cc the gmail address as well - small newsrooms
+often watch it more closely than the domain inbox.
 
 Send by 16 August. Weeklies need one to two weeks of lead time.
 Send individually, never as a group or BCC.
