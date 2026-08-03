@@ -1,7 +1,7 @@
 ========================================================================
 TO       Columbia South Asian student groups - send individually, see list below
 METHOD   Email
-ATTACH   poster-web.jpg
+ATTACH   SILSILA.jpg (the poster)
 SUBJECT  Hindustani classical concert in NYC - Sun Aug 30
 ========================================================================
 

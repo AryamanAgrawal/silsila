@@ -1,7 +1,7 @@
 ========================================================================
 TO       info@theindianeye.com   -  The Indian EYE  [VERIFIED]
 METHOD   Email
-ATTACH   poster-web.jpg (and optionally the banner PNGs in assets/email/), plus poster-print.jpg for print use
+ATTACH   SILSILA.jpg (the poster) + the three portrait JPEGs in assets/
 SUBJECT  Press: Nobel Peace Prize tabla soloist and acclaimed sitarist perform in NYC, Aug 30
 ========================================================================
 
@@ -54,3 +54,9 @@ Send by 16 August. Weeklies need one to two weeks of lead time.
 Send individually, never as a group or BCC.
 The Nobel and UN credits are the opening line because that is what an editor
 can build a headline from.
+
+PRINT RESOLUTION: SILSILA.jpg is 1080x1350, which is about 3.6 inches wide at
+300dpi. Fine for web and for a small print listing, not enough for a large
+reproduction. If an outlet asks for print-quality artwork, get a 300dpi export
+of the corrected poster from Canva - do NOT send the old high-resolution file
+in outreach/assets/outdated/, it still says SATURDAY and PLAYERS THEATRE.

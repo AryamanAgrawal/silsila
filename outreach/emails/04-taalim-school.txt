@@ -1,7 +1,7 @@
 ========================================================================
 TO       info@taalim.com
 METHOD   Email
-ATTACH   poster-web.jpg + the 6 banner PNGs in assets/email/
+ATTACH   SILSILA.jpg (the poster) + the 6 banner PNGs in assets/email/
 SUBJECT  An evening built on the guru-shishya tradition - Aug 30 in NYC
 ========================================================================
 

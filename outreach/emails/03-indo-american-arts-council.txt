@@ -1,7 +1,7 @@
 ========================================================================
 TO       admin@IAAC.us
 METHOD   Email
-ATTACH   poster-web.jpg + the 6 banner PNGs in assets/email/
+ATTACH   SILSILA.jpg (the poster) + the 6 banner PNGs in assets/email/
 SUBJECT  From a fellow Indian arts nonprofit - Silsila: Resonance, Aug 30 in NYC
 ========================================================================
 

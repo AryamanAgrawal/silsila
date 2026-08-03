@@ -1,7 +1,7 @@
 ========================================================================
 TO       Columbia South Asia Institute
 METHOD   Email
-ATTACH   poster-web.jpg (and optionally the banner PNGs in assets/email/)
+ATTACH   SILSILA.jpg (the poster) + the 6 banner PNGs in assets/email/
 SUBJECT  Hindustani classical concert for students - Aug 30, Lower East Side
 ========================================================================
 

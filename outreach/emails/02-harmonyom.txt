@@ -1,7 +1,7 @@
 ========================================================================
 TO       Veronique@HarmoNYom.org   (cc Contact@HarmoNYom.org)
 METHOD   Email
-ATTACH   poster-web.jpg  -  ONE attachment only, nothing else
+ATTACH   SILSILA.jpg (the poster)  -  ONE attachment only, nothing else
 SUBJECT  Silsila: Resonance, Aug 30 - would love your advice, and to host you
 ========================================================================
 
@@ -51,7 +51,6 @@ rather than stacking it into the first email.
 No EARLYBIRD code in this one on purpose. Offering a discount code to
 someone you are inviting as a guest is a mixed message.
 
-ATTACHMENTS: poster-web.jpg and nothing else. This is a personal note, and a
-six-file press kit attached to it would undercut the tone. Hold the banner
-PNGs, poster-print.jpg and the portraits for your reply, if she offers to
+ATTACHMENTS: SILSILA.jpg and nothing else. This is a personal note, and a
+six-file press kit attached to it would undercut the tone. Hold the banner PNGs and the portraits for your reply, if she offers to
 share it. Never attach the .eml or invitation.html to anyone.
