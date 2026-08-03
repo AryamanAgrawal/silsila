@@ -1,48 +1,42 @@
 ========================================================================
 TO       Veronique@HarmoNYom.org   (cc Contact@HarmoNYom.org)
 METHOD   Email
-ATTACH   poster-web.jpg (and optionally the banner PNGs in assets/email/)
-SUBJECT  Silsila: Resonance - Hindustani classical concert, Aug 30, Abrons Arts Center
+ATTACH   poster-web.jpg (and the banner PNGs in assets/email/ if she asks)
+SUBJECT  Silsila: Resonance, Aug 30 - would love your advice, and to host you
 ========================================================================
 
 Dear Veronique,
 
-I'm writing on behalf of Ruh Arts Foundation, a 501(c)(3) dedicated to
-safeguarding the Subcontinent's classical arts. HarmoNYom's work championing
-this music in New York, including sponsoring the Ragas Live Festival on
-WKCR, is a big part of why there's an audience here for it at all.
+I'm with Ruh Arts Foundation, a 501(c)(3) working to safeguard the
+Subcontinent's classical arts. I'm writing partly to invite you to something
+and partly to ask your advice.
 
 On Sunday 30 August we're presenting Silsila: Resonance at the Playhouse
-Theater, Abrons Arts Center, with Jayanta Banerjee on sitar and Pandit Samir
-Chatterjee on tabla.
+Theater, Abrons Arts Center. Jayanta Banerjee plays sitar with Pandit Samir
+Chatterjee on tabla, there's a sitar duet between Jayanta and his disciple
+Tehreem Khan, and the evening closes with a finale Jayanta composed for
+seven musicians across sitar, tabla, violin, bansuri, keyboard and dholak.
 
-The programme opens with the two masters in conversation, moves through a
-sitar duet between Jayanta and his disciple Tehreem Khan honouring the
-guru-shishya tradition, and closes with A Dialogue Between East and West, a
-finale Jayanta composed for seven musicians.
+What HarmoNYom built for this music in New York, including sponsoring the
+Ragas Live Festival on WKCR, is a big part of why there's an audience here
+for it at all. We're a young organisation putting on our first evening of
+this scale, and we're still learning how to reach the people who would
+actually want to be in the room.
 
-Would you include it in your concerts and events listing, and mention it to
-your community if it fits? I've attached the poster and a set of ready-made
-banner graphics you're welcome to use in any newsletter or social post.
+So, two things. First, we'd love to have you there as our guest - it would
+mean a lot to have you in the audience. Second, if you have ten minutes at
+some point, I'd be grateful for any guidance on getting the word out: who
+else in the city we should be talking to, which listings actually move
+people, or anything you'd have done differently. And if you felt like
+passing it along to anyone in your circle, that alone would help enormously.
 
 Sunday, August 30, 2026
 Doors 6:30 PM / Music 7:00 PM
 Playhouse Theater, Abrons Arts Center
 466 Grand Street, New York, NY 10002
-
 Tickets: https://abronsartscenter.app.getcuebox.com/o/C5XTY485/shows/F5YXT2PK
-Use code EARLYBIRD for 20% off
 
-Jayanta Banerjee - sitar
-Pandit Samir Chatterjee - tabla
-Tehreem Khan - sitar
-Sikandar Rahman - violin
-Pranav Shikarpur - bansuri
-Shiva Kannan - keyboard
-Aditya Pillai - dholak
-
-Happy to send anything else you need - higher-resolution images, artist
-bios, or a shorter blurb to fit your format.
+Thank you for the years of work that made an evening like this possible.
 
 With gratitude,
 Aryaman Agrawal
@@ -52,14 +46,22 @@ Outreach & Community Lead, Ruh Arts Foundation
 ------------------------------------------------------------------------
 NOTES
 ------------------------------------------------------------------------
-Veronique is listed on the Concerts & Events page as the contact for event
-details, so she is the better target than the generic address. Cc the generic
-one so it is on file either way.
+Reframed from a listing request to advice + invitation. HarmoNYom's events
+page stops around 2022, so asking them to update a calendar would signal we
+had not looked. Veronique as a person with a two-decade network is the real
+asset here, not the website.
 
-HarmoNYom sponsored WKCR's Ragas Live Festival in 2012 and has worked with
-Clocktower Radio and Pioneer Works. That connection is real and specific, so
-the opening line is not flattery. If she replies warmly, she is also a
-natural person to ask for an introduction to Ragas Live (file 05).
+The advice ask works because it is genuinely low cost for her and flattering
+in a way that happens to be true. People who have built something usually
+enjoy being asked how.
 
-CALIBRATION: their events page shows nothing after 2022, so they may be
-semi-dormant. Worth one email because it is cheap, but do not chase it.
+CONFIRM WITH TEHREEM before sending: are comp tickets available? The email
+offers to host her. If comps are not possible, change "as our guest" to
+"we would love to see you there" and leave the ticket link to do the work.
+
+If she replies warmly, she is the natural person to ask for an introduction
+to David Ellenbogen at Ragas Live / WKCR (file 05). Hold that for the reply
+rather than stacking it into the first email.
+
+No EARLYBIRD code in this one on purpose. Offering a discount code to
+someone you are inviting as a guest is a mixed message.
