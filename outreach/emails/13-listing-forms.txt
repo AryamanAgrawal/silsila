@@ -9,7 +9,7 @@ LISTING FORMS - no pitch needed, just paste
   Live Music Project        has an Indian-genre filter for NYC
   Songkick + Bandsintown    so it appears on the artists' profiles
 
-IMAGE: use assets/poster-social-4x5.jpg (1080x1350) where a square-ish image is requested, otherwise poster-web.jpg.
+IMAGE: assets/SILSILA.jpg (1080x1350). This is the corrected poster - Sunday, doors 6:30, Playhouse Theater, with the Ruh Arts Foundation credit. Use it for every form.
 
 TITLE Silsila: Resonance - The Living Journey of South Asian Classical Music
 
