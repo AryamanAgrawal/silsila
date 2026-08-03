@@ -9,31 +9,16 @@ LISTING FORMS - no pitch needed, just paste
   Live Music Project        has an Indian-genre filter for NYC
   Songkick + Bandsintown    so it appears on the artists' profiles
 
-IMAGE: use assets/poster-social-4x5.jpg (1080x1350) where a square-ish
-image is requested, otherwise poster-web.jpg.
+IMAGE: use assets/poster-social-4x5.jpg (1080x1350) where a square-ish image is requested, otherwise poster-web.jpg.
 
-TITLE
-Silsila: Resonance - The Living Journey of South Asian Classical Music
+TITLE Silsila: Resonance - The Living Journey of South Asian Classical Music
 
 PRESENTER
 Ruh Arts Foundation
 
-SHORT DESCRIPTION (40 words)
-Sitarist Jayanta Banerjee and tabla maestro Pandit Samir Chatterjee headline
-an evening of Hindustani classical music, joined by a sitar duet with
-disciple Tehreem Khan and a seven-artist finale bridging Eastern and Western
-traditions.
+SHORT DESCRIPTION (40 words) Sitarist Jayanta Banerjee and tabla maestro Pandit Samir Chatterjee headline an evening of Hindustani classical music, joined by a sitar duet with disciple Tehreem Khan and a seven-artist finale bridging Eastern and Western traditions.
 
-LONG DESCRIPTION (100 words)
-Silsila means continuation; resonance is the note that lingers after it is
-played. Presented by Ruh Arts Foundation, this evening traces the living
-journey of South Asian classical music. Internationally acclaimed sitarist
-Jayanta Banerjee and Pandit Samir Chatterjee, a virtuoso of the Farrukhabad
-tabla gharana, open in conversation. A sitar duet between Banerjee and his
-disciple Tehreem Khan honours the guru-shishya bond that has carried this
-music across generations. The night closes with A Dialogue Between East and
-West, a collaborative finale composed by Banerjee, uniting sitar, tabla,
-violin, bansuri, keyboard and dholak.
+LONG DESCRIPTION (100 words) Silsila means continuation; resonance is the note that lingers after it is played. Presented by Ruh Arts Foundation, this evening traces the living journey of South Asian classical music. Internationally acclaimed sitarist Jayanta Banerjee and Pandit Samir Chatterjee, a virtuoso of the Farrukhabad tabla gharana, open in conversation. A sitar duet between Banerjee and his disciple Tehreem Khan honours the guru-shishya bond that has carried this music across generations. The night closes with A Dialogue Between East and West, a collaborative finale composed by Banerjee, uniting sitar, tabla, violin, bansuri, keyboard and dholak.
 
 DETAILS
 Sunday, August 30, 2026
