@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Silsila: Resonance — poster</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:wght@400;500;600&family=Pinyon+Script&family=Ephesis&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/open-sauce-one@5/400.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/open-sauce-one@5/500.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/open-sauce-one@5/700.css"
+    />
+    <style>
+      /* ═══════════════════════════════════════════════════════════
+   4:5 poster, designed at 1080 x 1350 and rendered at 3x.
+
+   The QR is the constraint that drives the layout. The ticket
+   URL forces a 49-module (version 8) code, and a module has to
+   land at 0.5mm or larger to scan from arm's length. On an
+   11-inch print that means the QR can never be smaller than
+   95px here. It is set at 168px, so it stays scannable down to
+   about a 6-inch flyer.
+   ═══════════════════════════════════════════════════════════ */
+      :root {
+        --plaster: #850d0d;
+        --sindoor: #bd0606;
+        --bone: #e9e4e0;
+        --paper: #fbfaf8;
+        --ink: #171717;
+        --rose: #e9bdbd;
+        --f-display: "Anton", sans-serif;
+        --f-serif: "Cormorant Garamond", serif;
+        --f-formal: "Pinyon Script", cursive;
+        --f-sign: "Ephesis", cursive;
+        --f-body: "Open Sauce One", sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      body {
+        width: 1080px;
+        height: 1350px;
+        background: var(--bone);
+        font-family: var(--f-body);
+        color: var(--ink);
+        position: relative;
+        overflow: hidden;
+      }
+      body::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: url("assets/paper-grain.jpg") center / 320px;
+        mix-blend-mode: overlay;
+        opacity: 0.9;
+      }
+      .sheet {
+        position: relative;
+        z-index: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .checker {
+        height: 26px;
+        flex: none;
+        background: repeating-conic-gradient(
+            var(--ink) 0 25%,
+            transparent 0 50%
+          )
+          0 0 / 26px 26px;
+      }
+
+      .body {
+        flex: 1;
+        padding: 26px 64px 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ── masthead ─────────────────────────────────────────── */
+      .presenter {
+        text-align: center;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--ink);
+      }
+      .lockup {
+        position: relative;
+        text-align: center;
+        margin-top: 6px;
+      }
+      .title {
+        font-family: var(--f-display);
+        font-size: 148px;
+        line-height: 0.82;
+        letter-spacing: -0.012em;
+        text-transform: uppercase;
+        color: var(--sindoor);
+      }
+      .series {
+        font-family: var(--f-formal);
+        font-size: 70px;
+        line-height: 1;
+        color: var(--ink);
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translate(-50%, 74%);
+        white-space: nowrap;
+      }
+      .tagline {
+        text-align: center;
+        margin-top: 52px;
+        font-size: 19px;
+        font-weight: 700;
+        letter-spacing: 0.045em;
+        text-transform: uppercase;
+      }
+
+      /* ── the two masters ──────────────────────────────────── */
+      .masters {
+        display: flex;
+        justify-content: center;
+        gap: 48px;
+        margin-top: 30px;
+      }
+      .card {
+        position: relative;
+        width: 344px;
+      }
+      .polaroid {
+        background: var(--paper);
+        padding: 13px 13px 15px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.26);
+      }
+      .polaroid img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .tape {
+        position: absolute;
+        width: 132px;
+        z-index: 3;
+        top: -16px;
+        filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.26));
+      }
+      .who {
+        text-align: center;
+        margin-top: 13px;
+      }
+      .who .n {
+        font-family: var(--f-serif);
+        font-weight: 600;
+        font-size: 25px;
+        letter-spacing: 0.075em;
+        text-transform: uppercase;
+        color: var(--plaster);
+        line-height: 1.1;
+      }
+      .who .i {
+        font-family: var(--f-sign);
+        font-size: 28px;
+        color: var(--ink);
+        line-height: 1.15;
+      }
+
+      /* ── the company ──────────────────────────────────────── */
+      .with {
+        margin-top: 26px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+      .with::before,
+      .with::after {
+        content: "";
+        height: 1px;
+        flex: 1;
+        background: rgba(23, 23, 23, 0.28);
+      }
+      .with span {
+        font-size: 12px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--plaster);
+      }
+      .company {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 16px;
+      }
+      .co {
+        width: 166px;
+      }
+      .co .frame {
+        background: var(--paper);
+        padding: 7px 7px 8px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      }
+      .co img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+      }
+      .co .n {
+        text-align: center;
+        margin-top: 8px;
+        font-family: var(--f-serif);
+        font-weight: 600;
+        font-size: 14px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--plaster);
+        line-height: 1.15;
+        white-space: nowrap;
+      }
+      .co .i {
+        text-align: center;
+        font-family: var(--f-sign);
+        font-size: 17px;
+        color: var(--ink);
+        line-height: 1.1;
+      }
+
+      /* ── footer: logistics beside the ticket stub ─────────── */
+      .footer {
+        flex: none;
+        background: var(--plaster);
+        color: var(--bone);
+        padding: 26px 64px 30px;
+        display: flex;
+        align-items: center;
+        gap: 44px;
+      }
+      .footer::before {
+        content: "";
+        position: absolute;
+      }
+      .when {
+        flex: 1;
+      }
+      .when .day {
+        font-family: var(--f-display);
+        font-size: 52px;
+        line-height: 0.95;
+        letter-spacing: 0.005em;
+        text-transform: uppercase;
+        color: var(--bone);
+      }
+      .when .times {
+        font-size: 19px;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        margin-top: 10px;
+        color: var(--bone);
+        font-weight: 500;
+      }
+      .when .place {
+        font-size: 16px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-top: 9px;
+        color: var(--rose);
+        line-height: 1.65;
+      }
+
+      .stub {
+        flex: none;
+        text-align: center;
+      }
+      .stub .q {
+        width: 168px;
+        height: 168px;
+        display: block;
+        background: var(--paper);
+        padding: 0;
+        border-radius: 2px;
+      }
+      .stub .cta {
+        margin-top: 9px;
+        font-family: var(--f-display);
+        font-size: 17px;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--bone);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sheet">
+      <div class="checker"></div>
+
+      <div class="body">
+        <div class="presenter">Presented by Ruh Arts Foundation</div>
+
+        <div class="lockup">
+          <div class="title">Resonance</div>
+          <div class="series">silsila</div>
+        </div>
+
+        <div class="tagline">
+          The Living Journey of South&nbsp;Asian Classical Music
+        </div>
+
+        <div class="masters">
+          <div class="card">
+            <img
+              class="tape"
+              src="assets/tape-kraft.png"
+              style="left: 86px; transform: rotate(-6deg)"
+            />
+            <div class="polaroid"><img src="assets/jayanta.jpg" alt="" /></div>
+            <div class="who">
+              <div class="n">Jayanta Banerjee</div>
+              <div class="i">Sitar</div>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              class="tape"
+              src="assets/tape-kraft-2.png"
+              style="right: 84px; transform: rotate(7deg)"
+            />
+            <div class="polaroid"><img src="assets/samir.jpg" alt="" /></div>
+            <div class="who">
+              <div class="n">Pt. Samir Chatterjee</div>
+              <div class="i">Tabla</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="with"><span>With</span></div>
+
+        <div class="company">
+          <div class="co">
+            <div class="frame"><img src="assets/tehreem.jpg" alt="" /></div>
+            <div class="n">Tehreem Khan</div>
+            <div class="i">Sitar</div>
+          </div>
+          <div class="co">
+            <div class="frame"><img src="assets/sikandar.jpg" alt="" /></div>
+            <div class="n">Sikandar Rahman</div>
+            <div class="i">Violin</div>
+          </div>
+          <div class="co">
+            <div class="frame"><img src="assets/pranav.jpg" alt="" /></div>
+            <div class="n">Pranav Shikarpur</div>
+            <div class="i">Bansuri</div>
+          </div>
+          <div class="co">
+            <div class="frame"><img src="assets/shiva.jpg" alt="" /></div>
+            <div class="n">Shiva Kannan</div>
+            <div class="i">Keyboard</div>
+          </div>
+          <div class="co">
+            <div class="frame"><img src="assets/aditya.jpg" alt="" /></div>
+            <div class="n">Aditya Pillai</div>
+            <div class="i">Dholak</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="when">
+          <div class="day">Sunday 30 August 2026</div>
+          <div class="times">Doors 6:30 PM &nbsp;·&nbsp; Showtime 7 PM</div>
+          <div class="place">
+            Playhouse Theater, Abrons Arts Center<br />
+            466 Grand Street, New York, NY 10002
+          </div>
+        </div>
+        <div class="stub">
+          <img class="q" src="assets/qr.png" alt="Tickets" />
+          <div class="cta">Scan for tickets</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
