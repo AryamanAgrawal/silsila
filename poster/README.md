@@ -27,16 +27,20 @@ Rebuild everything with `./render.sh` after editing `poster.html`.
 
 Render scale does not fix photographs - the source files do. At 11.25 inches:
 
-| Element | Effective |
+| Element | Effective at 11.25in |
 |---|---|
 | All type | vector, unlimited |
-| Company photos | 416 dpi |
-| Jayanta and Samir | **243 dpi** |
+| Company photos | ~340 dpi |
+| Jayanta | 295 dpi |
+| Samir | 218 dpi |
 
-243 dpi is fine on a digital press and will look good. It is below the 300 dpi
-ideal, and it is the single limit on this poster. Printing much larger than
-about 14 inches wide will start to soften those two photographs. Higher
-resolution originals of Jayanta and Samir are the only way to lift it.
+Samir is the weakest. His portrait comes from the only frame in the source deck
+that shows him and the tabla without dead space - it was shot in colour and is
+desaturated here, which is also why it is the largest Samir file available at
+882x800. The darker frame originally used was 534px and left a lot of empty
+black around him.
+
+Printing much beyond about 14 inches wide will start to soften that one image.
 
 ## The QR drives the layout
 
