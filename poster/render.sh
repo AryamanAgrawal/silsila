@@ -1,10 +1,20 @@
 #!/usr/bin/env bash
-# 1080x1350 design, rendered at 3x -> 3240x4050 (~295dpi on an 11in print)
+# Print master is the PDF: all type stays vector, only the photographs are raster.
+# 1080x1350 CSS px maps to 11.25 x 14.06 inches at 96dpi.
 set -e
 cd "$(dirname "$0")"
 CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+
+"$CHROME" --headless --disable-gpu --no-pdf-header-footer \
+  --virtual-time-budget=20000 \
+  --print-to-pdf="silsila-poster.pdf" "file://$PWD/poster.html" 2>/dev/null
+
+# raster fallbacks, 4x for crisp type where a PDF cannot be used
 "$CHROME" --headless --disable-gpu --hide-scrollbars \
-  --window-size=1080,1350 --force-device-scale-factor=3 \
-  --virtual-time-budget=15000 \
+  --window-size=1080,1350 --force-device-scale-factor=4 \
+  --virtual-time-budget=20000 \
   --screenshot="silsila-poster.png" "file://$PWD/poster.html" 2>/dev/null
-echo "wrote silsila-poster.png"
+
+magick silsila-poster.png -quality 96 silsila-poster-print.jpg
+magick silsila-poster.png -resize 1080x1350 -quality 90 silsila-poster-web.jpg
+echo "wrote pdf + png(4x) + print jpg + web jpg"

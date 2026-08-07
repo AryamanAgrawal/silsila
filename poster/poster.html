@@ -32,6 +32,10 @@
    95px here. It is set at 168px, so it stays scannable down to
    about a 6-inch flyer.
    ═══════════════════════════════════════════════════════════ */
+      @page {
+        size: 1080px 1350px;
+        margin: 0;
+      }
       :root {
         --plaster: #850d0d;
         --sindoor: #bd0606;
@@ -55,20 +59,11 @@
       body {
         width: 1080px;
         height: 1350px;
-        background: var(--bone);
+        background: #ffffff;
         font-family: var(--f-body);
         color: var(--ink);
         position: relative;
         overflow: hidden;
-      }
-      body::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        background: url("assets/paper-grain.jpg") center / 320px;
-        mix-blend-mode: overlay;
-        opacity: 0.9;
       }
       .sheet {
         position: relative;
@@ -149,9 +144,9 @@
         width: 344px;
       }
       .polaroid {
-        background: var(--paper);
+        background: #ffffff;
         padding: 13px 13px 15px;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.26);
+        border: 1px solid rgba(23, 23, 23, 0.55);
       }
       .polaroid img {
         display: block;
@@ -163,7 +158,6 @@
         width: 132px;
         z-index: 3;
         top: -16px;
-        filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.26));
       }
       .who {
         text-align: center;
@@ -215,9 +209,9 @@
         width: 166px;
       }
       .co .frame {
-        background: var(--paper);
+        background: #ffffff;
         padding: 7px 7px 8px;
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(23, 23, 23, 0.45);
       }
       .co img {
         display: block;
@@ -295,9 +289,8 @@
         width: 168px;
         height: 168px;
         display: block;
-        background: var(--paper);
+        background: #ffffff;
         padding: 0;
-        border-radius: 2px;
       }
       .stub .cta {
         margin-top: 9px;

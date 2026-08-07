@@ -1,35 +1,47 @@
 # Poster
 
-`silsila-poster.png` - 3240 x 4050, the master. Designed at 1080 x 1350 and
-rendered at 3x, which is about 295dpi on an 11-inch print.
+Print master is **`silsila-poster.pdf`**. Send that to the printer.
 
-| File | Use |
+| File | Size | Use |
+|---|---|---|
+| `silsila-poster.pdf` | 11.25 x 14.07 in | **print** - all type is vector |
+| `silsila-poster.png` | 4320 x 5400 | raster master, if a PDF cannot be used |
+| `silsila-poster-print.jpg` | 4320 x 5400 | same, smaller file |
+| `silsila-poster-web.jpg` | 1080 x 1350 | Instagram, email |
+
+Rebuild everything with `./render.sh` after editing `poster.html`.
+
+## Built for print
+
+- **Plain white ground.** No background tint and no paper-grain overlay, so the
+  press lays no ink over the whole sheet. Cheaper, and it cannot band.
+- **No shadows.** Drop shadows force rasterisation, band on uncoated stock, and
+  are a screen idiom. Photo frames use a hairline rule instead, which is how
+  print has always separated an image from the page.
+- **Vector type.** The PDF keeps Anton, Cormorant, Ephesis and Open Sauce as
+  embedded fonts, so type is resolution-independent. Only the photographs are
+  raster.
+- **QR is pure black on pure white** for maximum contrast.
+
+## Resolution ceiling
+
+Render scale does not fix photographs - the source files do. At 11.25 inches:
+
+| Element | Effective |
 |---|---|
-| `silsila-poster.png` | print, and anything that needs the master |
-| `silsila-poster-print.jpg` | same size, smaller file, for print shops that prefer JPEG |
-| `silsila-poster-web.jpg` | 1080 x 1350, for Instagram and email |
+| All type | vector, unlimited |
+| Company photos | 416 dpi |
+| Jayanta and Samir | **243 dpi** |
 
-Rebuild with `./render.sh` after editing `poster.html`.
+243 dpi is fine on a digital press and will look good. It is below the 300 dpi
+ideal, and it is the single limit on this poster. Printing much larger than
+about 14 inches wide will start to soften those two photographs. Higher
+resolution originals of Jayanta and Samir are the only way to lift it.
 
 ## The QR drives the layout
 
-The CueBox ticket URL is long, so it forces a 49-module (version 8) code. A QR
-module has to land at 0.5mm or larger to scan from arm's length, which means
-the code can never be smaller than 95px in this 1080px design if the poster is
-printed 11 inches wide.
+The CueBox URL forces a 49-module (version 8) code, and a module must be 0.5mm
+or larger to scan from arm's length. At 168px in a 1080px design that is 0.89mm
+on an 11 inch print - comfortable, and still fine down to about 8 inches.
 
-It is set at 168px. That holds up down to about an 8-inch print:
-
-| Printed width | QR size | Module | |
-|---|---|---|---|
-| 6 in | 24 mm | 0.48 mm | borderline |
-| 8 in | 32 mm | 0.65 mm | fine |
-| 11 in | 43 mm | 0.89 mm | fine |
-| 17 in | 67 mm | 1.37 mm | fine |
-| 24 in | 95 mm | 1.94 mm | fine |
-
-The code is dark-on-light on a bone tile rather than bone-on-red. Inverted
-codes are handled less reliably by older phone cameras, and the light tile also
-gives the quiet zone scanners need to find the code's edge.
-
-Verified by decoding the rendered poster, not by eye.
+Verified by decoding the QR out of the finished PDF at 300dpi, not by eye.
