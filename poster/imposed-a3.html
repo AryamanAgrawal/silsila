@@ -1,27 +1,28 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Silsila: Resonance — poster</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
+<head>
+<meta charset="utf-8" />
+<title>Silsila: Resonance - 2 up (a3)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
       href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:wght@400;500;600&family=Pinyon+Script&family=Ephesis&display=swap"
       rel="stylesheet"
     />
-    <link
+<link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@fontsource/open-sauce-one@5/400.css"
     />
-    <link
+<link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@fontsource/open-sauce-one@5/500.css"
     />
-    <link
+<link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@fontsource/open-sauce-one@5/700.css"
     />
-    <style>
+<style>
+
       /* ═══════════════════════════════════════════════════════════
    4:5 poster, designed at 1080 x 1350 and rendered at 3x.
 
@@ -295,10 +296,34 @@
         text-transform: uppercase;
         color: var(--bone);
       }
-    </style>
-  </head>
-  <body>
-    <div class="sheet">
+    
+
+/* ── imposition ─────────────────────────────────────────────
+   Overrides the poster's own page box. Everything below wins
+   because it comes later in the same stylesheet.
+   Wrapper classes are namespaced: the poster already owns
+   .frame for the company photo mats, and an unprefixed rule
+   here was resizing all ten of them. */
+@page { size: 420mm 297mm; margin: 0; }
+html, body {
+  width: 420mm; height: 297mm;
+  margin: 0; padding: 0; background: #fff; overflow: hidden; position: relative;
+}
+.imp-slot {
+  position: absolute;
+  width: 199mm; height: 248.7500mm;
+  overflow: hidden;
+}
+.imp-frame {
+  width: 1080px; height: 1350px;
+  transform: scale(0.696413); transform-origin: top left;
+}
+.imp-frame .sheet { height: 1350px; }
+/* cut marks */
+i { position: absolute; border-left: 0.4pt solid #000; border-top: 0.4pt solid #000; }
+</style>
+</head>
+<body><div class="imp-slot" style="left:6.0000mm;top:24.1250mm"><div class="imp-frame"><div class="sheet">
       <div class="checker"></div>
 
       <div class="body">
@@ -376,6 +401,83 @@
           <div class="cta">Scan for tickets</div>
         </div>
       </div>
-    </div>
-  </body>
+    </div></div></div><div class="imp-slot" style="left:215.0000mm;top:24.1250mm"><div class="imp-frame"><div class="sheet">
+      <div class="checker"></div>
+
+      <div class="body">
+        <div class="presenter">Presented by Ruh Arts Foundation</div>
+
+        <div class="lockup">
+          <div class="title">Resonance</div>
+          <div class="series">silsila</div>
+        </div>
+
+        <div class="tagline">
+          The Living Journey of South&nbsp;Asian Classical Music
+        </div>
+
+        <div class="masters">
+          <div class="card">
+            <div class="polaroid"><img src="assets/jayanta.jpg" alt="" /></div>
+            <div class="who">
+              <div class="n">Jayanta Banerjee</div>
+              <div class="i">Sitar</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="polaroid"><img src="assets/samir.jpg" alt="" /></div>
+            <div class="who">
+              <div class="n">Pt. Samir Chatterjee</div>
+              <div class="i">Tabla</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="with"><span>With</span></div>
+
+        <div class="company">
+        <div class="co">
+          <div class="frame"><img src="assets/sikandar.jpg" alt="" /></div>
+          <div class="n">Sikandar Rahman</div>
+          <div class="i">Violin</div>
+        </div>
+        <div class="co">
+          <div class="frame"><img src="assets/pranav.jpg" alt="" /></div>
+          <div class="n">Pranav Shikarpur</div>
+          <div class="i">Bansuri</div>
+        </div>
+        <div class="co">
+          <div class="frame"><img src="assets/tehreem.jpg" alt="" /></div>
+          <div class="n">Tehreem Khan</div>
+          <div class="i">Sitar</div>
+        </div>
+        <div class="co">
+          <div class="frame"><img src="assets/shiva.jpg" alt="" /></div>
+          <div class="n">Shiva Kannan</div>
+          <div class="i">Keyboard</div>
+        </div>
+        <div class="co">
+          <div class="frame"><img src="assets/aditya.jpg" alt="" /></div>
+          <div class="n">Aditya Pillai</div>
+          <div class="i">Dholak</div>
+        </div>
+      </div>
+
+      </div>
+
+      <div class="footer">
+        <div class="when">
+          <div class="day">Sunday 30 August 2026</div>
+          <div class="times">Doors 6:30 PM &nbsp;·&nbsp; Showtime 7 PM</div>
+          <div class="place">
+            Playhouse Theater, Abrons Arts Center<br />
+            466 Grand Street, New York, NY 10002
+          </div>
+        </div>
+        <div class="stub">
+          <img class="q" src="assets/qr.png" alt="Tickets" />
+          <div class="cta">Scan for tickets</div>
+        </div>
+      </div>
+    </div></div></div><i style="left:6.0mm;top:0;width:0;height:14.475mm"></i><i style="left:6.0mm;top:282.525mm;width:0;height:14.475mm"></i><i style="left:205.0mm;top:0;width:0;height:14.475mm"></i><i style="left:205.0mm;top:282.525mm;width:0;height:14.475mm"></i><i style="left:215.0mm;top:0;width:0;height:14.475mm"></i><i style="left:215.0mm;top:282.525mm;width:0;height:14.475mm"></i><i style="left:414.0mm;top:0;width:0;height:14.475mm"></i><i style="left:414.0mm;top:282.525mm;width:0;height:14.475mm"></i><i style="top:24.125mm;left:0;height:0;width:3.600mm"></i><i style="top:24.125mm;left:416.400mm;height:0;width:3.600mm"></i><i style="top:272.875mm;left:0;height:0;width:3.600mm"></i><i style="top:272.875mm;left:416.400mm;height:0;width:3.600mm"></i></body>
 </html>
