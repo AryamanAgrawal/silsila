@@ -20,16 +20,18 @@ PX_PER_IN = 96
 PX_PER_MM = 96 / 25.4
 
 LAYOUTS = {
-    # name: (page w, page h, poster w, gap, unit, px-per-unit)
-    "tabloid": (17, 11, 8.0, 0.5, "in", PX_PER_IN),
-    "a3": (420, 297, 199, 10, "mm", PX_PER_MM),
+    # name: (page w, page h, poster w, gap, unit, px-per-unit, count)
+    "tabloid": (17, 11, 8.0, 0.5, "in", PX_PER_IN, 2),
+    "a3": (420, 297, 199, 10, "mm", PX_PER_MM, 2),
+    "a4-2up": (297, 210, 138.5, 10, "mm", PX_PER_MM, 2),
+    "a4-single": (210, 297, 200, 0, "mm", PX_PER_MM, 1),
 }
 
 
 def build(name):
-    page_w, page_h, poster_w, gap, unit, ppu = LAYOUTS[name]
+    page_w, page_h, poster_w, gap, unit, ppu, count = LAYOUTS[name]
     poster_h = poster_w * DESIGN_H / DESIGN_W
-    margin_x = (page_w - 2 * poster_w - gap) / 2
+    margin_x = (page_w - count * poster_w - (count - 1) * gap) / 2
     margin_y = (page_h - poster_h) / 2
     scale = (poster_w * ppu) / DESIGN_W
 
@@ -46,7 +48,10 @@ def build(name):
             "but duplicating it nests the second copy inside the first.")
 
     # cut marks sit in the margin, never over the artwork
-    xs = [margin_x, margin_x + poster_w, margin_x + poster_w + gap, page_w - margin_x]
+    xs = []
+    for i in range(count):
+        left = margin_x + i * (poster_w + gap)
+        xs += [left, left + poster_w]
     ys = [margin_y, margin_y + poster_h]
     marks = []
     for x in xs:
@@ -57,9 +62,9 @@ def build(name):
         marks.append(f'<i style="top:{y}{unit};left:{page_w - margin_x*0.6:.3f}{unit};height:0;width:{margin_x*0.6:.3f}{unit}"></i>')
 
     slots = "".join(
-        f'<div class="imp-slot" style="left:{left}{unit};top:{margin_y:.4f}{unit}">'
-        f'<div class="imp-frame">{sheet}</div></div>'
-        for left in (f"{margin_x:.4f}", f"{margin_x + poster_w + gap:.4f}")
+        f'<div class="imp-slot" style="left:{margin_x + i * (poster_w + gap):.4f}{unit};'
+        f'top:{margin_y:.4f}{unit}"><div class="imp-frame">{sheet}</div></div>'
+        for i in range(count)
     )
 
     html = f"""<!doctype html>
@@ -101,7 +106,7 @@ i {{ position: absolute; border-left: 0.4pt solid #000; border-top: 0.4pt solid 
 """
     out = HERE / f"imposed-{name}.html"
     out.write_text(html)
-    print(f"  {out.name}: {page_w}x{page_h}{unit} sheet, two posters {poster_w}x{poster_h:.2f}{unit}, "
+    print(f"  {out.name}: {page_w}x{page_h}{unit} sheet, {count} x {poster_w}x{poster_h:.2f}{unit}, "
           f"gap {gap}{unit}, margins {margin_x:.2f}/{margin_y:.2f}{unit}, scale {scale:.4f}")
 
 

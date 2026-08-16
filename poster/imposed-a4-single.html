@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Silsila: Resonance - 2 up (a4-single)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:wght@400;500;600&family=Pinyon+Script&family=Ephesis&display=swap"
+      rel="stylesheet"
+    />
+<link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/open-sauce-one@5/400.css"
+    />
+<link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/open-sauce-one@5/500.css"
+    />
+<link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/open-sauce-one@5/700.css"
+    />
+<style>
+
+      /* ═══════════════════════════════════════════════════════════
+   4:5 poster, designed at 1080 x 1350 and rendered at 3x.
+
+   The QR is the constraint that drives the layout. The ticket
+   URL forces a 49-module (version 8) code, and a module has to
+   land at 0.5mm or larger to scan from arm's length. On an
+   11-inch print that means the QR can never be smaller than
+   95px here. It is set at 168px, so it stays scannable down to
+   about a 6-inch flyer.
+   ═══════════════════════════════════════════════════════════ */
+      @page {
+        size: 1080px 1350px;
+        margin: 0;
+      }
+      :root {
+        --plaster: #850d0d;
+        --sindoor: #bd0606;
+        --bone: #e9e4e0;
+        --paper: #fbfaf8;
+        --ink: #171717;
+        --rose: #e9bdbd;
+        --f-display: "Anton", sans-serif;
+        --f-serif: "Cormorant Garamond", serif;
+        --f-formal: "Pinyon Script", cursive;
+        --f-sign: "Ephesis", cursive;
+        --f-body: "Open Sauce One", sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      body {
+        width: 1080px;
+        height: 1350px;
+        background: #ffffff;
+        font-family: var(--f-body);
+        color: var(--ink);
+        position: relative;
+        overflow: hidden;
+      }
+      .sheet {
+        position: relative;
+        z-index: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .checker {
+        flex: none;
+        display: flex;
+        flex-direction: column;
+      }
+      .checker .row {
+        display: flex;
+        height: 13px;
+      }
+      .checker i {
+        width: 13.5px;
+        height: 13px;
+      }
+      .checker .row:first-child i:nth-child(odd),
+      .checker .row:last-child i:nth-child(even) {
+        background: var(--ink);
+      }
+
+      .body {
+        flex: 1;
+        padding: 26px 64px 46px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ── masthead ─────────────────────────────────────────── */
+      .presenter {
+        text-align: center;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--ink);
+      }
+      .lockup {
+        position: relative;
+        text-align: center;
+        margin-top: 6px;
+      }
+      .title {
+        font-family: var(--f-display);
+        font-size: 148px;
+        line-height: 0.82;
+        letter-spacing: -0.012em;
+        text-transform: uppercase;
+        color: var(--sindoor);
+      }
+      .series {
+        font-family: var(--f-formal);
+        font-size: 70px;
+        line-height: 1;
+        color: var(--ink);
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translate(-50%, 74%);
+        white-space: nowrap;
+      }
+      .tagline {
+        text-align: center;
+        margin-top: 38px;
+        font-size: 19px;
+        font-weight: 700;
+        letter-spacing: 0.045em;
+        text-transform: uppercase;
+      }
+
+      /* ── the two masters ──────────────────────────────────── */
+      .masters {
+        display: flex;
+        justify-content: center;
+        gap: 80px;
+        margin-top: 32px;
+      }
+      .card {
+        position: relative;
+        width: 310px;
+      }
+      .polaroid {
+        background: #ffffff;
+        padding: 13px 13px 15px;
+        border: 1px solid rgba(23, 23, 23, 0.55);
+      }
+      .polaroid img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .who {
+        text-align: center;
+        margin-top: 16px;
+      }
+      .who .n {
+        font-family: var(--f-serif);
+        font-weight: 600;
+        font-size: 23px;
+        white-space: nowrap;
+        letter-spacing: 0.075em;
+        text-transform: uppercase;
+        color: var(--plaster);
+        line-height: 1.1;
+      }
+      .who .i {
+        font-family: var(--f-sign);
+        font-size: 28px;
+        color: var(--ink);
+        line-height: 1.15;
+      }
+
+      /* ── the company ──────────────────────────────────────── */
+      .with {
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+      .with::before,
+      .with::after {
+        content: "";
+        height: 1px;
+        flex: 1;
+        background: rgba(23, 23, 23, 0.28);
+      }
+      .with span {
+        font-size: 12px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--plaster);
+      }
+      .company {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 18px;
+      }
+      .co {
+        width: 148px;
+      }
+      .co .frame {
+        background: #ffffff;
+        padding: 6px 6px 9px;
+        border: 1px solid rgba(23, 23, 23, 0.5);
+      }
+      .co img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 4/5;
+        object-fit: cover;
+      }
+      .co .n {
+        text-align: center;
+        margin-top: 8px;
+        font-family: var(--f-serif);
+        font-weight: 600;
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--plaster);
+        line-height: 1.15;
+        white-space: nowrap;
+      }
+      .co .i {
+        text-align: center;
+        font-family: var(--f-sign);
+        font-size: 15px;
+        color: var(--ink);
+        line-height: 1.1;
+      }
+
+      /* ── footer: logistics beside the ticket stub ─────────── */
+      .footer {
+        flex: none;
+        background: var(--plaster);
+        color: var(--bone);
+        padding: 26px 64px 30px;
+        display: flex;
+        align-items: center;
+        gap: 44px;
+      }
+      .footer::before {
+        content: "";
+        position: absolute;
+      }
+      .when {
+        flex: 1;
+      }
+      .when .day {
+        font-family: var(--f-display);
+        font-size: 52px;
+        line-height: 0.95;
+        letter-spacing: 0.005em;
+        text-transform: uppercase;
+        color: var(--bone);
+      }
+      .when .times {
+        font-size: 19px;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        margin-top: 10px;
+        color: var(--bone);
+        font-weight: 500;
+      }
+      .when .place {
+        font-size: 16px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-top: 9px;
+        color: var(--rose);
+        line-height: 1.65;
+      }
+
+      .stub {
+        flex: none;
+        text-align: center;
+      }
+      .stub .q {
+        width: 168px;
+        height: 168px;
+        display: block;
+        background: #ffffff;
+        padding: 0;
+      }
+      .stub .cta {
+        margin-top: 9px;
+        font-family: var(--f-display);
+        font-size: 17px;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--bone);
+      }
+    
+
+/* ── imposition ─────────────────────────────────────────────
+   Overrides the poster's own page box. Everything below wins
+   because it comes later in the same stylesheet.
+   Wrapper classes are namespaced: the poster already owns
+   .frame for the company photo mats, and an unprefixed rule
+   here was resizing all ten of them. */
+@page { size: 210mm 297mm; margin: 0; }
+html, body {
+  width: 210mm; height: 297mm;
+  margin: 0; padding: 0; background: #fff; overflow: hidden; position: relative;
+}
+.imp-slot {
+  position: absolute;
+  width: 200mm; height: 250.0000mm;
+  overflow: hidden;
+}
+.imp-frame {
+  width: 1080px; height: 1350px;
+  transform: scale(0.699913); transform-origin: top left;
+}
+.imp-frame .sheet { height: 1350px; }
+/* cut marks */
+i { position: absolute; border-left: 0.4pt solid #000; border-top: 0.4pt solid #000; }
+</style>
+</head>
+<body><div class="imp-slot" style="left:5.0000mm;top:23.5000mm"><div class="imp-frame"><div class="sheet">
+      <div class="checker"><span class="row"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="row"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+
+      <div class="body">
+        <div class="presenter">Presented by Ruh Arts Foundation</div>
+
+        <div class="lockup">
+          <div class="title">Resonance</div>
+          <div class="series">silsila</div>
+        </div>
+
+        <div class="tagline">
+          The Living Journey of South&nbsp;Asian Classical Music
+        </div>
+
+        <div class="masters">
+          <div class="card">
+            <div class="polaroid"><img src="assets/jayanta.jpg" alt="" /></div>
+            <div class="who">
+              <div class="n">Jayanta Banerjee</div>
+              <div class="i">Sitar</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="polaroid"><img src="assets/samir.jpg" alt="" /></div>
+            <div class="who">
+              <div class="n">Pt. Samir Chatterjee</div>
+              <div class="i">Tabla</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="with"><span>With</span></div>
+
+        <div class="company">
+        <div class="co">
+          <div class="frame"><img src="assets/sikandar.jpg" alt="" /></div>
+          <div class="n">Sikandar Rahman</div>
+          <div class="i">Violin</div>
+        </div>
+        <div class="co">
+          <div class="frame"><img src="assets/pranav.jpg" alt="" /></div>
+          <div class="n">Pranav Shikarpur</div>
+          <div class="i">Bansuri</div>
+        </div>
+        <div class="co">
+          <div class="frame"><img src="assets/tehreem.jpg" alt="" /></div>
+          <div class="n">Tehreem Khan</div>
+          <div class="i">Sitar</div>
+        </div>
+        <div class="co">
+          <div class="frame"><img src="assets/shiva.jpg" alt="" /></div>
+          <div class="n">Shiva Kannan</div>
+          <div class="i">Keyboard</div>
+        </div>
+        <div class="co">
+          <div class="frame"><img src="assets/aditya.jpg" alt="" /></div>
+          <div class="n">Aditya Pillai</div>
+          <div class="i">Dholak</div>
+        </div>
+      </div>
+
+      </div>
+
+      <div class="footer">
+        <div class="when">
+          <div class="day">Sunday 30 August 2026</div>
+          <div class="times">Doors 6:30 PM &nbsp;·&nbsp; Showtime 7 PM</div>
+          <div class="place">
+            Playhouse Theater, Abrons Arts Center<br />
+            466 Grand Street, New York, NY 10002
+          </div>
+        </div>
+        <div class="stub">
+          <img class="q" src="assets/qr.png" alt="Tickets" />
+          <div class="cta">Scan for tickets</div>
+        </div>
+      </div>
+    </div></div></div><i style="left:5.0mm;top:0;width:0;height:14.100mm"></i><i style="left:5.0mm;top:282.900mm;width:0;height:14.100mm"></i><i style="left:205.0mm;top:0;width:0;height:14.100mm"></i><i style="left:205.0mm;top:282.900mm;width:0;height:14.100mm"></i><i style="top:23.5mm;left:0;height:0;width:3.000mm"></i><i style="top:23.5mm;left:207.000mm;height:0;width:3.000mm"></i><i style="top:273.5mm;left:0;height:0;width:3.000mm"></i><i style="top:273.5mm;left:207.000mm;height:0;width:3.000mm"></i></body>
+</html>

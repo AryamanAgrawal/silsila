@@ -17,10 +17,10 @@ CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
 # two-up sheets for printing and cutting apart
 python3 impose.py >/dev/null
-for L in tabloid a3; do
+for L in tabloid a3 a4-2up a4-single; do
   "$CHROME" --headless --disable-gpu --no-pdf-header-footer \
     --virtual-time-budget=20000 \
-    --print-to-pdf="silsila-poster-2up-$L.pdf" "file://$PWD/imposed-$L.html" 2>/dev/null
+    --print-to-pdf="silsila-poster-$L.pdf" "file://$PWD/imposed-$L.html" 2>/dev/null
 done
 
 magick silsila-poster.png -quality 96 silsila-poster-print.jpg
