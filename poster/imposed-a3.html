@@ -75,13 +75,21 @@
       }
 
       .checker {
-        height: 26px;
         flex: none;
-        background: repeating-conic-gradient(
-            var(--ink) 0 25%,
-            transparent 0 50%
-          )
-          0 0 / 26px 26px;
+        display: flex;
+        flex-direction: column;
+      }
+      .checker .row {
+        display: flex;
+        height: 13px;
+      }
+      .checker i {
+        width: 13.5px;
+        height: 13px;
+      }
+      .checker .row:first-child i:nth-child(odd),
+      .checker .row:last-child i:nth-child(even) {
+        background: var(--ink);
       }
 
       .body {
@@ -324,7 +332,7 @@ i { position: absolute; border-left: 0.4pt solid #000; border-top: 0.4pt solid #
 </style>
 </head>
 <body><div class="imp-slot" style="left:6.0000mm;top:24.1250mm"><div class="imp-frame"><div class="sheet">
-      <div class="checker"></div>
+      <div class="checker"><span class="row"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="row"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
 
       <div class="body">
         <div class="presenter">Presented by Ruh Arts Foundation</div>
@@ -402,7 +410,7 @@ i { position: absolute; border-left: 0.4pt solid #000; border-top: 0.4pt solid #
         </div>
       </div>
     </div></div></div><div class="imp-slot" style="left:215.0000mm;top:24.1250mm"><div class="imp-frame"><div class="sheet">
-      <div class="checker"></div>
+      <div class="checker"><span class="row"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="row"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
 
       <div class="body">
         <div class="presenter">Presented by Ruh Arts Foundation</div>
