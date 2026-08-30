@@ -220,14 +220,24 @@ export const host = {
 };
 
 /**
- * The closing panel. Entries render only once they have a `url`, so the
- * section can ship before the handles are confirmed and light up as they land.
+ * The closing panel, in the order the page introduces people: the host, then
+ * the artists as the carousel runs them. Entries render only once they have a
+ * `url`, so silsila's own sits here as a placeholder until it is confirmed.
+ *
+ * The `?igsi=` parameter Instagram appends to a shared link is a per-share
+ * tracking token and is deliberately not reproduced.
  */
 export const socials: { label: string; handle: string; url: string | null }[] = [
-  { label: "Ruh Arts Foundation", handle: "", url: null },
+  { label: "Ruh Arts Foundation", handle: "@ruhartsfoundation", url: "https://www.instagram.com/ruhartsfoundation" },
   { label: "silsila", handle: "", url: null },
+  { label: "Samir Chatterjee", handle: "@samirchatterjee76", url: "https://www.instagram.com/samirchatterjee76" },
+  { label: "Chhandayan", handle: "@chhandayan", url: "https://www.instagram.com/chhandayan" },
   { label: "Jayanta Banerjee", handle: "@jayantsitar", url: "https://www.instagram.com/jayantsitar" },
-  { label: "Tehreem Khan", handle: "", url: null },
+  { label: "Tehreem Khan", handle: "@thetehreemkhan", url: "https://www.instagram.com/thetehreemkhan" },
+  { label: "Sikandar Rahman", handle: "@sikandermusic", url: "https://www.instagram.com/sikandermusic" },
+  { label: "Pranav Shikarpur", handle: "@snpranav", url: "https://www.instagram.com/snpranav" },
+  { label: "Shiva Kannan", handle: "@shivakannan", url: "https://www.instagram.com/shivakannan" },
+  { label: "Aryaman Agrawal", handle: "@itsaryamann", url: "https://www.instagram.com/itsaryamann" },
 ];
 
 export const album = {

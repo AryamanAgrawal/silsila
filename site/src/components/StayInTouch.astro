@@ -81,16 +81,23 @@ const live = socials.filter((s) => s.url);
   .handles a:hover .at {
     opacity: 1;
   }
+  /* The panel is centred, but these rows are a two-column list: without an
+     explicit alignment a name that wraps centres itself while its neighbours
+     sit flush left, and the column reads as ragged. */
   .who {
+    flex: 1;
+    text-align: left;
     font-family: var(--f-serif);
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.09em;
-    font-size: var(--t-20);
+    letter-spacing: 0.08em;
+    font-size: clamp(1rem, 4vw, 1.25rem);
   }
   .at {
+    text-align: right;
+    white-space: nowrap;
     font-size: var(--t-14);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     opacity: 0.75;
     transition: opacity 0.2s;
   }
