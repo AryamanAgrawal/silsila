@@ -255,6 +255,8 @@ export const socials: { label: string; handle: string; url: string | null }[] = 
  * once the other eight arrive.
  */
 export const thanks = {
+  /** Read out on the night. Listed as given, one name per person. */
+  presenters: ["Samar", "Anjali", "Rehma Maryam Arastu Husain", "Laila"],
   people: [
     "Aryaman Agrawal",
     "Saima Khan",

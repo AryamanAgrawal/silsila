@@ -16,7 +16,7 @@ import { asset } from "@/lib/url";
     <p class="kicker">With gratitude</p>
     <h2 class="section-title" id="thanks-h">Thank you</h2>
 
-    <p class="lede">This evening was made by many hands.</p>
+    <p class="lede">This evening was supported by many hands.</p>
 
     <ul class="orgs">
       {
@@ -31,6 +31,11 @@ import { asset } from "@/lib/url";
         ))
       }
     </ul>
+
+    <div class="people">
+      <p class="meta">Our young presenters</p>
+      <p class="names">{thanks.presenters.join(" · ")}</p>
+    </div>
 
     <div class="people">
       <p class="meta">And to</p>
@@ -84,6 +89,9 @@ import { asset } from "@/lib/url";
     margin-top: clamp(var(--s8), 5vw, var(--s12));
     border-top: 1px solid var(--hairline);
     padding-top: clamp(var(--s6), 4vw, var(--s8));
+  }
+  .people + .people {
+    margin-top: clamp(var(--s6), 4vw, var(--s8));
   }
   .names {
     margin: var(--s2) 0 0;
