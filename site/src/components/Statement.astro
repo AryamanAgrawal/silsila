@@ -9,7 +9,6 @@ import { statement, event } from "@/data/event";
     <div class="body">
       {statement.map((p) => <p class="line" data-anim="lines">{p}</p>)}
     </div>
-    <p class="signature">Curated by {event.curator}</p>
   </div>
 </section>
 
@@ -28,12 +27,5 @@ import { statement, event } from "@/data/event";
   }
   .line:last-child {
     margin-bottom: 0;
-  }
-  .signature {
-    font-family: var(--f-sign);
-    font-size: var(--t-31);
-    color: var(--plaster);
-    margin: var(--s12) 0 0;
-    line-height: 1;
   }
 </style>
