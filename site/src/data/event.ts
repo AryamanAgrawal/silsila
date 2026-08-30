@@ -3,15 +3,27 @@
  *
  * The date is Sunday 30 August 2026, confirmed. The poster's "Saturday" is a
  * typo and is not reproduced anywhere on this site: the weekday is derived
- * from `date` below, which the hero, marquee, schema.org markup and the .ics
- * file all read from.
+ * from `date` below, which the hero, marquee and schema.org markup all read
+ * from.
+ *
+ * This site is a program, not a box office. The link is handed to people to
+ * read on a phone, so the run of show and the artists carry the page; the
+ * ticket link survives only as one row in the venue table.
  */
 
 export const event = {
   title: "Resonance",
   series: "silsila",
   tagline: "The Living Journey of South Asian Classical Music",
-  presentedBy: "Tehreem Khan",
+
+  host: {
+    name: "Ruh Arts Foundation",
+    short: "Ruh Arts",
+    mark: "/assets/motif/ruh-mark.png",
+    lockup: "/assets/motif/ruh-lockup.png",
+  },
+
+  curator: "Tehreem Khan",
 
   date: "2026-08-30",
   doors: "18:30",
@@ -35,7 +47,7 @@ export const event = {
     phone: "516-507-2335",
   },
 
-  /** Set `url` once ticketing is live; until then the section renders the enquiry state. */
+  /** Kept as a venue row. The page no longer sells; it explains. */
   tickets: {
     url: "https://abronsartscenter.app.getcuebox.com/o/C5XTY485/shows/F5YXT2PK",
     note: "Tickets via Abrons Arts Center",
@@ -47,14 +59,15 @@ export type Artist = {
   name: string;
   honorific?: string;
   instrument: string;
-  photo: string;
+  /** `null` renders the polaroid's holding frame instead of a portrait. */
+  photo: string | null;
   /** Paragraphs. `null` where no bio has been supplied yet. */
   bio: string[] | null;
   press?: { quote: string; source: string }[];
   links?: { label: string; url: string }[];
 };
 
-/** Wall order. The artists section lays these out 2 / 2 / 3, in this order. */
+/** Carousel order. The strip and its bio panel both read from this array. */
 export const artists: Artist[] = [
   {
     slug: "jayanta-banerjee",
@@ -104,7 +117,10 @@ export const artists: Artist[] = [
     name: "Tehreem Khan",
     instrument: "Sitar",
     photo: "/assets/artists/tehreem.jpg",
-    bio: null,
+    bio: [
+      "Tehreem Khan is a Pakistani-New York\u2013based artist exploring the interwoven traditions of South Asian classical music and movement arts. She studies South Asian classical vocal music, primarily in the Khayal tradition, within the Saami family lineage, engaging deeply with its distinctive, spiritually expansive approach to sound and intonation, alongside sitar with Jayanta Banerjee and Kathak with Nighat Chaudhry.",
+      "Alongside her artistic practice, Tehreem is a cybersecurity engineer \u2014 a dual path that shapes her disciplined, curious approach to both technology and the classical arts. Her work is guided by a commitment to honoring, preserving, and sharing the teachings of her Ustaads with wider global audiences. Her practice is rooted in rigorous classical study while seeking a contemporary voice, threading melody, rhythm, and movement into a practice that reflects the fluid, borderless spirit of South Asian arts. At the heart of her work is a desire to experience the purity of sur and the spiritual essence of music, and to share that experience with her audience.",
+    ],
   },
   {
     slug: "sikandar-rahman",
@@ -128,10 +144,10 @@ export const artists: Artist[] = [
     bio: null,
   },
   {
-    slug: "aditya-pillai",
-    name: "Aditya Pillai",
-    instrument: "Dholak",
-    photo: "/assets/artists/aditya.jpg",
+    slug: "aryaman-agrawal",
+    name: "Aryaman Agrawal",
+    instrument: "Harmonium",
+    photo: "/assets/artists/aryaman.jpg",
     bio: null,
   },
 ];
@@ -168,7 +184,7 @@ export const runOfShow = [
   {
     title: "A Dialogue Between East and West",
     performers: "Composed by Jayanta Banerjee",
-    body: "A collaborative finale joined by Sikandar Rahman on violin, Pranav Shikarpur on bansuri, Shiva Kannan on keyboard, and Aditya Pillai on dholak, where distinct musical voices meet with mutual respect, curiosity, and shared expression.",
+    body: "A collaborative finale joined by Sikandar Rahman on violin, Pranav Shikarpur on bansuri, Shiva Kannan on keyboard, and Aryaman Agrawal on harmonium, where distinct musical voices meet with mutual respect, curiosity, and shared expression.",
     kicker: "Finale",
     feature: true,
   },
@@ -177,6 +193,29 @@ export const runOfShow = [
 export const statement = [
   "Silsila means continuation, the unbroken line through which South Asian classical music has passed from one generation to the next, each note carrying the wisdom of the past while opening space for new expression.",
   "Resonance is the lingering voice of the sitar: the way a note keeps sounding long after it is struck, connecting artists, traditions, and audiences across time.",
+];
+
+/**
+ * The host. Sits beside `statement` on the page: silsila is continuation stated
+ * as poetry, this is the same idea stated as purpose.
+ */
+export const host = {
+  name: "Ruh Arts Foundation",
+  status: "501(c)(3) nonprofit",
+  bio: [
+    "Ruh Arts Foundation is a 501(c)(3) nonprofit dedicated to honoring and safeguarding the Subcontinent\u2019s classical arts. We cultivate artist-led, community-oriented spaces where mastery, ancestral knowledge, rigorous practice, and thoughtful evolution converge \u2014 ensuring these endangered traditions endure for generations to come.",
+  ],
+};
+
+/**
+ * The closing panel. Entries render only once they have a `url`, so the
+ * section can ship before the handles are confirmed and light up as they land.
+ */
+export const socials: { label: string; handle: string; url: string | null }[] = [
+  { label: "Ruh Arts Foundation", handle: "", url: null },
+  { label: "silsila", handle: "", url: null },
+  { label: "Jayanta Banerjee", handle: "@jayantsitar", url: "https://www.instagram.com/jayantsitar" },
+  { label: "Tehreem Khan", handle: "", url: null },
 ];
 
 export const album = {

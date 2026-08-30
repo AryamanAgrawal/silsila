@@ -1,0 +1,108 @@
+---
+import { socials, event } from "@/data/event";
+
+/**
+ * Replaces the ticket panel. Same full-bleed sindoor beat — it is the only
+ * saturated red moment in the scroll — with the job changed from selling a
+ * seat to keeping the room.
+ *
+ * Entries without a `url` are not rendered, so this ships before the handles
+ * are confirmed and fills in as they arrive.
+ */
+const live = socials.filter((s) => s.url);
+---
+
+<section class="field--sindoor section touch" id="touch" aria-labelledby="touch-h">
+  <div class="wrap">
+    <h2 class="big" id="touch-h">Stay</h2>
+    <p class="line">Follow the silsila</p>
+
+    {
+      live.length > 0 && (
+        <ul class="handles">
+          {live.map((s) => (
+            <li>
+              <a href={s.url!} target="_blank" rel="noopener noreferrer">
+                <span class="who">{s.label}</span>
+                {s.handle && <span class="at">{s.handle}</span>}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <p class="note">
+      Or write to us at <a href={`mailto:${event.contact.email}`}>{event.contact.email}</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .touch {
+    text-align: center;
+  }
+  .big {
+    font-family: var(--f-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(4rem, 20vw, 15rem);
+    line-height: 0.8;
+    letter-spacing: -0.015em;
+    margin: 0;
+  }
+  .line {
+    font-family: var(--f-sign);
+    font-size: var(--t-31);
+    line-height: 1;
+    margin: var(--s4) 0 var(--s12);
+  }
+
+  .handles {
+    list-style: none;
+    margin: 0 auto var(--s12);
+    padding: 0;
+    display: grid;
+    gap: var(--s3);
+    max-width: 46ch;
+  }
+  .handles a {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s4);
+    padding: var(--s3) 0;
+    border-bottom: 1px solid var(--hairline);
+    text-decoration: none;
+    color: inherit;
+  }
+  .handles a:hover .at {
+    opacity: 1;
+  }
+  .who {
+    font-family: var(--f-serif);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    font-size: var(--t-20);
+  }
+  .at {
+    font-size: var(--t-14);
+    letter-spacing: 0.08em;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+  }
+
+  .note {
+    font-size: var(--t-12);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin: 0;
+  }
+  .note a {
+    color: inherit;
+    border-bottom: 1px solid currentColor;
+    text-decoration: none;
+  }
+</style>

@@ -124,7 +124,11 @@ a {
   padding-inline: var(--gutter);
 }
 .section {
-  padding-block: clamp(var(--s24), 12vw, var(--s48));
+  /* The small end is 64px, not 96: on a phone this page is read in one sitting
+     and nine sections of desktop padding cost the reader two screens of
+     nothing. Above ~530px the vw term takes over and the desktop rhythm is
+     unchanged. */
+  padding-block: clamp(var(--s16), 12vw, var(--s48));
 }
 
 /* ── shared type ──────────────────────────────────────────── */
@@ -240,7 +244,10 @@ a {
 /* ── polaroid ─────────────────────────────────────────────── */
 .polaroid {
   background: #fbfaf8;
-  padding: 12px 12px 46px;
+  /* The bottom band holds a two-line name. Cards narrow as the wall packs
+     seven across, and "Samir Chatterjee" stops fitting on one line well before
+     the smallest card size — at 46px the second line rode up over the photo. */
+  padding: 12px 12px 72px;
   position: relative;
   box-shadow:
     0 14px 34px rgba(0, 0, 0, 0.34),
@@ -266,11 +273,12 @@ a {
   font-family: var(--f-serif);
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.07em;
   font-size: var(--t-14);
   color: var(--plaster);
-  line-height: 1.1;
+  line-height: 1.05;
   display: block;
+  text-wrap: balance;
 }
 .polaroid .p-inst {
   font-family: var(--f-sign);

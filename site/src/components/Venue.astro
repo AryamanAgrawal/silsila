@@ -26,6 +26,14 @@ import { asset } from "@/lib/url";
           <dd>{event.venue.trains.join(" · ")}</dd>
         </div>
         <div>
+          <dt>Tickets</dt>
+          <dd>
+            <a href={event.tickets.url} target="_blank" rel="noopener noreferrer">
+              {event.tickets.note}
+            </a>
+          </dd>
+        </div>
+        <div>
           <dt>Enquiries</dt>
           <dd>
             <a href={`mailto:${event.contact.email}`}>{event.contact.email}</a>

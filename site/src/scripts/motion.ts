@@ -220,51 +220,179 @@ function magnetic() {
   });
 }
 
-/* ── 08 Bio disclosures: animate the height instead of snapping ─── */
-function disclosures() {
-  document.querySelectorAll<HTMLDetailsElement>("details.bio").forEach((d) => {
-    const summary = d.querySelector("summary");
-    const body = d.querySelector<HTMLElement>(".b-body");
-    if (!summary || !body) return;
-    let animating = false;
+/* ── 08 Artist carousel: strip picks the panel ───────────── */
+/**
+ * Runs whether or not motion is reduced — it is navigation, not decoration.
+ * The server ships every panel visible; the first thing this does is hide the
+ * inactive ones, so a failed boot leaves a readable page rather than an empty
+ * one.
+ */
+function carousel() {
+  const section = document.querySelector<HTMLElement>(".artists");
+  const scroller = section?.querySelector<HTMLElement>("[data-strip]");
+  const panels = section?.querySelector<HTMLElement>("[data-panels]");
+  if (!section || !scroller || !panels) return;
 
-    summary.addEventListener("click", (e) => {
-      e.preventDefault();
-      if (animating) return;
-      animating = true;
-      const done = () => {
-        gsap.set(body, { clearProps: "height,opacity,overflow" });
-        animating = false;
-      };
+  const tabs = Array.from(section.querySelectorAll<HTMLButtonElement>("[data-pick]"));
+  const dots = Array.from(section.querySelectorAll<HTMLElement>("[data-dot]"));
+  if (!tabs.length) return;
 
-      if (d.open) {
-        gsap.to(body, {
-          height: 0,
-          opacity: 0,
-          overflow: "hidden",
-          duration: 0.34,
-          ease: "power2.inOut",
-          onComplete: () => {
-            d.open = false;
-            done();
-          },
-        });
-      } else {
-        d.open = true;
+  let current = tabs.findIndex((t) => t.getAttribute("aria-selected") === "true");
+  if (current < 0) current = 0;
+
+  const panelFor = (slug: string) =>
+    panels.querySelector<HTMLElement>(`[data-panel="${slug}"]`);
+
+  const paint = (next: number, { scroll = true, focus = false } = {}) => {
+    const tab = tabs[next];
+    const slug = tab.dataset.pick!;
+    const panel = panelFor(slug);
+    if (!panel) return;
+
+    const outgoing = panels.querySelector<HTMLElement>('[data-panel][data-active="true"]');
+    const changed = outgoing !== panel;
+
+    tabs.forEach((t, i) => {
+      t.setAttribute("aria-selected", String(i === next));
+      t.tabIndex = i === next ? 0 : -1;
+    });
+    dots.forEach((d, i) => d.toggleAttribute("data-on", i === next));
+
+    if (changed) {
+      if (outgoing) outgoing.dataset.active = "false";
+      panel.dataset.active = "true";
+      if (!reduced) {
         gsap.fromTo(
-          body,
-          { height: 0, opacity: 0, overflow: "hidden" },
-          { height: "auto", opacity: 1, duration: 0.42, ease: "power2.out", onComplete: done },
+          panel,
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.32, ease: SETTLE },
         );
       }
-    });
+    }
+
+    if (scroll) {
+      tab.scrollIntoView({
+        behavior: reduced ? "auto" : "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+    if (focus) tab.focus({ preventScroll: true });
+    current = next;
+  };
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener("click", () => paint(i));
   });
+
+  section.addEventListener("keydown", (e) => {
+    const key = (e as KeyboardEvent).key;
+    const delta = key === "ArrowRight" ? 1 : key === "ArrowLeft" ? -1 : 0;
+    if (delta) {
+      e.preventDefault();
+      paint((current + delta + tabs.length) % tabs.length, { focus: true });
+      return;
+    }
+    if (key === "Home" || key === "End") {
+      e.preventDefault();
+      paint(key === "Home" ? 0 : tabs.length - 1, { focus: true });
+    }
+  });
+
+  /* A swipe should select what it lands on, without fighting the smooth
+     scroll that selecting a card starts. */
+  let idle: number;
+  scroller.addEventListener(
+    "scroll",
+    () => {
+      window.clearTimeout(idle);
+      idle = window.setTimeout(() => {
+        const mid = scroller.getBoundingClientRect().left + scroller.clientWidth / 2;
+        let best = current;
+        let bestDist = Infinity;
+        tabs.forEach((t, i) => {
+          const r = t.getBoundingClientRect();
+          const d = Math.abs(r.left + r.width / 2 - mid);
+          if (d < bestDist) {
+            bestDist = d;
+            best = i;
+          }
+        });
+        if (best !== current) paint(best, { scroll: false });
+      }, 90);
+    },
+    { passive: true },
+  );
+
+  paint(current, { scroll: false });
+}
+
+/* ── 09 Program nav: reveal past the hero, mark the section ─ */
+/**
+ * Also unconditional. `hidden` comes off only here, so a page with no JS never
+ * shows a bar that cannot track anything.
+ */
+function programNav() {
+  const bar = document.querySelector<HTMLElement>("[data-nav]");
+  const hero = document.querySelector<HTMLElement>(".hero");
+  if (!bar || !hero) return;
+
+  const links = Array.from(bar.querySelectorAll<HTMLAnchorElement>("[data-nav-link]"));
+  const sections = links
+    .map((l) => document.getElementById(l.dataset.navLink!))
+    .filter((el): el is HTMLElement => Boolean(el));
+
+  bar.hidden = false;
+  gsap.set(bar, { yPercent: -100 });
+
+  let shown = false;
+  const show = (next: boolean) => {
+    if (next === shown) return;
+    shown = next;
+    gsap.to(bar, {
+      yPercent: next ? 0 : -100,
+      duration: reduced ? 0 : 0.42,
+      ease: "power3.out",
+    });
+  };
+
+  new IntersectionObserver(
+    ([entry]) => show(!entry.isIntersecting),
+    { rootMargin: "-70px 0px 0px 0px" },
+  ).observe(hero);
+
+  /* Marks the section whose top most recently passed under the bar. */
+  const mark = () => {
+    const line = bar.offsetHeight + 12;
+    let active = -1;
+    sections.forEach((sec, i) => {
+      if (sec.getBoundingClientRect().top <= line) active = i;
+    });
+    links.forEach((l, i) => l.toggleAttribute("data-on", i === active));
+  };
+
+  mark();
+  window.addEventListener("scroll", mark, { passive: true });
+
+  /* The bar's own height is the correct scroll offset for its anchors. */
+  const setPad = () =>
+    document.documentElement.style.setProperty(
+      "scroll-padding-top",
+      `${bar.offsetHeight + 12}px`,
+    );
+  setPad();
+  window.addEventListener("resize", setPad, { passive: true });
 }
 
 /* ── boot ────────────────────────────────────────────────── */
 function boot() {
+  // Navigation first, and unconditionally: the carousel and the nav are how the
+  // page is read, not how it is decorated.
+  carousel();
+  programNav();
+
   if (reduced) {
-    // Everything is already in its resting state; only the marquees are
+    // Everything else is already in its resting state; only the marquees are
     // suppressed, so the page reads as a plain document.
     return;
   }
@@ -275,7 +403,6 @@ function boot() {
   polaroids();
   marquees();
   magnetic();
-  disclosures();
 }
 
 if (document.fonts?.ready) {

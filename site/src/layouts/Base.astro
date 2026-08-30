@@ -61,16 +61,7 @@ const schema = {
     },
   },
   performer: artists.map((a) => ({ "@type": "Person", name: a.name })),
-  organizer: { "@type": "Person", name: event.presentedBy },
-  ...(event.tickets.url
-    ? {
-        offers: {
-          "@type": "Offer",
-          url: event.tickets.url,
-          availability: "https://schema.org/InStock",
-        },
-      }
-    : {}),
+  organizer: { "@type": "Organization", name: event.host.name },
 };
 ---
 
@@ -101,6 +92,9 @@ const schema = {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
   <body>
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
     <a class="skip" href="#main">Skip to content</a>
     <slot />
   </body>

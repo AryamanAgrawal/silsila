@@ -1,35 +1,73 @@
 ---
-import { event, addressLine, formatted } from "@/data/event";
+import { event, host, formatted, addressLine } from "@/data/event";
+import { asset } from "@/lib/url";
+
+/**
+ * A colophon that also carries the practical detail. The venue section is
+ * currently off the page, and without these lines the program never says where
+ * to go — so address, subway and tickets live here until it returns.
+ */
 ---
 
 <footer class="field field--bone footer">
   <div class="wrap">
     <div class="grid">
-      <div>
+      <div class="brand">
         <p class="mark">{event.series}</p>
         <p class="sub">{event.title}</p>
+        <p class="when">
+          {formatted.weekday} {formatted.dayNumber} {formatted.month} {formatted.year}
+          · {event.venue.name}
+        </p>
       </div>
 
-      <dl class="cols">
-        <div>
-          <dt>When</dt>
-          <dd>{formatted.weekday} {formatted.dayNumber} {formatted.month} {formatted.year}</dd>
-          <dd>Doors {formatted.doors} · Curtain {formatted.showtime}</dd>
-        </div>
-        <div>
-          <dt>Where</dt>
-          <dd>{event.venue.name}, {event.venue.room}</dd>
-          <dd>{addressLine}</dd>
-        </div>
-        <div>
-          <dt>Contact</dt>
-          <dd><a href={`mailto:${event.contact.email}`}>{event.contact.email}</a></dd>
-          <dd><a href={`tel:${event.contact.phone.replace(/\D/g, "")}`}>{event.contact.phone}</a></dd>
-        </div>
-      </dl>
+      <div class="where">
+        <dl>
+          <div>
+            <dt>Where</dt>
+            <dd>{event.venue.name}, {event.venue.room}</dd>
+            <dd>
+              <a href={event.venue.mapsUrl} target="_blank" rel="noopener noreferrer">
+                {addressLine}
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt>Subway</dt>
+            <dd>{event.venue.trains.join(" · ")}</dd>
+          </div>
+          <div>
+            <dt>Tickets</dt>
+            <dd>
+              <a href={event.tickets.url} target="_blank" rel="noopener noreferrer">
+                {event.tickets.note}
+              </a>
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="host">
+        <img
+          src={asset(event.host.lockup)}
+          alt={event.host.name}
+          width="1400"
+          height="1186"
+          loading="lazy"
+        />
+        <p class="presented">Presented by {event.host.name}</p>
+        <p class="status">{host.status}</p>
+      </div>
     </div>
 
-    <p class="credit">Presented by {event.presentedBy}</p>
+    <div class="foot">
+      <p class="credit">Curated by {event.curator}</p>
+      <p class="questions">
+        Questions on the night —
+        <a href={`mailto:${event.contact.email}`}>{event.contact.email}</a>
+        <a href={`tel:${event.contact.phone.replace(/\D/g, "")}`}>{event.contact.phone}</a>
+      </p>
+    </div>
   </div>
   <div class="checker"></div>
 </footer>
@@ -40,14 +78,37 @@ import { event, addressLine, formatted } from "@/data/event";
   }
   .grid {
     display: grid;
-    grid-template-columns: auto 1fr;
-    gap: clamp(var(--s8), 6vw, var(--s24));
+    grid-template-columns: 1fr;
+    gap: clamp(var(--s8), 6vw, var(--s16));
     align-items: start;
   }
-  @media (max-width: 780px) {
+  @media (min-width: 720px) {
     .grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: auto 1fr auto;
+      gap: clamp(var(--s8), 6vw, var(--s24));
     }
+  }
+
+  .where dl {
+    margin: 0;
+    display: grid;
+    gap: var(--s4);
+  }
+  .where dt {
+    font-size: var(--t-12);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ash);
+    margin-bottom: 2px;
+  }
+  .where dd {
+    margin: 0;
+    font-size: var(--t-14);
+  }
+  .where a {
+    color: var(--sindoor);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
   }
 
   .mark {
@@ -65,35 +126,59 @@ import { event, addressLine, formatted } from "@/data/event";
     color: var(--sindoor);
     margin: 0;
   }
-
-  .cols {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: var(--s6);
-    margin: 0;
-  }
-  .cols dt {
+  .when {
     font-size: var(--t-12);
-    letter-spacing: 0.16em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--ash);
-    margin-bottom: var(--s2);
-  }
-  .cols dd {
-    margin: 0 0 4px;
-    font-size: var(--t-14);
-  }
-  .cols a {
-    color: var(--sindoor);
-    text-decoration: none;
-    border-bottom: 1px solid currentColor;
+    margin: var(--s3) 0 0;
   }
 
+  .host img {
+    width: 96px;
+    height: auto;
+  }
+  .presented {
+    font-size: var(--t-12);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin: var(--s3) 0 0;
+  }
+  .status {
+    font-size: var(--t-12);
+    letter-spacing: 0.1em;
+    color: var(--ash);
+    margin: 2px 0 0;
+  }
+
+  .foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s6);
+    margin: clamp(var(--s12), 6vw, var(--s16)) 0 clamp(var(--s12), 6vw, var(--s16));
+  }
   .credit {
     font-family: var(--f-sign);
     font-size: var(--t-25);
     color: var(--plaster);
-    margin: clamp(var(--s12), 6vw, var(--s16)) 0 clamp(var(--s12), 6vw, var(--s16));
+    margin: 0;
     line-height: 1;
+  }
+  .questions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s3);
+    font-size: var(--t-12);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ash);
+    margin: 0;
+  }
+  .questions a {
+    color: var(--sindoor);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
   }
 </style>

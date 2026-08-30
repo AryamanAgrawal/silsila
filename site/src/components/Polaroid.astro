@@ -17,6 +17,12 @@ const tapeRot = (((seed * 53) % 200) / 10 - 10).toFixed(2);
 const tapeSide = seed % 2 === 0 ? "left" : "right";
 const tape = TAPES[seed % TAPES.length];
 const tapeOffset = 10 + ((seed * 7) % 26);
+
+/** Stands in until a portrait arrives. */
+const initials = artist.name
+  .split(" ")
+  .map((w) => w[0])
+  .join("");
 ---
 
 <figure
@@ -33,14 +39,22 @@ const tapeOffset = 10 + ((seed * 7) % 26);
     style={`${tapeSide}:${tapeOffset}px; transform:rotate(${tapeRot}deg);`}
   />
   <div class="polaroid">
-    <img
-      src={asset(artist.photo)}
-      alt={`${artist.name}, ${artist.instrument.toLowerCase()}`}
-      width="720"
-      height="900"
-      loading="lazy"
-      decoding="async"
-    />
+    {
+      artist.photo ? (
+        <img
+          src={asset(artist.photo)}
+          alt={`${artist.name}, ${artist.instrument.toLowerCase()}`}
+          width="720"
+          height="900"
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <div class="holding" aria-label={`Portrait of ${artist.name} to come`}>
+          <span>{initials}</span>
+        </div>
+      )
+    }
     <figcaption>
       <span class="p-name">{artist.name}</span>
       <span class="p-inst">{artist.instrument}</span>
@@ -59,5 +73,22 @@ const tapeOffset = 10 + ((seed * 7) % 26);
   .tape {
     top: -14px;
     width: clamp(80px, 52%, 124px);
+  }
+
+  /* Reads as an empty frame on the wall rather than a broken image. */
+  .holding {
+    aspect-ratio: 4 / 5;
+    display: grid;
+    place-items: center;
+    background: var(--kraft);
+    background-image: url("/silsila/assets/texture/paper-grain.jpg");
+    background-size: 300px;
+    background-blend-mode: overlay;
+  }
+  .holding span {
+    font-family: var(--f-serif);
+    font-size: clamp(1.6rem, 5vw, 2.6rem);
+    letter-spacing: 0.12em;
+    color: rgba(23, 23, 23, 0.34);
   }
 </style>

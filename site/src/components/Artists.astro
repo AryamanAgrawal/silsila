@@ -3,163 +3,264 @@ import { artists } from "@/data/event";
 import Polaroid from "./Polaroid.astro";
 
 /**
- * The wall is laid out 2 / 2 / 3, stepping down in size so billing reads off
- * the arrangement. Cards fill from `artists` in order, so reordering that array
- * reorders the wall.
+ * A snap strip of polaroids over one bio panel, so a face and the words about
+ * it are never more than a thumb apart. On a phone the strip scrolls and the
+ * next card peeks in at the edge; past 900px all seven fit at once and it
+ * reads as the wall it used to be.
+ *
+ * Every panel is rendered and visible on the server. `motion.ts` is what hides
+ * the inactive ones, so with no JS the section degrades to a strip of
+ * photographs above every bio in order.
  */
-const SHAPE = [
-  { count: 2, width: 320 },
-  { count: 2, width: 250 },
-  { count: 3, width: 206 },
-];
-
-let cursor = 0;
-const rows = SHAPE.map(({ count, width }) => {
-  const members = artists.slice(cursor, cursor + count);
-  const offset = cursor;
-  cursor += count;
-  return { members, width, offset };
-});
+const CARD = 210;
 ---
 
 <section class="field field--plaster section artists" id="artists" aria-labelledby="artists-h">
   <div class="wrap">
     <p class="kicker">On stage</p>
     <h2 class="section-title" id="artists-h">The artists</h2>
+    <p class="lede">Seven musicians. Tap a photograph.</p>
+  </div>
 
-    {
-      rows.map((row) => (
-        <div class="wall">
-          {row.members.map((a, i) => (
-            <Polaroid artist={a} width={row.width} seed={row.offset + i + 1} />
-          ))}
-        </div>
-      ))
-    }
-
-    <div class="bios">
+  <div class="strip-scroll" data-strip>
+    <ul class="strip" role="tablist" aria-label="The artists">
       {
-        artists
-          .filter((a) => a.bio)
-          .map((a) => (
-            <details class="bio">
-              <summary>
-                <span class="b-name">
-                  {a.honorific && <em>{a.honorific}</em>}
-                  {a.name}
-                </span>
-                <span class="b-inst">{a.instrument}</span>
-                <span class="b-more" aria-hidden="true" />
-              </summary>
-              <div class="b-body">
-                {a.bio!.map((p) => (
-                  <p>{p}</p>
+        artists.map((a, i) => (
+          <li class="slot">
+            <button
+              class="pick"
+              role="tab"
+              type="button"
+              id={`tab-${a.slug}`}
+              aria-controls={`panel-${a.slug}`}
+              aria-selected={i === 0 ? "true" : "false"}
+              tabindex={i === 0 ? 0 : -1}
+              data-pick={a.slug}
+            >
+              <Polaroid artist={a} width={CARD} seed={i + 1} />
+            </button>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div class="wrap">
+    <ol class="dots" data-dots aria-hidden="true">
+      {artists.map((a) => <li data-dot={a.slug} />)}
+    </ol>
+
+    <div class="panels" data-panels>
+      {
+        artists.map((a, i) => (
+          <article
+            class="panel"
+            role="tabpanel"
+            id={`panel-${a.slug}`}
+            aria-labelledby={`tab-${a.slug}`}
+            data-panel={a.slug}
+            data-active={i === 0 ? "true" : "false"}
+          >
+            <header class="p-head">
+              <h3 class="p-name">
+                {a.honorific && <em>{a.honorific}</em>}
+                {a.name}
+              </h3>
+              <p class="p-inst">{a.instrument}</p>
+            </header>
+
+            {a.bio ? (
+              a.bio.map((para) => <p class="p-text">{para}</p>)
+            ) : (
+              <p class="p-pending">A note on {a.name.split(" ")[0]} is on its way.</p>
+            )}
+
+            {a.press && (
+              <ul class="press">
+                {a.press.map((q) => (
+                  <li>
+                    <blockquote>{q.quote}</blockquote>
+                    <cite>{q.source}</cite>
+                  </li>
                 ))}
-                {a.press && (
-                  <ul class="press">
-                    {a.press.map((q) => (
-                      <li>
-                        <blockquote>{q.quote}</blockquote>
-                        <cite>{q.source}</cite>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                {a.links && (
-                  <p class="b-links">
-                    {a.links.map((l) => (
-                      <a href={l.url} target="_blank" rel="noopener noreferrer">
-                        {l.label}
-                      </a>
-                    ))}
-                  </p>
-                )}
-              </div>
-            </details>
-          ))
+              </ul>
+            )}
+
+            {a.links && (
+              <p class="p-links">
+                {a.links.map((l) => (
+                  <a href={l.url} target="_blank" rel="noopener noreferrer">
+                    {l.label}
+                  </a>
+                ))}
+              </p>
+            )}
+          </article>
+        ))
       }
     </div>
   </div>
 </section>
 
 <style>
-  .wall {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    gap: clamp(var(--s8), 5vw, var(--s24)) clamp(var(--s6), 4vw, var(--s16));
-  }
-  .wall + .wall {
-    margin-top: clamp(var(--s8), 5vw, var(--s16));
-  }
-  .wall:first-of-type {
-    margin-top: clamp(var(--s12), 6vw, var(--s16));
+  .artists .lede {
+    margin-top: var(--s3);
   }
 
-  .bios {
-    max-width: 74ch;
-    margin: clamp(var(--s24), 9vw, var(--s32)) auto 0;
-    border-top: 1px solid var(--hairline);
+  /* Full-bleed so cards can run to the screen edge and read as scrollable. */
+  .strip-scroll {
+    margin-top: clamp(var(--s12), 6vw, var(--s16));
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
   }
-  .bio {
-    border-bottom: 1px solid var(--hairline);
-  }
-  .bio summary {
-    display: flex;
-    align-items: baseline;
-    gap: var(--s4);
-    padding: var(--s6) 0;
-    cursor: pointer;
-    list-style: none;
-  }
-  .bio summary::-webkit-details-marker {
+  .strip-scroll::-webkit-scrollbar {
     display: none;
   }
-  .b-name {
+
+  .strip {
+    --strip-gap: clamp(var(--s6), 4vw, var(--s12));
+    display: flex;
+    align-items: flex-start;
+    gap: var(--strip-gap);
+    list-style: none;
+    margin: 0;
+    /* The tape sits above the card and the cards are tilted, so the strip
+       needs headroom and side room or both get clipped by the scroller. */
+    padding: 26px var(--gutter) var(--s8);
+    width: max-content;
+    min-width: 100%;
+    justify-content: center;
+  }
+  .slot {
+    scroll-snap-align: center;
+    flex: none;
+  }
+
+  /* Past 900px the strip stops being a strip: the cards give up whatever width
+     is needed for all seven to stand on screen together, so the section reads
+     as the wall it replaced and the scroll affordance is never offered where
+     there is nothing to scroll. Capped at the mobile size so it never inflates
+     on a very wide display. */
+  @media (min-width: 900px) {
+    .strip {
+      --strip-gap: var(--s4);
+    }
+    .slot :global(.card) {
+      width: min(210px, calc((100vw - 2 * var(--gutter) - 6 * var(--strip-gap)) / 7));
+    }
+  }
+
+  .pick {
+    display: block;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      transform 0.4s cubic-bezier(0.33, 1, 0.68, 1),
+      opacity 0.4s;
+  }
+  /* Unpicked cards sit back a step. Held at 0.82 because the polaroid's white
+     border blends toward the plaster underneath it, and much below this the
+     card reads as pink rather than as unselected. Scale carries the rest. */
+  .pick[aria-selected="false"] {
+    opacity: 0.82;
+    transform: scale(0.92);
+  }
+  .pick[aria-selected="true"] {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .pick:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 6px;
+  }
+
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+    list-style: none;
+    margin: 0 0 clamp(var(--s8), 5vw, var(--s12));
+    padding: 0;
+  }
+  .dots li {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--hairline);
+    transition:
+      background-color 0.3s,
+      transform 0.3s;
+  }
+  .dots li[data-on] {
+    background: var(--strong);
+    transform: scale(1.35);
+  }
+  @media (min-width: 900px) {
+    .dots {
+      display: none;
+    }
+  }
+
+  .panels {
+    max-width: 66ch;
+    margin-inline: auto;
+    border-top: 1px solid var(--hairline);
+    padding-top: clamp(var(--s6), 4vw, var(--s8));
+    /* Holds the floor steady so switching between a three-paragraph bio and a
+       one-line placeholder does not bounce the page under the reader. */
+    min-height: 20rem;
+  }
+  .panel[data-active="false"] {
+    display: none;
+  }
+
+  .p-head {
+    margin-bottom: var(--s4);
+  }
+  .p-name {
     font-family: var(--f-serif);
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.09em;
-    font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+    font-size: clamp(1.35rem, 4vw, 2rem);
+    line-height: 1.1;
     color: var(--strong);
+    margin: 0;
   }
-  .b-name em {
+  .p-name em {
     font-style: normal;
     color: var(--muted);
     margin-right: 0.45em;
-    font-size: 0.72em;
+    font-size: 0.68em;
   }
-  .b-inst {
+  .p-inst {
     font-family: var(--f-sign);
-    font-size: var(--t-20);
-    color: var(--muted);
-  }
-  .b-more {
-    margin-left: auto;
-    width: 13px;
-    height: 13px;
-    border-right: 2px solid var(--accent);
-    border-bottom: 2px solid var(--accent);
-    transform-origin: center;
-    transform: translateY(-4px) rotate(45deg);
-    transition: transform 0.34s cubic-bezier(0.33, 1, 0.68, 1);
-    flex: none;
-  }
-  .bio[open] .b-more {
-    transform: translateY(1px) rotate(-135deg);
+    font-size: var(--t-25);
+    color: var(--accent);
+    line-height: 1;
+    margin: 4px 0 0;
   }
 
-  .b-body {
-    padding-bottom: var(--s8);
-    max-width: var(--measure);
-  }
-  .bio summary {
-    -webkit-tap-highlight-color: transparent;
-  }
-  .b-body p {
+  .p-text {
     margin: 0 0 var(--s4);
   }
+  .p-pending {
+    font-family: var(--f-serif);
+    font-style: italic;
+    font-size: var(--t-20);
+    color: var(--muted);
+    margin: 0;
+  }
+
   .press {
     list-style: none;
     margin: var(--s6) 0 0;
@@ -182,12 +283,14 @@ const rows = SHAPE.map(({ count, width }) => {
     text-transform: uppercase;
     color: var(--muted);
   }
-  .b-links {
+
+  .p-links {
     display: flex;
+    flex-wrap: wrap;
     gap: var(--s4);
     margin: var(--s6) 0 0;
   }
-  .b-links a {
+  .p-links a {
     font-size: var(--t-12);
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -195,5 +298,22 @@ const rows = SHAPE.map(({ count, width }) => {
     text-decoration: none;
     border-bottom: 1px solid currentColor;
     padding-bottom: 2px;
+  }
+
+  /* No JS: the strip is still a strip, and every bio is simply on the page. */
+  :global(html:not(.js)) .panel[data-active="false"] {
+    display: block;
+  }
+  :global(html:not(.js)) .panels .panel + .panel {
+    margin-top: var(--s8);
+    border-top: 1px solid var(--hairline);
+    padding-top: var(--s8);
+  }
+  :global(html:not(.js)) .pick[aria-selected="false"] {
+    opacity: 1;
+    transform: none;
+  }
+  :global(html:not(.js)) .dots {
+    display: none;
   }
 </style>
