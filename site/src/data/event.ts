@@ -245,8 +245,14 @@ export const socials: { label: string; handle: string; url: string | null }[] = 
 
 /**
  * The gratitude wall. `logo` is a path under `public/assets/support/`; entries
- * without one set their name instead, so the section ships before the artwork
- * arrives and each logo drops in as a one-line change.
+ * without one set their name instead.
+ *
+ * All eleven are on names deliberately. Three logos are already sitting in
+ * that folder — Chhandayan, Brooklyn Raga Massive and Royal Bengal Teahouse,
+ * pulled from the organisations' own sites — and switching just those three on
+ * looks worse than none: three small marks adrift among eight confident
+ * uppercase names reads as a wall that failed to load. Turn them on together
+ * once the other eight arrive.
  */
 export const thanks = {
   people: [
@@ -258,15 +264,15 @@ export const thanks = {
   ],
   organisations: [
     { name: "Barzakh Cafe", logo: null },
-    { name: "Chhandayan", logo: null },
+    { name: "Chhandayan", logo: null }, // /assets/support/chhandayan.png
     { name: "Leela Dance Collective", logo: null },
     { name: "Kathak Souls", logo: null },
     { name: "The Saami Brothers", logo: null },
     { name: "Tarka", logo: null },
-    { name: "Brooklyn Raga Massive", logo: null },
+    { name: "Brooklyn Raga Massive", logo: null }, // /assets/support/brooklyn-raga-massive.png
     { name: "Faces of Art", logo: null },
     { name: "Bengalis of New York", logo: null },
-    { name: "Royal Bengal Teahouse", logo: null },
+    { name: "Royal Bengal Teahouse", logo: null }, // /assets/support/royal-bengal-teahouse.png
     { name: "SAYA NYC", logo: null },
   ] as { name: string; logo: string | null }[],
 };
