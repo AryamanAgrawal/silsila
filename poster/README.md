@@ -9,6 +9,19 @@ Print master is **`silsila-poster.pdf`**. Send that to the printer.
 | `silsila-poster-print.jpg` | 4320 x 5400 | same, smaller file |
 | `silsila-poster-web.jpg` | 1080 x 1350 | Instagram, email |
 
+### House screen
+
+`silsila-screen-qr.png` (3840 x 2160) and `silsila-screen-qr-1080.jpg`
+(1920 x 1080) are the 16:9 slide for the projector before doors. Built by
+`render-screen.sh` from `screen.html`.
+
+The code points at the programme site, not at tickets, so it is a 33-module
+symbol where the poster's ticket URL needs 49 — coarser, and easier to scan
+across a room. It is set at 520px on a 1920 canvas, so a 3m-wide projection
+puts the code near 80cm and a module near 19mm. It decodes at 400px wide,
+blurred and dimmed, and at 22 degrees off-axis; `render-screen.sh` fails the
+build if it ever stops decoding.
+
 ### Sheet layouts
 
 | File | Sheet | Each poster | QR module |

@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Silsila: Resonance — house screen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:wght@400;500;600&family=Pinyon+Script&family=Ephesis&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/open-sauce-one@5/400.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/open-sauce-one@5/500.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/open-sauce-one@5/700.css" />
+    <style>
+      /* ═══════════════════════════════════════════════════════════
+   16:9 house screen, designed at 1920 x 1080 and rendered at 2x.
+
+   The code is the subject, so it sits dead centre and everything
+   else is billing around it. Read from a seat rather than from
+   arm's length, which inverts the print poster's constraints: the
+   programme URL takes 33 modules where the ticket URL needed 49,
+   and at 520px that is nearly 16px a module. Projected 3m wide
+   the code is about 80cm across, which scans from the back of the
+   house.
+
+   Plaster ground rather than bone: the room is dark when this is
+   up, and the code needs to be the brightest thing on the screen.
+   ═══════════════════════════════════════════════════════════ */
+      @page {
+        size: 1920px 1080px;
+        margin: 0;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      :root {
+        --plaster: #850d0d;
+        --sindoor: #bd0606;
+        --bone: #e9e4e0;
+        --bone-warm: #f2e3dd;
+        --paper: #fbfaf8;
+        --ink: #171717;
+        --rose: #e9bdbd;
+        --f-display: "Anton", sans-serif;
+        --f-serif: "Cormorant Garamond", serif;
+        --f-formal: "Pinyon Script", cursive;
+        --f-sign: "Ephesis", cursive;
+        --f-body: "Open Sauce One", sans-serif;
+      }
+
+      body {
+        width: 1920px;
+        height: 1080px;
+        background: var(--plaster);
+        color: var(--bone);
+        font-family: var(--f-body);
+        position: relative;
+        overflow: hidden;
+      }
+      .strings {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.5;
+        pointer-events: none;
+      }
+      .strings line {
+        stroke: var(--rose);
+        stroke-width: 1;
+        opacity: 0.18;
+      }
+      .grain {
+        position: absolute;
+        inset: 0;
+        background: url("assets/plaster-wash.jpg") center / 1100px;
+        mix-blend-mode: overlay;
+        opacity: 0.55;
+        pointer-events: none;
+      }
+
+      .sheet {
+        position: relative;
+        z-index: 1;
+        height: 100%;
+        padding: 40px 104px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      /* ── billing above ────────────────────────────────────── */
+      .host {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .host img {
+        width: 46px;
+        height: auto;
+        /* the mark is black line art; screen it to bone on the maroon */
+        filter: invert(1) brightness(1.6);
+      }
+      .host span {
+        font-size: 17px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--rose);
+      }
+
+      /* Stacked, not overlapped. The site's hero can sit the script across the
+         baseline because the display type is 13rem there; at 84px the two
+         collide and the script becomes unreadable. */
+      .lockup {
+        margin-top: 10px;
+      }
+      .series {
+        font-family: var(--f-formal);
+        font-size: 46px;
+        line-height: 1;
+        color: var(--rose);
+      }
+      .title {
+        margin-top: 2px;
+        font-family: var(--f-display);
+        font-size: 84px;
+        line-height: 0.9;
+        letter-spacing: -0.012em;
+        text-transform: uppercase;
+        color: var(--bone-warm);
+      }
+
+      .tagline {
+        margin-top: 22px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.055em;
+        font-size: 19px;
+        color: var(--bone);
+        opacity: 0.92;
+      }
+
+      /* ── the subject ──────────────────────────────────────── */
+      .card {
+        position: relative;
+        margin-top: 26px;
+        background: var(--paper);
+        padding: 28px 28px 20px;
+        box-shadow:
+          0 30px 70px rgba(0, 0, 0, 0.42),
+          0 6px 14px rgba(0, 0, 0, 0.26);
+        transform: rotate(-1.4deg);
+      }
+      .tape {
+        position: absolute;
+        top: -26px;
+        left: 50%;
+        width: 216px;
+        transform: translateX(-52%) rotate(2.2deg);
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.32));
+      }
+      .card img.q {
+        display: block;
+        width: 520px;
+        height: 520px;
+        /* nearest-neighbour keeps the module edges hard when scaled */
+        image-rendering: pixelated;
+      }
+      .card .caption {
+        margin-top: 16px;
+        font-family: var(--f-serif);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: 19px;
+        color: var(--plaster);
+      }
+
+      .cta {
+        margin-top: 30px;
+      }
+      .cta .big {
+        font-family: var(--f-display);
+        text-transform: uppercase;
+        font-size: 52px;
+        line-height: 1;
+        letter-spacing: 0.008em;
+        color: var(--bone-warm);
+      }
+      .cta .sub {
+        margin-top: 10px;
+        font-family: var(--f-sign);
+        font-size: 34px;
+        line-height: 1.2;
+        color: var(--rose);
+      }
+
+      /* ── when and where, along the foot ───────────────────── */
+      .facts {
+        margin-top: 30px;
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 18px;
+        font-size: 21px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--bone);
+      }
+      .facts .sep {
+        color: var(--rose);
+        opacity: 0.75;
+      }
+      .facts b {
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <svg class="strings" viewBox="0 0 1920 1080" preserveAspectRatio="none" aria-hidden="true">
+      <!-- 11 tarab strings, as on the instrument and as in the site's hero -->
+      <line x1="0" y1="86" x2="1920" y2="86" /><line x1="0" y1="176" x2="1920" y2="176" />
+      <line x1="0" y1="266" x2="1920" y2="266" /><line x1="0" y1="356" x2="1920" y2="356" />
+      <line x1="0" y1="446" x2="1920" y2="446" /><line x1="0" y1="536" x2="1920" y2="536" />
+      <line x1="0" y1="626" x2="1920" y2="626" /><line x1="0" y1="716" x2="1920" y2="716" />
+      <line x1="0" y1="806" x2="1920" y2="806" /><line x1="0" y1="896" x2="1920" y2="896" />
+      <line x1="0" y1="986" x2="1920" y2="986" />
+    </svg>
+    <div class="grain"></div>
+
+    <div class="sheet">
+      <div class="host">
+        <img src="assets/ruh-mark.png" alt="" />
+        <span>Presented by Ruh Arts Foundation</span>
+      </div>
+
+      <div class="lockup">
+        <div class="series">silsila</div>
+        <div class="title">Resonance</div>
+      </div>
+
+      <p class="tagline">The Living Journey of South&nbsp;Asian Classical Music</p>
+
+      <div class="card">
+        <img class="tape" src="assets/tape-kraft-wide.png" alt="" />
+        <img class="q" src="assets/qr-programme.svg" alt="Scan for the programme" />
+        <div class="caption">Tonight&rsquo;s programme</div>
+      </div>
+
+      <div class="cta">
+        <div class="big">Scan to read along</div>
+        <div class="sub">the artists, the running order, the album</div>
+      </div>
+
+      <div class="facts">
+        <span><b>Sunday 30 August 2026</b></span>
+        <span class="sep">·</span>
+        <span>Doors <b>6:30 PM</b></span>
+        <span class="sep">·</span>
+        <span>Curtain <b>7 PM</b></span>
+        <span class="sep">·</span>
+        <span>Abrons Arts Center</span>
+      </div>
+    </div>
+  </body>
+</html>
