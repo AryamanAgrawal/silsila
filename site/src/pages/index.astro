@@ -8,6 +8,7 @@ import Host from "@/components/Host.astro";
 import RunOfShow from "@/components/RunOfShow.astro";
 import Artists from "@/components/Artists.astro";
 import Listen from "@/components/Listen.astro";
+import Thanks from "@/components/Thanks.astro";
 import StayInTouch from "@/components/StayInTouch.astro";
 import SiteFooter from "@/components/SiteFooter.astro";
 import { event, formatted, addressLine } from "@/data/event";
@@ -29,7 +30,7 @@ const details = [
   artists, then returns once at the end, so the maroon bookends the programme
   rather than alternating in and out of it.
 
-    bone → sindoor → bone bone → PLASTER PLASTER → bone → PLASTER → bone
+    bone → sindoor → bone bone → PLASTER PLASTER → bone bone → PLASTER → bone
 
   Statement and Host are adjacent on purpose: silsila is continuation written
   as poetry, Ruh's line is the same idea written as purpose. Host takes the
@@ -50,6 +51,7 @@ const details = [
     <RunOfShow />
     <Artists />
     <Listen />
+    <Thanks />
     <StayInTouch />
   </main>
   <SiteFooter />

@@ -243,6 +243,34 @@ export const socials: { label: string; handle: string; url: string | null }[] = 
   { label: "Aryaman Agrawal", handle: "@itsaryamann", url: "https://www.instagram.com/itsaryamann" },
 ];
 
+/**
+ * The gratitude wall. `logo` is a path under `public/assets/support/`; entries
+ * without one set their name instead, so the section ships before the artwork
+ * arrives and each logo drops in as a one-line change.
+ */
+export const thanks = {
+  people: [
+    "Aryaman Agrawal",
+    "Saima Khan",
+    "Krushika Patankar",
+    "Basma Rajper",
+    "Arham Hashmi",
+  ],
+  organisations: [
+    { name: "Barzakh Cafe", logo: null },
+    { name: "Chhandayan", logo: null },
+    { name: "Leela Dance Collective", logo: null },
+    { name: "Kathak Souls", logo: null },
+    { name: "The Saami Brothers", logo: null },
+    { name: "Tarka", logo: null },
+    { name: "Brooklyn Raga Massive", logo: null },
+    { name: "Faces of Art", logo: null },
+    { name: "Bengalis of New York", logo: null },
+    { name: "Royal Bengal Teahouse", logo: null },
+    { name: "SAYA NYC", logo: null },
+  ] as { name: string; logo: string | null }[],
+};
+
 export const album = {
   title: "Echoes to Sky",
   artist: "Jayanta Banerjee",
