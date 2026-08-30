@@ -128,8 +128,8 @@ export const artists: Artist[] = [
     instrument: "Violin",
     photo: "/assets/artists/sikandar.jpg",
     bio: [
-      "Born and raised in New York City yet perpetually globetrotting, Sikander’s spirit is always between Karachi, Lahore, and Istanbul. Trained in Western classical violin for over two decades, he performed and led ensembles at Carnegie Hall and Lincoln Center in his youth. His musical journey has since expanded from the Middle Eastern Maqam to Hindustani classical traditions, further enriched by khayal vocal training under the illustrious Saami Brothers Qawwal.",
-      "A true ‘āshiq-e-jamāl — a lover of all that is beautiful — Sikander finds his muse in the Urdu language. His current musical inspirations include Mehdi Hassan, Nayyara Noor, and Jaffer Zaidi of Kaavish.",
+      "Born and raised in New York City yet perpetually globetrotting, Sikandar’s spirit is always between Karachi, Lahore, and Istanbul. Trained in Western classical violin for over two decades, he performed and led ensembles at Carnegie Hall and Lincoln Center in his youth. His musical journey has since expanded from the Middle Eastern Maqam to Hindustani classical traditions, further enriched by khayal vocal training under the illustrious Saami Brothers Qawwal.",
+      "A true ‘āshiq-e-jamāl — a lover of all that is beautiful — Sikandar finds his muse in the Urdu language. His current musical inspirations include Mehdi Hassan, Nayyara Noor, and Jaffer Zaidi of Kaavish.",
     ],
   },
   {
