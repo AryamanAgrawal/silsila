@@ -66,6 +66,17 @@ done
 # projector should not be emitting.
 magick silsila-screen-logo.png -resize 1920x silsila-screen-logo-1080.png
 
+# Print header for letter-size stage notes. --default-background-color=00000000
+# is what actually makes it transparent: without it Chrome paints white behind
+# the page and the PNG arrives with a plate baked in. Shot at the design size so
+# 2100px lands as 7 inches at 300dpi, x2 for 600.
+"$CHROME" --headless --disable-gpu --hide-scrollbars \
+  --default-background-color=00000000 \
+  --window-size=2100,520 --force-device-scale-factor=2 \
+  --virtual-time-budget=20000 \
+  --screenshot="silsila-print-header.png" \
+  "http://localhost:$PORT/silsila/header/" 2>/dev/null
+
 # A QR that does not scan is just a picture, so prove it before shipping —
 # and prove it degraded, because nobody scans a projection head-on from 1m.
 for f in silsila-screen-qr silsila-screen-qr-plain; do
@@ -78,4 +89,9 @@ for f in silsila-screen-qr silsila-screen-qr-plain; do
   zbarimg --quiet --raw /tmp/_deg.png || { echo "DECODE FAILED"; exit 1; }
 done
 rm -f /tmp/_deg.png
-echo "wrote three slides from /silsila/code, /code/plain and /logo"
+# The header is worthless with a white plate behind it, so check the corner is
+# actually transparent rather than assuming the flag took.
+alpha=$(magick silsila-print-header.png -format "%[fx:p{4,4}.a]" info:)
+[ "$alpha" = "0" ] || { echo "print header is not transparent (corner alpha $alpha)"; exit 1; }
+
+echo "wrote three slides and the print header"

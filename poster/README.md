@@ -19,6 +19,7 @@ press F11.
 | `/silsila/code` | full billing around the code |
 | `/silsila/code/plain` | the code alone, half again the size |
 | `/silsila/logo` | the curtain slide: billing and the Ruh mark on black |
+| `/silsila/header` | print header for stage notes, transparent, ink on nothing |
 
 Both are unlisted: nothing links to them, they carry noindex, and
 `astro.config.mjs` keeps `/code` out of the sitemap. They share
@@ -34,6 +35,17 @@ trust:
 | `silsila-screen-qr.png` / `-1080.jpg` | 3840 x 2160 / 1920 x 1080 |
 | `silsila-screen-qr-plain.png` / `-1080.jpg` | 3840 x 2160 / 1920 x 1080 |
 | `silsila-screen-logo.png` / `-1080.png` | 3840 x 2160 / 1920 x 1080 |
+| `silsila-print-header.png` | 4200 x 1040 |
+
+`silsila-print-header.png` is the header for letter-size stage notes. It has no
+background at all — drop it at the top of a page in any document and the paper
+shows through. Laid out at 2100 x 520, which is 7 inches at 300dpi, so it spans
+letter width inside a normal margin; rendered at 2x, so it is 600dpi on the
+page. Everything in it is ink rather than bone, and the mark is a flat fill
+rather than a photograph, so a black-and-white office printer gets solid black
+instead of a screened halftone. `render-screen.sh` checks the corner is
+actually transparent before it finishes, since the file is worthless with a
+white plate baked in.
 
 The curtain slide is for throwing onto the black drape, so it sits on pure
 black rather than plaster: anything lit reads as a glowing rectangle on the

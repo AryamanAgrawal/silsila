@@ -1,0 +1,120 @@
+---
+import "@fontsource/anton/400.css";
+import "@fontsource/cormorant-garamond/600.css";
+import "@fontsource/pinyon-script/400.css";
+import "@fontsource/open-sauce-one/400.css";
+import "@fontsource/open-sauce-one/700.css";
+import "@/styles/tokens.css";
+import { asset } from "@/lib/url";
+import { event, formatted } from "@/data/event";
+
+/**
+ * Print header for letter-size stage notes.
+ *
+ * No background at all — the page is transparent and the render is shot with
+ * Chrome's background disabled, so the PNG drops onto white paper or into a
+ * document without carrying a plate around with it.
+ *
+ * Ink, not bone: this is the one artefact that lands on white, so the mark and
+ * the type are dark and the whole thing survives a black-and-white office
+ * printer. Laid out at 2100 x 520, which is 7 inches at 300dpi — letter width
+ * inside a normal margin — and rendered at 2x for 600dpi.
+ */
+const line = `${formatted.weekday} ${formatted.dayNumber} ${formatted.month} ${formatted.year} · ${event.venue.name}, ${event.venue.room}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Silsila: Resonance — print header</title>
+    <meta name="robots" content="noindex, nofollow" />
+  </head>
+  <body>
+    <div class="band">
+      <div
+        class="mark"
+        role="img"
+        aria-label={event.host.name}
+        style={`--src:url(${asset(event.host.lockup)})`}
+      >
+      </div>
+
+      <div class="type">
+        <div class="series">{event.series}</div>
+        <div class="title">{event.title}</div>
+        <div class="rule"></div>
+        <div class="line">{line}</div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  html,
+  body {
+    margin: 0;
+    background: transparent;
+  }
+
+  .band {
+    width: 2100px;
+    height: 520px;
+    display: flex;
+    align-items: center;
+    gap: 64px;
+    padding: 0 8px;
+    color: var(--ink);
+    font-family: var(--f-body);
+  }
+
+  /* Masked to flat ink so it prints solid, and so a greyscale printer gets a
+     clean black rather than a screened halftone of a photograph. */
+  .mark {
+    flex: none;
+    width: 420px;
+    aspect-ratio: 1400 / 1186;
+    background-color: var(--ink);
+    -webkit-mask: var(--src) center / contain no-repeat;
+    mask: var(--src) center / contain no-repeat;
+  }
+
+  .type {
+    min-width: 0;
+  }
+  .series {
+    font-family: var(--f-formal);
+    font-size: 92px;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .title {
+    margin-top: 2px;
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: 150px;
+    line-height: 0.86;
+    letter-spacing: -0.012em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .rule {
+    width: 100%;
+    height: 3px;
+    background: var(--ink);
+    opacity: 0.28;
+    margin: 26px 0 20px;
+  }
+  .line {
+    font-size: 30px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.72;
+  }
+</style>
