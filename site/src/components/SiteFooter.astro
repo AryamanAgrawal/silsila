@@ -68,6 +68,13 @@ import { asset } from "@/lib/url";
         <a href={`tel:${event.contact.phone.replace(/\D/g, "")}`}>{event.contact.phone}</a>
       </p>
     </div>
+
+    <p class="colophon">
+      Website by
+      <a href="https://aryamanagrawal.github.io" target="_blank" rel="noopener noreferrer">
+        Aryaman Agrawal
+      </a>
+    </p>
   </div>
   <div class="checker"></div>
 </footer>
@@ -157,7 +164,7 @@ import { asset } from "@/lib/url";
     align-items: baseline;
     justify-content: space-between;
     gap: var(--s6);
-    margin: clamp(var(--s12), 6vw, var(--s16)) 0 clamp(var(--s12), 6vw, var(--s16));
+    margin: clamp(var(--s12), 6vw, var(--s16)) 0 clamp(var(--s6), 4vw, var(--s8));
   }
   .credit {
     font-family: var(--f-sign);
@@ -180,5 +187,23 @@ import { asset } from "@/lib/url";
     color: var(--sindoor);
     text-decoration: none;
     border-bottom: 1px solid currentColor;
+  }
+
+  /* The quietest line on the page, and the last. */
+  .colophon {
+    margin: 0 0 clamp(var(--s8), 5vw, var(--s12));
+    font-size: var(--t-12);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ash);
+  }
+  .colophon a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .colophon a:hover {
+    color: var(--sindoor);
+    border-bottom-color: currentColor;
   }
 </style>
