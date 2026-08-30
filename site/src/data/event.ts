@@ -127,21 +127,30 @@ export const artists: Artist[] = [
     name: "Sikandar Rahman",
     instrument: "Violin",
     photo: "/assets/artists/sikandar.jpg",
-    bio: null,
+    bio: [
+      "Born and raised in New York City yet perpetually globetrotting, Sikander’s spirit is always between Karachi, Lahore, and Istanbul. Trained in Western classical violin for over two decades, he performed and led ensembles at Carnegie Hall and Lincoln Center in his youth. His musical journey has since expanded from the Middle Eastern Maqam to Hindustani classical traditions, further enriched by khayal vocal training under the illustrious Saami Brothers Qawwal.",
+      "A true ‘āshiq-e-jamāl — a lover of all that is beautiful — Sikander finds his muse in the Urdu language. His current musical inspirations include Mehdi Hassan, Nayyara Noor, and Jaffer Zaidi of Kaavish.",
+    ],
   },
   {
     slug: "pranav-shikarpur",
     name: "Pranav Shikarpur",
     instrument: "Bansuri",
     photo: "/assets/artists/pranav.jpg",
-    bio: null,
+    bio: [
+      "Pranav Shikarpur is a Hindustani flautist based in NYC. He started his Hindustani flute (bansuri) training from the late Pt. Venkatesh Godkhindi when he was 7 years old, and has continued to learn from Surmani Pt. Pravin Godkhindi for the past 14 years. He was awarded the Centre for Cultural Resources and Training scholarship (CCRT) from the central government of India at the age of 12 for Hindustani flute. Pranav is a strong believer in music being a universal language, and has collaborated with musicians and dancers across different genres.",
+      "In addition to his passion for the flute, Pranav has trained in Hindustani vocal music with Smt. Geetha Hegde and tabla with Sri Mohan for many years.",
+    ],
   },
   {
     slug: "shiva-kannan",
     name: "Shiva Kannan",
     instrument: "Keyboard",
     photo: "/assets/artists/shiva.jpg",
-    bio: null,
+    bio: [
+      "Shiva Kannan is a music producer, instrumentalist and vocalist based in NYC. He has been trained in Carnatic music since the age of 8 in Chennai, India.",
+      "He is passionate about learning and experimenting with different genres of music.",
+    ],
   },
   {
     slug: "aryaman-agrawal",
