@@ -172,7 +172,7 @@ export const runOfShow = [
   {
     title: "Sitar & Tabla",
     performers: "Jayanta Banerjee & Samir Chatterjee",
-    body: "The evening opens with Tehreem Khan\u2019s teacher on sitar, accompanied on tabla. Through intricate improvisation, rhythmic dialogue, and moments of profound stillness, the two explore the depth, beauty, and spontaneity of this living art form.",
+    body: "The evening opens with two masters, whose artistry unfolds through intricate improvisation, rhythmic dialogue, and moments of profound stillness. Together, they explore the depth, beauty, and spontaneity of this living art form.",
     kicker: "Opening set",
     feature: true,
   },
