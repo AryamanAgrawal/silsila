@@ -1,0 +1,295 @@
+---
+import "@fontsource/anton/400.css";
+import "@fontsource/cormorant-garamond/600.css";
+import "@fontsource/pinyon-script/400.css";
+import "@fontsource/ephesis/400.css";
+import "@fontsource/open-sauce-one/400.css";
+import "@fontsource/open-sauce-one/700.css";
+import "@/styles/tokens.css";
+
+import { asset } from "@/lib/url";
+import { event, formatted } from "@/data/event";
+
+/**
+ * The house screen: open this on the display machine and press F11.
+ *
+ * The composition is designed at 1920 x 1080 and every length is expressed in
+ * cqw against a stage locked to 16:9, so it holds its exact proportions on any
+ * projector instead of reflowing. On a screen that is not 16:9 the stage
+ * letterboxes onto the same plaster ground.
+ *
+ * Nothing links here. It is kept out of the sitemap in astro.config.mjs and
+ * carries noindex.
+ *
+ * The code points at the programme, not at tickets. That URL is short enough
+ * for a 33-module symbol where the print poster's ticket URL needs 49, so the
+ * modules are coarse and it reads from across the house. It is drawn from an
+ * SVG, so it stays hard-edged however large this is thrown.
+ */
+const STRINGS = Array.from({ length: 11 }, (_, i) => 86 + i * 90);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Silsila: Resonance — house screen</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#850D0D" />
+    <link
+      rel="icon"
+      href={`${import.meta.env.BASE_URL}/favicon.svg`.replace(/\/+/g, "/")}
+      type="image/svg+xml"
+    />
+  </head>
+  <body>
+    <div class="stage">
+      <svg class="strings" viewBox="0 0 1920 1080" preserveAspectRatio="none" aria-hidden="true">
+        {STRINGS.map((y) => <line x1="0" y1={y} x2="1920" y2={y} />)}
+      </svg>
+      <div class="grain"></div>
+
+      <div class="sheet">
+        <div class="host">
+          <img src={asset(event.host.mark)} alt="" aria-hidden="true" />
+          <span>Presented by {event.host.name}</span>
+        </div>
+
+        <div class="lockup">
+          <div class="series">{event.series}</div>
+          <div class="title">{event.title}</div>
+        </div>
+
+        <p class="tagline">{event.tagline.replace("South Asian", "South\u00A0Asian")}</p>
+
+        <div class="card">
+          <img class="tape" src={asset("assets/motif/tape-kraft-wide.png")} alt="" aria-hidden="true" />
+          <img class="q" src={asset("screen/qr-programme.svg")} alt="Scan for tonight's programme" />
+          <div class="caption">Tonight&rsquo;s programme</div>
+        </div>
+
+        <div class="cta">
+          <div class="big">Scan to read along</div>
+          <div class="sub">the artists, the running order, the album</div>
+        </div>
+
+        <div class="facts">
+          <span><b>{formatted.weekday} {formatted.dayNumber} {formatted.month} {formatted.year}</b></span>
+          <span class="sep">·</span>
+          <span>Doors <b>{formatted.doors}</b></span>
+          <span class="sep">·</span>
+          <span>Curtain <b>{formatted.showtime}</b></span>
+          <span class="sep">·</span>
+          <span>{event.venue.name}</span>
+        </div>
+      </div>
+    </div>
+
+    <script is:inline>
+      // A cursor parked in the middle of a projection is the one thing on this
+      // page nobody wants to look at.
+      (function () {
+        let t;
+        const wake = () => {
+          document.body.classList.remove("idle");
+          clearTimeout(t);
+          t = setTimeout(() => document.body.classList.add("idle"), 2500);
+        };
+        ["mousemove", "mousedown", "keydown", "touchstart"].forEach((e) =>
+          window.addEventListener(e, wake, { passive: true }),
+        );
+        wake();
+      })();
+    </script>
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+        background: var(--plaster);
+      }
+      body {
+        display: grid;
+        place-items: center;
+      }
+      body.idle {
+        cursor: none;
+      }
+
+      /* Locked to 16:9 and measured in cqw, so the composition scales as one
+         piece rather than reflowing into whatever the projector happens to be. */
+      .stage {
+        position: relative;
+        width: min(100vw, calc(100vh * 16 / 9));
+        height: min(100vh, calc(100vw * 9 / 16));
+        container-type: size;
+        overflow: hidden;
+        background: var(--plaster);
+        color: var(--bone);
+        font-family: var(--f-body);
+      }
+
+      .strings {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.5;
+      }
+      .strings line {
+        stroke: var(--rose);
+        stroke-width: 1;
+        opacity: 0.18;
+      }
+      .grain {
+        position: absolute;
+        inset: 0;
+        background: url("/silsila/assets/texture/plaster-wash.jpg") center / 57.29cqw;
+        mix-blend-mode: overlay;
+        opacity: 0.55;
+      }
+
+      .sheet {
+        position: relative;
+        z-index: 1;
+        height: 100%;
+        padding: 1.25cqw 5.42cqw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .host {
+        display: flex;
+        align-items: center;
+        gap: 0.83cqw;
+      }
+      .host img {
+        width: 2.4cqw;
+        height: auto;
+        /* the mark is black line art; screen it to bone on the maroon */
+        filter: invert(1) brightness(1.6);
+      }
+      .host span {
+        font-size: 0.885cqw;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--rose);
+      }
+
+      /* Stacked, not overlapped. The site's hero can lay the script across the
+         baseline because its display type is 13rem; at this size the two
+         collide and silsila becomes unreadable. */
+      .lockup {
+        margin-top: 0.52cqw;
+      }
+      .series {
+        font-family: var(--f-formal);
+        font-size: 2.29cqw;
+        line-height: 1;
+        color: var(--rose);
+      }
+      .title {
+        margin-top: 0.1cqw;
+        font-family: var(--f-display);
+        font-weight: 400;
+        font-size: 4.06cqw;
+        line-height: 0.9;
+        letter-spacing: -0.012em;
+        text-transform: uppercase;
+        color: var(--bone-warm);
+      }
+
+      .tagline {
+        margin: 0.83cqw 0 0;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.055em;
+        font-size: 0.99cqw;
+        color: var(--bone);
+        opacity: 0.92;
+      }
+
+      .card {
+        position: relative;
+        margin-top: 1.35cqw;
+        background: #fbfaf8;
+        padding: 1.46cqw 1.46cqw 1.04cqw;
+        box-shadow:
+          0 1.56cqw 3.65cqw rgba(0, 0, 0, 0.42),
+          0 0.31cqw 0.73cqw rgba(0, 0, 0, 0.26);
+        transform: rotate(-1.4deg);
+      }
+      .tape {
+        position: absolute;
+        top: -1.35cqw;
+        left: 50%;
+        width: 11.25cqw;
+        transform: translateX(-52%) rotate(2.2deg);
+        filter: drop-shadow(0 0.2cqw 0.42cqw rgba(0, 0, 0, 0.32));
+      }
+      .card .q {
+        display: block;
+        width: 27.08cqw;
+        height: 27.08cqw;
+      }
+      .card .caption {
+        margin-top: 0.83cqw;
+        font-family: var(--f-serif);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: 0.99cqw;
+        color: var(--plaster);
+      }
+
+      .cta {
+        margin-top: 1.15cqw;
+      }
+      .cta .big {
+        font-family: var(--f-display);
+        text-transform: uppercase;
+        font-size: 2.5cqw;
+        line-height: 1;
+        letter-spacing: 0.008em;
+        color: var(--bone-warm);
+      }
+      .cta .sub {
+        margin-top: 0.52cqw;
+        font-family: var(--f-sign);
+        font-size: 1.77cqw;
+        line-height: 1.2;
+        color: var(--rose);
+      }
+
+      .facts {
+        margin-top: 1.15cqw;
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 0.94cqw;
+        font-size: 1.09cqw;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--bone);
+      }
+      .facts .sep {
+        color: var(--rose);
+        opacity: 0.75;
+      }
+      .facts b {
+        font-weight: 700;
+      }
+    </style>
+  </body>
+</html>

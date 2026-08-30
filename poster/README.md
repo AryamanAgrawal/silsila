@@ -11,16 +11,26 @@ Print master is **`silsila-poster.pdf`**. Send that to the printer.
 
 ### House screen
 
-`silsila-screen-qr.png` (3840 x 2160) and `silsila-screen-qr-1080.jpg`
-(1920 x 1080) are the 16:9 slide for the projector before doors. Built by
-`render-screen.sh` from `screen.html`.
+The slide for the projector before doors is the page at **`/silsila/code`** —
+open it on the display machine and press F11. It is unlisted: nothing links to
+it, it carries noindex, and `astro.config.mjs` keeps it out of the sitemap.
 
-The code points at the programme site, not at tickets, so it is a 33-module
+`render-screen.sh` renders that page to flat files for a playback deck that
+cannot point a browser at the site:
+
+| File | Size |
+|---|---|
+| `silsila-screen-qr.png` | 3840 x 2160 |
+| `silsila-screen-qr-1080.jpg` | 1920 x 1080 |
+
+The page is the design; these are renders of it, so the two cannot drift.
+
+The code points at the programme rather than at tickets, which is a 33-module
 symbol where the poster's ticket URL needs 49 — coarser, and easier to scan
-across a room. It is set at 520px on a 1920 canvas, so a 3m-wide projection
-puts the code near 80cm and a module near 19mm. It decodes at 400px wide,
-blurred and dimmed, and at 22 degrees off-axis; `render-screen.sh` fails the
-build if it ever stops decoding.
+across a room. It is drawn from SVG at 27cqw of a 16:9 stage, so a 3m-wide
+projection puts a module near 19mm. It decodes at 400px wide, blurred and
+dimmed, and at 22 degrees off-axis; `render-screen.sh` fails the build if it
+ever stops decoding.
 
 ### Sheet layouts
 
