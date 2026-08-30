@@ -9,28 +9,39 @@ Print master is **`silsila-poster.pdf`**. Send that to the printer.
 | `silsila-poster-print.jpg` | 4320 x 5400 | same, smaller file |
 | `silsila-poster-web.jpg` | 1080 x 1350 | Instagram, email |
 
-### House screen
+### House screens
 
-The slide for the projector before doors is the page at **`/silsila/code`** —
-open it on the display machine and press F11. It is unlisted: nothing links to
-it, it carries noindex, and `astro.config.mjs` keeps it out of the sitemap.
+Two slides for the projector before doors. Open one on the display machine and
+press F11.
 
-`render-screen.sh` renders that page to flat files for a playback deck that
-cannot point a browser at the site:
+| Page | What it is |
+|---|---|
+| `/silsila/code` | full billing around the code |
+| `/silsila/code/plain` | the code alone, half again the size |
+
+Both are unlisted: nothing links to them, they carry noindex, and
+`astro.config.mjs` keeps `/code` out of the sitemap. They share
+`layouts/Screen.astro` and `components/QrCard.astro`, so they cannot drift
+apart.
+
+`render-screen.sh` renders both pages to flat files, for a playback deck that
+cannot point a browser at the site — or for a venue whose wifi you do not
+trust:
 
 | File | Size |
 |---|---|
-| `silsila-screen-qr.png` | 3840 x 2160 |
-| `silsila-screen-qr-1080.jpg` | 1920 x 1080 |
+| `silsila-screen-qr.png` / `-1080.jpg` | 3840 x 2160 / 1920 x 1080 |
+| `silsila-screen-qr-plain.png` / `-1080.jpg` | 3840 x 2160 / 1920 x 1080 |
 
-The page is the design; these are renders of it, so the two cannot drift.
+The pages are the design; these are renders of them.
 
 The code points at the programme rather than at tickets, which is a 33-module
 symbol where the poster's ticket URL needs 49 — coarser, and easier to scan
-across a room. It is drawn from SVG at 27cqw of a 16:9 stage, so a 3m-wide
-projection puts a module near 19mm. It decodes at 400px wide, blurred and
-dimmed, and at 22 degrees off-axis; `render-screen.sh` fails the build if it
-ever stops decoding.
+across a room. On the full slide it is 27cqw of a 16:9 stage, on the plain one
+40cqw, so a 3m-wide projection puts a module near 19mm and 28mm respectively.
+`render-screen.sh` decodes every file it writes, plus a copy of each shrunk to
+400px, blurred and dimmed, and fails rather than ship a code that has stopped
+scanning.
 
 ### Sheet layouts
 

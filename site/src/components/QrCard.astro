@@ -1,0 +1,66 @@
+---
+import { asset } from "@/lib/url";
+
+/**
+ * The code, taped up like one of the artist polaroids.
+ *
+ * `size` is the code's edge in cqw, so it scales with the stage rather than the
+ * viewport. The SVG keeps the modules hard-edged however large this is thrown.
+ */
+interface Props {
+  /** Code edge, in cqw of the 16:9 stage. */
+  size: number;
+  caption?: string;
+}
+const { size, caption } = Astro.props;
+
+/** The tape and the padding are proportional to the code, so the card holds
+ *  its look whether it is the whole slide or one element on it. */
+const pad = (size * 0.054).toFixed(2);
+const tape = (size * 0.415).toFixed(2);
+---
+
+<div class="card" style={`--q:${size}cqw; --pad:${pad}cqw; --tape:${tape}cqw;`}>
+  <img
+    class="tape"
+    src={asset("assets/motif/tape-kraft-wide.png")}
+    alt=""
+    aria-hidden="true"
+  />
+  <img class="q" src={asset("screen/qr-programme.svg")} alt="Scan for tonight's programme" />
+  {caption && <div class="caption">{caption}</div>}
+</div>
+
+<style>
+  .card {
+    position: relative;
+    background: #fbfaf8;
+    padding: var(--pad) var(--pad) calc(var(--pad) * 0.72);
+    box-shadow:
+      0 1.56cqw 3.65cqw rgba(0, 0, 0, 0.42),
+      0 0.31cqw 0.73cqw rgba(0, 0, 0, 0.26);
+    transform: rotate(-1.4deg);
+  }
+  .tape {
+    position: absolute;
+    top: calc(var(--pad) * -0.93);
+    left: 50%;
+    width: var(--tape);
+    transform: translateX(-52%) rotate(2.2deg);
+    filter: drop-shadow(0 0.2cqw 0.42cqw rgba(0, 0, 0, 0.32));
+  }
+  .q {
+    display: block;
+    width: var(--q);
+    height: var(--q);
+  }
+  .caption {
+    margin-top: calc(var(--pad) * 0.57);
+    font-family: var(--f-serif);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: calc(var(--q) * 0.0365);
+    color: var(--plaster);
+  }
+</style>

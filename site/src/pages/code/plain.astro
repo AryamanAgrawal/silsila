@@ -1,0 +1,32 @@
+---
+import Screen from "@/layouts/Screen.astro";
+import QrCard from "@/components/QrCard.astro";
+
+/**
+ * The code and nothing else, for a small monitor, a lobby panel, or a slide in
+ * somebody else's deck. Same stage and ground as `/code`, so the two can sit in
+ * one running order without a jolt.
+ *
+ * The billing is gone but one line stays: a code with no words next to it is a
+ * puzzle, and nobody lifts a phone for a puzzle. Everything that line does not
+ * need goes into the code, which is 40cqw here against 27 on the full slide —
+ * about half again the module size, so it reads from further back.
+ */
+---
+
+<Screen title="Silsila: Resonance — scan">
+  <QrCard size={40} />
+  <p class="cta">Scan for tonight’s programme</p>
+</Screen>
+
+<style>
+  .cta {
+    margin: 1.45cqw 0 0;
+    font-family: var(--f-display);
+    text-transform: uppercase;
+    font-size: 2.4cqw;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    color: var(--bone-warm);
+  }
+</style>

@@ -1,0 +1,133 @@
+---
+import "@fontsource/anton/400.css";
+import "@fontsource/cormorant-garamond/600.css";
+import "@fontsource/pinyon-script/400.css";
+import "@fontsource/ephesis/400.css";
+import "@fontsource/open-sauce-one/400.css";
+import "@fontsource/open-sauce-one/700.css";
+import "@/styles/tokens.css";
+
+/**
+ * The ground every house-screen variant stands on: a stage locked to 16:9 and
+ * sized with `container-type: size`, so pages can express every length in cqw
+ * and hold their proportions on any projector instead of reflowing. On a screen
+ * that is not 16:9 the stage letterboxes onto the same plaster.
+ *
+ * These pages are unlisted — noindex here, and astro.config.mjs keeps /code out
+ * of the sitemap.
+ */
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+
+/** 11 tarab strings, as on the instrument and as in the site's hero. */
+const STRINGS = Array.from({ length: 11 }, (_, i) => 86 + i * 90);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#850D0D" />
+    <link
+      rel="icon"
+      href={`${import.meta.env.BASE_URL}/favicon.svg`.replace(/\/+/g, "/")}
+      type="image/svg+xml"
+    />
+  </head>
+  <body>
+    <div class="stage">
+      <svg class="strings" viewBox="0 0 1920 1080" preserveAspectRatio="none" aria-hidden="true">
+        {STRINGS.map((y) => <line x1="0" y1={y} x2="1920" y2={y} />)}
+      </svg>
+      <div class="grain"></div>
+      <div class="sheet"><slot /></div>
+    </div>
+
+    <script is:inline>
+      // A cursor parked in the middle of a projection is the one thing on these
+      // pages nobody wants to look at.
+      (function () {
+        let t;
+        const wake = () => {
+          document.body.classList.remove("idle");
+          clearTimeout(t);
+          t = setTimeout(() => document.body.classList.add("idle"), 2500);
+        };
+        ["mousemove", "mousedown", "keydown", "touchstart"].forEach((e) =>
+          window.addEventListener(e, wake, { passive: true }),
+        );
+        wake();
+      })();
+    </script>
+
+    <style is:global>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+        background: var(--plaster);
+      }
+      body {
+        display: grid;
+        place-items: center;
+      }
+      body.idle {
+        cursor: none;
+      }
+
+      .stage {
+        position: relative;
+        width: min(100vw, calc(100vh * 16 / 9));
+        height: min(100vh, calc(100vw * 9 / 16));
+        container-type: size;
+        overflow: hidden;
+        background: var(--plaster);
+        color: var(--bone);
+        font-family: var(--f-body);
+      }
+
+      .strings {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.5;
+      }
+      .strings line {
+        stroke: var(--rose);
+        stroke-width: 1;
+        opacity: 0.18;
+      }
+      .grain {
+        position: absolute;
+        inset: 0;
+        background: url("/silsila/assets/texture/plaster-wash.jpg") center / 57.29cqw;
+        mix-blend-mode: overlay;
+        opacity: 0.55;
+      }
+
+      .sheet {
+        position: relative;
+        z-index: 1;
+        height: 100%;
+        padding: 1.25cqw 5.42cqw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+    </style>
+  </body>
+</html>

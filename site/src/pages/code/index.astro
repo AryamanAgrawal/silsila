@@ -1,0 +1,137 @@
+---
+import Screen from "@/layouts/Screen.astro";
+import QrCard from "@/components/QrCard.astro";
+import { asset } from "@/lib/url";
+import { event, formatted } from "@/data/event";
+
+/**
+ * The house screen: open this on the display machine and press F11.
+ *
+ * The full billing around the code, for the projector before doors. See
+ * `/code/plain` for the stripped version that drops the billing and doubles
+ * the code, for a small monitor or somebody else's deck.
+ */
+const tagline = event.tagline.replace("South Asian", "South Asian");
+---
+
+<Screen title="Silsila: Resonance — house screen">
+  <div class="host">
+    <img src={asset(event.host.mark)} alt="" aria-hidden="true" />
+    <span>Presented by {event.host.name}</span>
+  </div>
+
+  {/* Stacked, not overlapped. The site's hero can lay the script across the
+      baseline because its display type is 13rem; at this size the two collide
+      and silsila becomes unreadable. */}
+  <div class="lockup">
+    <div class="series">{event.series}</div>
+    <div class="title">{event.title}</div>
+  </div>
+
+  <p class="tagline">{tagline}</p>
+
+  <QrCard size={27.08} caption="Tonight’s programme" />
+
+  <div class="cta">
+    <div class="big">Scan to read along</div>
+    <div class="sub">the artists, the running order, the album</div>
+  </div>
+
+  <div class="facts">
+    <span><b>{formatted.weekday} {formatted.dayNumber} {formatted.month} {formatted.year}</b></span>
+    <span class="sep">·</span>
+    <span>Doors <b>{formatted.doors}</b></span>
+    <span class="sep">·</span>
+    <span>Curtain <b>{formatted.showtime}</b></span>
+    <span class="sep">·</span>
+    <span>{event.venue.name}</span>
+  </div>
+</Screen>
+
+<style>
+  .host {
+    display: flex;
+    align-items: center;
+    gap: 0.83cqw;
+  }
+  .host img {
+    width: 2.4cqw;
+    height: auto;
+    /* the mark is black line art; screen it to bone on the maroon */
+    filter: invert(1) brightness(1.6);
+  }
+  .host span {
+    font-size: 0.885cqw;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--rose);
+  }
+
+  .lockup {
+    margin-top: 0.52cqw;
+  }
+  .series {
+    font-family: var(--f-formal);
+    font-size: 2.29cqw;
+    line-height: 1;
+    color: var(--rose);
+  }
+  .title {
+    margin-top: 0.1cqw;
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: 4.06cqw;
+    line-height: 0.9;
+    letter-spacing: -0.012em;
+    text-transform: uppercase;
+    color: var(--bone-warm);
+  }
+
+  .tagline {
+    margin: 0.83cqw 0 1.35cqw;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.055em;
+    font-size: 0.99cqw;
+    color: var(--bone);
+    opacity: 0.92;
+  }
+
+  .cta {
+    margin-top: 1.15cqw;
+  }
+  .cta .big {
+    font-family: var(--f-display);
+    text-transform: uppercase;
+    font-size: 2.5cqw;
+    line-height: 1;
+    letter-spacing: 0.008em;
+    color: var(--bone-warm);
+  }
+  .cta .sub {
+    margin-top: 0.52cqw;
+    font-family: var(--f-sign);
+    font-size: 1.77cqw;
+    line-height: 1.2;
+    color: var(--rose);
+  }
+
+  .facts {
+    margin-top: 1.15cqw;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.94cqw;
+    font-size: 1.09cqw;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--bone);
+  }
+  .facts .sep {
+    color: var(--rose);
+    opacity: 0.75;
+  }
+  .facts b {
+    font-weight: 700;
+  }
+</style>

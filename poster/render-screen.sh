@@ -26,22 +26,45 @@ PY
 # it through a directory where that path actually resolves.
 TMP="$(mktemp -d)"
 ln -s "$PWD/../site/dist" "$TMP/silsila"
-(cd "$TMP" && python3 -m http.server $PORT >/dev/null 2>&1) &
+# --directory rather than a `cd` in a subshell: with the subshell, $! is the
+# wrapper's pid and the trap below leaves the server orphaned on the port,
+# still answering — from a working directory that no longer exists, so every
+# request 404s and the next run screenshots an error page.
+python3 -m http.server "$PORT" --directory "$TMP" >/dev/null 2>&1 &
 SERVER=$!
 trap 'kill $SERVER 2>/dev/null || true; rm -rf "$TMP"' EXIT
-sleep 2
 
-"$CHROME" --headless --disable-gpu --hide-scrollbars \
-  --window-size=1920,1080 --force-device-scale-factor=2 \
-  --virtual-time-budget=20000 \
-  --screenshot="silsila-screen-qr.png" \
-  "http://localhost:$PORT/silsila/code/" 2>/dev/null
-
-magick silsila-screen-qr.png -resize 1920x -quality 94 silsila-screen-qr-1080.jpg
-
-# A QR that does not scan is just a picture, so prove it before shipping.
-for f in silsila-screen-qr.png silsila-screen-qr-1080.jpg; do
-  printf '%-30s ' "$f"
-  zbarimg --quiet --raw "$f" || { echo "DECODE FAILED"; exit 1; }
+# Wait for the server to actually answer. A fixed sleep raced it and Chrome
+# screenshotted a 404 page, which then failed the decode check further down —
+# the check did its job, but the cause was here.
+for _ in $(seq 1 40); do
+  if curl -fs -o /dev/null "http://localhost:$PORT/silsila/code/"; then break; fi
+  sleep 0.25
 done
-echo "wrote screen png(2x) + 1080 jpg from /silsila/code"
+curl -fsS -o /dev/null "http://localhost:$PORT/silsila/code/" \
+  || { echo "server never came up on $PORT"; exit 1; }
+
+shoot() { # route -> basename
+  "$CHROME" --headless --disable-gpu --hide-scrollbars \
+    --window-size=1920,1080 --force-device-scale-factor=2 \
+    --virtual-time-budget=20000 \
+    --screenshot="$2.png" "http://localhost:$PORT/silsila/$1" 2>/dev/null
+  magick "$2.png" -resize 1920x -quality 94 "$2-1080.jpg"
+}
+
+shoot "code/"       silsila-screen-qr
+shoot "code/plain/" silsila-screen-qr-plain
+
+# A QR that does not scan is just a picture, so prove it before shipping —
+# and prove it degraded, because nobody scans a projection head-on from 1m.
+for f in silsila-screen-qr silsila-screen-qr-plain; do
+  for v in "$f.png" "$f-1080.jpg"; do
+    printf '%-36s ' "$v"
+    zbarimg --quiet --raw "$v" || { echo "DECODE FAILED"; exit 1; }
+  done
+  magick "$f.png" -resize 400x -blur 0x0.6 -brightness-contrast -18x0 /tmp/_deg.png
+  printf '%-36s ' "$f (400px, blurred, dim)"
+  zbarimg --quiet --raw /tmp/_deg.png || { echo "DECODE FAILED"; exit 1; }
+done
+rm -f /tmp/_deg.png
+echo "wrote both slides, png(2x) + 1080 jpg, from /silsila/code and /code/plain"
