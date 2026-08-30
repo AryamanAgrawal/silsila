@@ -162,7 +162,7 @@ export const artists: Artist[] = [
     photo: "/assets/artists/aryaman.jpg",
     bio: [
       "Aryaman Agrawal studies vocal music and harmonium under Jayanta Banerjee. He came to Hindustani classical music in 2025, for no reason more complicated than having found something that touched his ruh \u2014 his soul. He approaches it as devotion rather than as study, and his ambition is to earn a real mastery of these forms: to move through the notes, one day, the way the musicians beside him on this stage do.",
-      "A software engineer by day and an artist by disposition, he makes things with whatever tools are at hand \u2014 AI agents in code, sketches in pencil, compositions in sur.",
+      "A software engineer by day and an artist by disposition, he makes things with whatever tools are at hand: AI agents in code, sketches in pencil, compositions in sur \u2014 the musical note itself.",
     ],
   },
 ];
@@ -224,15 +224,15 @@ export const host = {
 
 /**
  * The closing panel, in the order the page introduces people: the host, then
- * the artists as the carousel runs them. Entries render only once they have a
- * `url`, so silsila's own sits here as a placeholder until it is confirmed.
+ * the artists as the carousel runs them. The series itself has no account, so
+ * every row here resolves; an entry without a `url` is skipped rather than
+ * rendered dead.
  *
  * The `?igsi=` parameter Instagram appends to a shared link is a per-share
  * tracking token and is deliberately not reproduced.
  */
 export const socials: { label: string; handle: string; url: string | null }[] = [
   { label: "Ruh Arts Foundation", handle: "@ruhartsfoundation", url: "https://www.instagram.com/ruhartsfoundation" },
-  { label: "silsila", handle: "", url: null },
   { label: "Samir Chatterjee", handle: "@samirchatterjee76", url: "https://www.instagram.com/samirchatterjee76" },
   { label: "Chhandayan", handle: "@chhandayan", url: "https://www.instagram.com/chhandayan" },
   { label: "Jayanta Banerjee", handle: "@jayantsitar", url: "https://www.instagram.com/jayantsitar" },
