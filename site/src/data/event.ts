@@ -67,27 +67,11 @@ export type Artist = {
   links?: { label: string; url: string }[];
 };
 
-/** Carousel order. The strip and its bio panel both read from this array. */
+/**
+ * Carousel order. The strip and its bio panel both read from this array, so
+ * whoever sits first is the card the section opens on.
+ */
 export const artists: Artist[] = [
-  {
-    slug: "jayanta-banerjee",
-    name: "Jayanta Banerjee",
-    honorific: "Shri",
-    instrument: "Sitar",
-    photo: "/assets/artists/jayanta.jpg",
-    bio: [
-      "Shri Jayanta Banerjee is an internationally acclaimed sitarist, composer, and multidisciplinary musician whose artistry bridges Indian classical traditions with contemporary and global expressions. Trained under eminent gurus including Shri Amit Prasanna Mukherjee, Pt. Devi Prasad Chatterjee, Pt. Santosh Banerjee of the Rampur Gharana, and Pt. Robi Chakraborty of the Maihar Gharana, his musical lineage reflects a deep-rooted connection to the great traditions of Hindustani classical music. Alongside the sitar, he is proficient in the sarod, harmonium and keyboards, and is also a trained vocalist.",
-      "Over the course of his career he has performed extensively across India and internationally, appearing at the Hollywood Bowl, Royal Festival Hall, the National Centre for the Performing Arts, the Asian Art Museum, the Palace of Fine Arts and the Sydney Opera House. He has collaborated with legendary artists across Indian classical music and dance, including Padma Vibhushan Pt. Birju Maharaj, Pt. Chitresh Das, and Vidwan Vikku Vinayakram.",
-      'Beyond performance he is a composer, educator and cultural curator, known for interdisciplinary works that bring together music and dance, most notably through the festival "Sambandh," which celebrates the Baithaki tradition and unites over a hundred artists across disciplines.',
-    ],
-    links: [
-      { label: "Instagram", url: "https://www.instagram.com/jayantsitar" },
-      {
-        label: "Echoes to Sky",
-        url: "https://open.spotify.com/album/1ybwXllFQkPQgtKeBxhD0G",
-      },
-    ],
-  },
   {
     slug: "samir-chatterjee",
     name: "Samir Chatterjee",
@@ -109,6 +93,25 @@ export const artists: Artist[] = [
         quote:
           "An exuberant improvisatory interchange with Samir Chatterjee, whose tabla playing also seemed less percussive than vocal.",
         source: "The New York Times",
+      },
+    ],
+  },
+  {
+    slug: "jayanta-banerjee",
+    name: "Jayanta Banerjee",
+    honorific: "Shri",
+    instrument: "Sitar",
+    photo: "/assets/artists/jayanta.jpg",
+    bio: [
+      "Shri Jayanta Banerjee is an internationally acclaimed sitarist, composer, and multidisciplinary musician whose artistry bridges Indian classical traditions with contemporary and global expressions. Trained under eminent gurus including Shri Amit Prasanna Mukherjee, Pt. Devi Prasad Chatterjee, Pt. Santosh Banerjee of the Rampur Gharana, and Pt. Robi Chakraborty of the Maihar Gharana, his musical lineage reflects a deep-rooted connection to the great traditions of Hindustani classical music. Alongside the sitar, he is proficient in the sarod, harmonium and keyboards, and is also a trained vocalist.",
+      "Over the course of his career he has performed extensively across India and internationally, appearing at the Hollywood Bowl, Royal Festival Hall, the National Centre for the Performing Arts, the Asian Art Museum, the Palace of Fine Arts and the Sydney Opera House. He has collaborated with legendary artists across Indian classical music and dance, including Padma Vibhushan Pt. Birju Maharaj, Pt. Chitresh Das, and Vidwan Vikku Vinayakram.",
+      'Beyond performance he is a composer, educator and cultural curator, known for interdisciplinary works that bring together music and dance, most notably through the festival "Sambandh," which celebrates the Baithaki tradition and unites over a hundred artists across disciplines.',
+    ],
+    links: [
+      { label: "Instagram", url: "https://www.instagram.com/jayantsitar" },
+      {
+        label: "Echoes to Sky",
+        url: "https://open.spotify.com/album/1ybwXllFQkPQgtKeBxhD0G",
       },
     ],
   },

@@ -2,9 +2,11 @@
 import { socials, event } from "@/data/event";
 
 /**
- * Replaces the ticket panel. Same full-bleed sindoor beat — it is the only
- * saturated red moment in the scroll — with the job changed from selling a
- * seat to keeping the room.
+ * Replaces the ticket panel, with the job changed from selling a seat to
+ * keeping the room. Takes the textured plaster ground rather than flat
+ * sindoor, so it closes on the same maroon the evening and the artists are
+ * set in — it needs the `field` class as well, which is what carries the
+ * texture.
  *
  * Entries without a `url` are not rendered, so this ships before the handles
  * are confirmed and fills in as they arrive.
@@ -12,7 +14,7 @@ import { socials, event } from "@/data/event";
 const live = socials.filter((s) => s.url);
 ---
 
-<section class="field--sindoor section touch" id="touch" aria-labelledby="touch-h">
+<section class="field field--plaster section touch" id="touch" aria-labelledby="touch-h">
   <div class="wrap">
     <h2 class="big" id="touch-h">Stay</h2>
     <p class="line">Follow the silsila</p>
