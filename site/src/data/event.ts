@@ -160,7 +160,10 @@ export const artists: Artist[] = [
     name: "Aryaman Agrawal",
     instrument: "Harmonium",
     photo: "/assets/artists/aryaman.jpg",
-    bio: null,
+    bio: [
+      "Aryaman Agrawal studies vocal music and harmonium under Jayanta Banerjee. He came to Hindustani classical music in 2025, for no reason more complicated than having found something that touched his ruh \u2014 his soul. He approaches it as devotion rather than as study, and his ambition is to earn a real mastery of these forms: to move through the notes, one day, the way the musicians beside him on this stage do.",
+      "A software engineer by day and an artist by disposition, he makes things with whatever tools are at hand \u2014 AI agents in code, sketches in pencil, compositions in sur.",
+    ],
   },
 ];
 
