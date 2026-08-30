@@ -49,11 +49,22 @@ shoot() { # route -> basename
     --window-size=1920,1080 --force-device-scale-factor=2 \
     --virtual-time-budget=20000 \
     --screenshot="$2.png" "http://localhost:$PORT/silsila/$1" 2>/dev/null
-  magick "$2.png" -resize 1920x -quality 94 "$2-1080.jpg"
 }
 
 shoot "code/"       silsila-screen-qr
 shoot "code/plain/" silsila-screen-qr-plain
+shoot "logo/"       silsila-screen-logo
+
+# The QR slides sit on a textured maroon, where JPEG is fine and much smaller.
+for f in silsila-screen-qr silsila-screen-qr-plain; do
+  magick "$f.png" -resize 1920x -quality 94 "$f-1080.jpg"
+done
+
+# The curtain slide stays PNG at both sizes. It is white line art on pure
+# black, which is the worst case for JPEG: the ringing shows up as grey haze
+# around every stroke, and on a black drape that haze is the one thing the
+# projector should not be emitting.
+magick silsila-screen-logo.png -resize 1920x silsila-screen-logo-1080.png
 
 # A QR that does not scan is just a picture, so prove it before shipping —
 # and prove it degraded, because nobody scans a projection head-on from 1m.
@@ -67,4 +78,4 @@ for f in silsila-screen-qr silsila-screen-qr-plain; do
   zbarimg --quiet --raw /tmp/_deg.png || { echo "DECODE FAILED"; exit 1; }
 done
 rm -f /tmp/_deg.png
-echo "wrote both slides, png(2x) + 1080 jpg, from /silsila/code and /code/plain"
+echo "wrote three slides from /silsila/code, /code/plain and /logo"

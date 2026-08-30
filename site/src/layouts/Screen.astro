@@ -18,8 +18,14 @@ import "@/styles/tokens.css";
  */
 interface Props {
   title: string;
+  /**
+   * Pure black ground, no texture and no strings. For the slide thrown onto
+   * the black drape: anything lit reads as a glowing rectangle on the cloth,
+   * so the background has to be something the projector does not emit.
+   */
+  dark?: boolean;
 }
-const { title } = Astro.props;
+const { title, dark = false } = Astro.props;
 
 /** 11 tarab strings, as on the instrument and as in the site's hero. */
 const STRINGS = Array.from({ length: 11 }, (_, i) => 86 + i * 90);
@@ -40,11 +46,19 @@ const STRINGS = Array.from({ length: 11 }, (_, i) => 86 + i * 90);
     />
   </head>
   <body>
-    <div class="stage">
-      <svg class="strings" viewBox="0 0 1920 1080" preserveAspectRatio="none" aria-hidden="true">
-        {STRINGS.map((y) => <line x1="0" y1={y} x2="1920" y2={y} />)}
-      </svg>
-      <div class="grain"></div>
+    <div class:list={["stage", { "stage--dark": dark }]}>
+      {
+        !dark && (
+          <>
+            <svg class="strings" viewBox="0 0 1920 1080" preserveAspectRatio="none" aria-hidden="true">
+              {STRINGS.map((y) => (
+                <line x1="0" y1={y} x2="1920" y2={y} />
+              ))}
+            </svg>
+            <div class="grain" />
+          </>
+        )
+      }
       <div class="sheet"><slot /></div>
     </div>
 
@@ -78,6 +92,10 @@ const STRINGS = Array.from({ length: 11 }, (_, i) => 86 + i * 90);
         overflow: hidden;
         background: var(--plaster);
       }
+      html:has(.stage--dark),
+      html:has(.stage--dark) body {
+        background: #000;
+      }
       body {
         display: grid;
         place-items: center;
@@ -95,6 +113,9 @@ const STRINGS = Array.from({ length: 11 }, (_, i) => 86 + i * 90);
         background: var(--plaster);
         color: var(--bone);
         font-family: var(--f-body);
+      }
+      .stage--dark {
+        background: #000;
       }
 
       .strings {

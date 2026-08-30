@@ -1,0 +1,69 @@
+---
+import Screen from "@/layouts/Screen.astro";
+import { asset } from "@/lib/url";
+import { event } from "@/data/event";
+
+/**
+ * The curtain slide: thrown onto the black drape, where a lit background would
+ * read as a glowing rectangle on the cloth. On pure black the projector emits
+ * almost nothing outside the artwork, so the billing and the mark appear to
+ * float on the curtain itself.
+ *
+ * The mark is drawn as a CSS mask over a flat fill rather than as the black
+ * line art inverted, so it is exactly one colour with no grey fringe — and the
+ * source stays the same transparent PNG the rest of the site uses. The
+ * supplied white-on-black JPEG would work here too, but it carries compression
+ * haloing around the strokes that shows badly at this size.
+ */
+---
+
+<Screen title="Silsila: Resonance — curtain" dark>
+  <div class="lockup">
+    <div class="series">{event.series}</div>
+    <div class="title">{event.title}</div>
+  </div>
+
+  <p class="presented">Presented by</p>
+
+  <div class="mark" role="img" aria-label={event.host.name} style={`--src:url(${asset(event.host.lockup)})`}></div>
+</Screen>
+
+<style>
+  .lockup {
+    margin-top: 1cqw;
+  }
+  .series {
+    font-family: var(--f-formal);
+    font-size: 2.6cqw;
+    line-height: 1;
+    color: var(--bone-warm);
+  }
+  .title {
+    margin-top: 0.1cqw;
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: 4.4cqw;
+    line-height: 0.9;
+    letter-spacing: -0.012em;
+    text-transform: uppercase;
+    color: var(--bone-warm);
+  }
+
+  .presented {
+    margin: 2.2cqw 0 1.6cqw;
+    font-size: 1.05cqw;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--rose);
+  }
+
+  /* Masked, not inverted: a flat fill through the alpha channel gives one clean
+     colour, where invert() on the black art leaves grey along every edge. */
+  .mark {
+    width: 44cqw;
+    aspect-ratio: 1400 / 1186;
+    background-color: var(--bone-warm);
+    -webkit-mask: var(--src) center / contain no-repeat;
+    mask: var(--src) center / contain no-repeat;
+  }
+</style>

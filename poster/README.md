@@ -18,6 +18,7 @@ press F11.
 |---|---|
 | `/silsila/code` | full billing around the code |
 | `/silsila/code/plain` | the code alone, half again the size |
+| `/silsila/logo` | the curtain slide: billing and the Ruh mark on black |
 
 Both are unlisted: nothing links to them, they carry noindex, and
 `astro.config.mjs` keeps `/code` out of the sitemap. They share
@@ -32,6 +33,14 @@ trust:
 |---|---|
 | `silsila-screen-qr.png` / `-1080.jpg` | 3840 x 2160 / 1920 x 1080 |
 | `silsila-screen-qr-plain.png` / `-1080.jpg` | 3840 x 2160 / 1920 x 1080 |
+| `silsila-screen-logo.png` / `-1080.png` | 3840 x 2160 / 1920 x 1080 |
+
+The curtain slide is for throwing onto the black drape, so it sits on pure
+black rather than plaster: anything lit reads as a glowing rectangle on the
+cloth. Under 4% of that frame is lit, so the mark appears to float. It ships
+as PNG at both sizes — white line art on pure black is the worst case for
+JPEG, and the ringing shows as grey haze around every stroke, which is exactly
+what the projector should not be emitting onto the curtain.
 
 The pages are the design; these are renders of them.
 
